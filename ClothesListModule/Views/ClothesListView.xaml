@@ -4,15 +4,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClothesListModule.Views"
+             xmlns:conv="clr-namespace:PresentationUtility.Converters;assembly=PresentationUtility"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConv"/>
+    </UserControl.Resources>
+    
     <Grid>
-        <ListBox ItemsSource="{Binding ClothesList}">
-            <ListBox.ItemTemplate>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ListView ItemsSource="{Binding ClothesList}" BorderThickness="0">
+            <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding name}"/>
                 </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>  
+            </ListView.ItemTemplate>
+        </ListView>
+        <TextBlock Text="Loading..." Visibility="{Binding Updating, Converter={StaticResource BoolToVisibilityConv}}"/>
     </Grid>
 </UserControl>

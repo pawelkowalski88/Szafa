@@ -14,8 +14,6 @@ namespace ClothesService.Services
         public ClothesServices(IUnityContainer container)
         {
             dbConnection = container.Resolve<DatabaseConnectionService>();
-            //Just for loading time
-            ClothesList = new List<clothes>() { new clothes { name = "Loading..." } };
         }
 
         public void UpdateClothesList()
@@ -23,7 +21,7 @@ namespace ClothesService.Services
             //updating clothes list as an async operation
             updateClothesListTask = new Task(() =>
             {
-                //Acquire the list from DB
+
                 ClothesList = dbConnection.GetEntities<clothes>().ToList();
                 //when clothes list is updated, fire an event
                 ClothesListUpdated(this, new EventArgs());

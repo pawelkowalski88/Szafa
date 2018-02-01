@@ -18,11 +18,13 @@ namespace ClothesListModule.ViewModels
             this.clothesService = clothesService;
             clothesService.ClothesListUpdated += ClothesService_ClothesListUpdated;
             clothesService.UpdateClothesList();
+            Updating = true;
         }
 
         private void ClothesService_ClothesListUpdated(object sender, EventArgs e)
         {
             InvokePropertyChanged("ClothesList");
+            Updating = false;
         }
 
         public List<clothes> ClothesList
@@ -33,5 +35,18 @@ namespace ClothesListModule.ViewModels
             }
         }
         ClothesServices clothesService;
+        bool updating;
+        public bool Updating
+        {
+            get
+            {
+                return updating;
+            }
+            set
+            {
+                updating = value;
+                InvokePropertyChanged("Updating");
+            }
+        }
     }
 }
