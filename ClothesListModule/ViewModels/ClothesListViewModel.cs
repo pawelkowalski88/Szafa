@@ -4,6 +4,7 @@ using DatabaseConnectionSQLite.Services;
 using Microsoft.Practices.Unity;
 using PresentationUtility;
 using Prism.Commands;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,15 +12,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using CustomEvents;
 
 namespace ClothesListModule.ViewModels
 {
     public class ClothesListViewModel : PropertyChangedImplementation
     {
-        public ClothesListViewModel(ClothesServices clothesService)
+        public ClothesListViewModel(ClothesServices clothesService, IEventAggregator eventAggregator)
         {
             this.clothesService = clothesService;
-            //Might be useful to use event aggregation in the future
+            this.eventAggregator = eventAggregator;
+            //Might be useful to use event aggregation in the future also for this
             clothesService.ClothesListUpdated += ClothesService_ClothesListUpdated;
             UpdateClothesList();
         }
@@ -36,14 +39,16 @@ namespace ClothesListModule.ViewModels
             Updating = true;
         }
 
-        private void OnElementSelected(object obj)
+        private void OnElementSelected(clothes obj)
         {
-            clothes c = obj as clothes;
+            //clothes c = obj as clothes;
 
-            if (c != null)
-            {
-                MessageBox.Show(c.name);
-            }
+            //if (c != null)
+            //{
+            //    MessageBox.Show(c.name);
+            //}
+            PieceOfClothingChangedEvent evt = eventAggregator.GetEvent<PieceOfClothingChangedEvent>();
+            evt.Publish(obj);
         }
 
         public List<clothes> ClothesList
@@ -73,7 +78,7 @@ namespace ClothesListModule.ViewModels
             {
                 if(selectElementCommand == null)
                 {
-                    selectElementCommand = new DelegateCommand<object>(OnElementSelected);
+                    selectElementCommand = new DelegateCommand<clothes>(OnElementSelected);
                 }
                 return selectElementCommand;
             }
@@ -82,6 +87,7 @@ namespace ClothesListModule.ViewModels
         ClothesServices clothesService;
         bool updating;
         ICommand selectElementCommand;
+        IEventAggregator eventAggregator;
 
     }
 }

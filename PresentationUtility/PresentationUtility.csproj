@@ -78,6 +78,12 @@
     <Compile Include="AttachedCommands\ListViewSelect.cs" />
     <Compile Include="AttachedCommands\ListViewSelectCommandBehavior.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\DateConverter.cs" />
+    <Compile Include="Converters\DateToDaysConverter.cs" />
+    <Compile Include="Converters\LastTimeOnConverter.cs" />
+    <Compile Include="Converters\NullToVisibilityConverter.cs" />
+    <Compile Include="Converters\PathConverter.cs" />
+    <Compile Include="Converters\TimesOnConverter.cs" />
     <Compile Include="PropertyChangedImplementation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

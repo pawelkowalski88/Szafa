@@ -11,20 +11,30 @@
     
     <UserControl.Resources>
         <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConv"/>
+        <conv:PathConverter x:Key="RelativePathConverter"/>
     </UserControl.Resources>
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <ListView ItemsSource="{Binding ClothesList}" 
                   BorderThickness="0"
                   comm:ListViewSelect.CommandProperty="{Binding SelectElementCommand}"
-                  comm:ListViewSelect.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}">
+                  comm:ListViewSelect.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}"
+                  Margin="5"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding name}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding picture_path, Converter={StaticResource RelativePathConverter}}" Width="80" Height="80">
+                        </Image>
+                        <StackPanel Margin="20">
+                            <TextBlock Text="{Binding name}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24"></TextBlock>
+                            <TextBlock Text="{Binding types.name}" HorizontalAlignment="Left"  VerticalAlignment="Center" FontSize="18" Foreground="Gray" FontFamily="Segoe UI Light"/>
+                        </StackPanel>
+                    </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

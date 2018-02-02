@@ -66,6 +66,19 @@ namespace SzafaWPF1
                     "ClothesServiceModule"
                 }
             });
+
+            //Adding Clothes view module
+            moduleType = typeof(ClothesDetailedViewModule.ModuleDefinitions.ClothesDetailedViewModule);
+            moduleCatalog.AddModule(new ModuleInfo()
+            {
+                ModuleName = "ClothesDetailedViewModule",
+                ModuleType = moduleType.AssemblyQualifiedName,
+                //depends on database connection and clothes service
+                DependsOn = new Collection<string>()
+                {
+                    "ClothesServiceModule"
+                }
+            });
         }
     }
 }

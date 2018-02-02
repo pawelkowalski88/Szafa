@@ -8,6 +8,25 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <ContentControl Name="ClothesList" prism:RegionManager.RegionName="ClothesListRegion"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+ 
+        <GridSplitter Grid.Column="0"
+                      Foreground="Gray"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Stretch"
+                      Width="2"/>
+
+        <Border Margin="2">
+            <ContentControl Name="ClothesList"
+                            prism:RegionManager.RegionName="ClothesListRegion"/>
+        </Border>
+
+        <Border Margin="2"  Grid.Column="1">
+            <ContentControl Name="MainDetails" prism:RegionManager.RegionName="MainDetailsRegion"/>
+        </Border>
+
     </Grid>
 </Window>

@@ -22,7 +22,7 @@ namespace ClothesService.Services
             updateClothesListTask = new Task(() =>
             {
 
-                ClothesList = dbConnection.GetEntities<clothes>().ToList();
+                ClothesList = dbConnection.GetClothes();
                 //when clothes list is updated, fire an event
                 ClothesListUpdated(this, new EventArgs());
             });
