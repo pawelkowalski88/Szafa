@@ -21,7 +21,7 @@
 
         <Border Margin="2">
             <ContentControl Name="ClothesList"
-                            prism:RegionManager.RegionName="ClothesListRegion"/>
+                            prism:RegionManager.RegionName="NavigationRegion"/>
         </Border>
 
         <Border Margin="2"  Grid.Column="1">

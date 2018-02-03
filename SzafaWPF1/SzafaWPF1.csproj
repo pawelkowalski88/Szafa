@@ -171,6 +171,10 @@
       <Project>{2be098ac-789a-49ac-b799-6050c59666d0}</Project>
       <Name>DatabaseConnectionModule</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NavigationViewModule\NavigationViewModule.csproj">
+      <Project>{49a9e921-6f53-463e-aaa6-b11932ee3e7a}</Project>
+      <Name>NavigationViewModule</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SzafaEntities\SzafaEntities.csproj">
       <Project>{f961da07-1ea3-430d-8749-36dcd782ecd4}</Project>
       <Name>SzafaEntities</Name>

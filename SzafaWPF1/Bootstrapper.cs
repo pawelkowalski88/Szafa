@@ -63,7 +63,8 @@ namespace SzafaWPF1
                 //depends on clothes service
                 DependsOn = new Collection<string>()
                 {
-                    "ClothesServiceModule"
+                    "ClothesServiceModule",
+                    "NavigationViewModule"
                 }
             });
 
@@ -91,6 +92,14 @@ namespace SzafaWPF1
                 {
                     "ClothesServiceModule"
                 }
+            });
+
+            //Adding navigation view module
+            moduleType = typeof(NavigationViewModule.ModuleDefinitions.NavigationViewModule);
+            moduleCatalog.AddModule(new ModuleInfo()
+            {
+                ModuleName = "NavigationViewModule",
+                ModuleType = moduleType.AssemblyQualifiedName
             });
         }
     }
