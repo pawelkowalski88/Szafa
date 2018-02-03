@@ -12,32 +12,56 @@
     <UserControl.Resources>
         <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConv"/>
         <conv:PathConverter x:Key="RelativePathConverter"/>
+        <conv:DateConverter x:Key="DateConv"/>
+        <conv:DateToDaysConverter x:Key="DateToDaysConv"/>
+        <conv:TimesOnConverter x:Key="TimesOnConv"/>
+        <conv:LastTimeOnConverter x:Key="LastTimeOnConv"/>
     </UserControl.Resources>
     
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <ListView ItemsSource="{Binding ClothesList}" 
-                  BorderThickness="0"
-                  comm:ListViewSelect.CommandProperty="{Binding SelectElementCommand}"
-                  comm:ListViewSelect.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}"
-                  Margin="5"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="{Binding picture_path, Converter={StaticResource RelativePathConverter}}" Width="80" Height="80">
-                        </Image>
-                        <StackPanel Margin="20">
-                            <TextBlock Text="{Binding name}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24"></TextBlock>
-                            <TextBlock Text="{Binding types.name}" HorizontalAlignment="Left"  VerticalAlignment="Center" FontSize="18" Foreground="Gray" FontFamily="Segoe UI Light"/>
-                        </StackPanel>
-                    </StackPanel>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <ListView ItemsSource="{Binding ClothesList}" 
+                      BorderThickness="0"
+                      comm:ListViewSelect.CommandProperty="{Binding SelectElementCommand}"
+                      comm:ListViewSelect.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      HorizontalContentAlignment="Stretch">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                    <Border BorderBrush="Gray" BorderThickness="0" VerticalAlignment="Stretch" Background="White">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="300" Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                <Image Source="{Binding picture_path, Converter={StaticResource RelativePathConverter}}" Width="80" Height="80">
+                                </Image>
+                                <StackPanel Margin="20">
+                                    <TextBlock Text="{Binding name}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24"></TextBlock>
+                                    <TextBlock Text="{Binding types.name}" HorizontalAlignment="Left"  VerticalAlignment="Center" FontSize="18" Foreground="Gray" FontFamily="Segoe UI Light"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Right" Grid.Column="1" VerticalAlignment="Stretch" Margin="5" Orientation="Horizontal">
+                                <StackPanel  Visibility="{Binding in_use, Converter={StaticResource BoolToVisibilityConv}}" Margin="10" Width="80" Height="80" Background="WhiteSmoke">
+                                    <TextBlock HorizontalAlignment="Center">W użyciu</TextBlock>
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding in_use_from, Converter={StaticResource DateToDaysConv}}" FontSize="24"/>
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding in_use_from, Converter={StaticResource DateConv}}" FontSize="12" Foreground="Gray"/>
+                                </StackPanel>
+                                <StackPanel Margin="10" Width="80" Height="80" Background="WhiteSmoke">
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding times_on, Converter={StaticResource TimesOnConv}}" FontSize="18"/>
+                                    <TextBlock Margin="0,10,0,0" HorizontalAlignment="Center" Text="{Binding last_time_on, Converter={StaticResource LastTimeOnConv}}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <TextBlock Text="Loading..." Visibility="{Binding Updating, Converter={StaticResource BoolToVisibilityConv}}"/>
-    </Grid>
+                </ListView.ItemTemplate>
+            </ListView>
+            <TextBlock Text="Loading..." Visibility="{Binding Updating, Converter={StaticResource BoolToVisibilityConv}}"/>
+        </Grid>
 </UserControl>
