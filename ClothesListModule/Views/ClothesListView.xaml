@@ -7,7 +7,7 @@
              xmlns:conv="clr-namespace:PresentationUtility.Converters;assembly=PresentationUtility"
              xmlns:comm="clr-namespace:PresentationUtility.AttachedCommands;assembly=PresentationUtility"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="800">
     
     <UserControl.Resources>
         <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConv"/>
@@ -17,20 +17,21 @@
         <conv:TimesOnConverter x:Key="TimesOnConv"/>
         <conv:LastTimeOnConverter x:Key="LastTimeOnConv"/>
     </UserControl.Resources>
-    
 
-        <Grid>
+
+    <Grid d:DataContext="{StaticResource SampleList}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <ListView ItemsSource="{Binding ClothesList}" 
+        <ListView ItemsSource="{Binding ClothesList}" 
                       BorderThickness="0"
                       comm:ListViewSelect.CommandProperty="{Binding SelectElementCommand}"
                       comm:ListViewSelect.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                      HorizontalContentAlignment="Stretch">
-                <ListView.ItemTemplate>
+                      HorizontalContentAlignment="Stretch"
+                        Background="LightGray">
+            <ListView.ItemTemplate>
                     <DataTemplate>
                     <Border BorderBrush="Gray" BorderThickness="0" VerticalAlignment="Stretch" Background="White">
                         <Grid>

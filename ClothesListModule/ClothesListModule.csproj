@@ -102,6 +102,10 @@
       <Project>{0F6A4AE4-772D-4801-8F89-7D0F568E9810}</Project>
       <Name>PresentationUtility</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SzafaEntities\SzafaEntities.csproj">
+      <Project>{f961da07-1ea3-430d-8749-36dcd782ecd4}</Project>
+      <Name>SzafaEntities</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\ClothesListView.xaml">
