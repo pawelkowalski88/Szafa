@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClothesDetailedViewModule",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SzafaEntities", "SzafaEntities\SzafaEntities.csproj", "{F961DA07-1EA3-430D-8749-36DCD782ECD4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClothesEditViewModule", "ClothesEditViewModule\ClothesEditViewModule.csproj", "{E05251FE-ABB8-4710-A4DA-C96308E4F547}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{F961DA07-1EA3-430D-8749-36DCD782ECD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F961DA07-1EA3-430D-8749-36DCD782ECD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F961DA07-1EA3-430D-8749-36DCD782ECD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E05251FE-ABB8-4710-A4DA-C96308E4F547}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E05251FE-ABB8-4710-A4DA-C96308E4F547}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E05251FE-ABB8-4710-A4DA-C96308E4F547}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E05251FE-ABB8-4710-A4DA-C96308E4F547}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

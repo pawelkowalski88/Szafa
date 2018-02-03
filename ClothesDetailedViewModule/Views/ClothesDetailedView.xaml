@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:ClothesDetailedViewModule.Views"
              xmlns:conv="clr-namespace:PresentationUtility.Converters;assembly=PresentationUtility"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="600" d:DesignWidth="400" d:DataContext="{StaticResource SampleDetails}"
+             Background="White">
     <UserControl.Resources>
         <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConv"/>
         <conv:NullToVisibilityConverter x:Key="NullToVis"/>
@@ -21,9 +22,13 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        
+        <!--Image-->
         <Border>
             <Image Source="{Binding CurrentItem.picture_path, Converter={StaticResource RelativePathConverter}}" Margin="20"/>
         </Border>
+        
+        <!--Details-->
         <StackPanel Orientation="Vertical" Grid.Row="1" Margin="20">
             <TextBlock Text="{Binding Path=CurrentItem.name}" FontSize="28"/>
             <TextBlock Text="{Binding Path=CurrentItem.types.name}" FontSize="24" Foreground="Gray" FontFamily="Segoe UI Light"/>
@@ -40,5 +45,6 @@
                 </StackPanel>
             </WrapPanel>
         </StackPanel>
+        
     </Grid>
 </UserControl>

@@ -21,10 +21,20 @@
 
     <Grid d:DataContext="{StaticResource SampleList}">
             <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
+        <StackPanel 
+            Background="White"
+            Orientation="Horizontal"
+            FlowDirection="RightToLeft">
+            <Button Width="120"
+                    Margin="5"
+                    Content="Nowy"/>
+        </StackPanel>
         <ListView ItemsSource="{Binding ClothesList}" 
+                  Grid.Row="2"
                       BorderThickness="0"
                       comm:ListViewSelect.CommandProperty="{Binding SelectElementCommand}"
                       comm:ListViewSelect.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}"
@@ -63,6 +73,8 @@
                 </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <TextBlock Text="Loading..." Visibility="{Binding Updating, Converter={StaticResource BoolToVisibilityConv}}"/>
+            <TextBlock Text="Loading..." 
+                       Grid.Row="1"
+                       Visibility="{Binding Updating, Converter={StaticResource BoolToVisibilityConv}}"/>
         </Grid>
 </UserControl>

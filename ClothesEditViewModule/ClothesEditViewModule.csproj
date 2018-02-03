@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0F6A4AE4-772D-4801-8F89-7D0F568E9810}</ProjectGuid>
+    <ProjectGuid>{E05251FE-ABB8-4710-A4DA-C96308E4F547}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PresentationUtility</RootNamespace>
-    <AssemblyName>PresentationUtility</AssemblyName>
+    <RootNamespace>ClothesEditViewModule</RootNamespace>
+    <AssemblyName>ClothesEditViewModule</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -66,6 +66,7 @@
       <HintPath>..\packages\Prism.Wpf.6.3.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -75,21 +76,41 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AttachedCommands\ListViewSelect.cs" />
-    <Compile Include="AttachedCommands\ListViewSelectCommandBehavior.cs" />
-    <Compile Include="Converters\BitmapConverter.cs" />
-    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
-    <Compile Include="Converters\DateConverter.cs" />
-    <Compile Include="Converters\DateToDaysConverter.cs" />
-    <Compile Include="Converters\LastTimeOnConverter.cs" />
-    <Compile Include="Converters\NullToVisibilityConverter.cs" />
-    <Compile Include="Converters\PathConverter.cs" />
-    <Compile Include="Converters\TimesOnConverter.cs" />
-    <Compile Include="PropertyChangedImplementation.cs" />
+    <Compile Include="ModuleDefinitions\ClothesEditViewModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\ClothesEditView.xaml.cs">
+      <DependentUpon>ClothesEditView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\ClothesEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClothesService\ClothesService.csproj">
+      <Project>{81be3301-27cc-4d74-bb04-c61398ce161c}</Project>
+      <Name>ClothesService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DatabaseConnectionModule\DatabaseConnectionModule.csproj">
+      <Project>{2be098ac-789a-49ac-b799-6050c59666d0}</Project>
+      <Name>DatabaseConnectionModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PresentationUtility\PresentationUtility.csproj">
+      <Project>{0f6a4ae4-772d-4801-8f89-7d0f568e9810}</Project>
+      <Name>PresentationUtility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SzafaEntities\SzafaEntities.csproj">
+      <Project>{f961da07-1ea3-430d-8749-36dcd782ecd4}</Project>
+      <Name>SzafaEntities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -60,20 +60,33 @@ namespace SzafaWPF1
             {
                 ModuleName = "ClothesViewModule",
                 ModuleType = moduleType.AssemblyQualifiedName,
-                //depends on database connection and clothes service
+                //depends on clothes service
                 DependsOn = new Collection<string>()
                 {
                     "ClothesServiceModule"
                 }
             });
 
-            //Adding Clothes view module
+            //Adding Clothes detailed view module
             moduleType = typeof(ClothesDetailedViewModule.ModuleDefinitions.ClothesDetailedViewModule);
             moduleCatalog.AddModule(new ModuleInfo()
             {
                 ModuleName = "ClothesDetailedViewModule",
                 ModuleType = moduleType.AssemblyQualifiedName,
-                //depends on database connection and clothes service
+                //depends on clothes service
+                DependsOn = new Collection<string>()
+                {
+                    "ClothesServiceModule"
+                }
+            });
+
+            //Adding Clothes editing module
+            moduleType = typeof(ClothesEditViewModule.ModuleDefinitions.ClothesEditViewModule);
+            moduleCatalog.AddModule(new ModuleInfo()
+            {
+                ModuleName = "ClothesEditViewModule",
+                ModuleType = moduleType.AssemblyQualifiedName,
+                //depends on clothes service
                 DependsOn = new Collection<string>()
                 {
                     "ClothesServiceModule"
