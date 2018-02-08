@@ -7,6 +7,9 @@ using DatabaseConnectionSQLite;
 using PresentationUtility;
 using Prism.Events;
 using CustomEvents;
+using System.Windows.Input;
+using Prism.Commands;
+using System.Windows;
 
 namespace ClothesDetailedViewModule.ViewModels
 {
@@ -34,5 +37,22 @@ namespace ClothesDetailedViewModule.ViewModels
             set { currentItem = value; InvokePropertyChanged("CurrentItem"); }
         }
 
+        ICommand editCommand;
+        public ICommand EditCommand
+        {
+            get
+            {
+                if(editCommand == null)
+                {
+                    editCommand = new DelegateCommand(OnEdit);
+                }
+                return editCommand;
+            }
+        }
+
+        private void OnEdit()
+        {
+            MessageBox.Show("Edit");
+        }
     }
 }

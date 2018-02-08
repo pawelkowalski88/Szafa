@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using ClothesService.Enumerators;
 
 namespace NavigationViewModule.ViewModels
 {
@@ -36,10 +37,12 @@ namespace NavigationViewModule.ViewModels
         private void OnNewPieceClick()
         {
             //MessageBox.Show("New");
+            container.RegisterInstance<EditActionType>(EditActionType.Create);
             IRegion region = regionManager.Regions["MainDetailsRegion"];
-            object newView = container.Resolve<ClothesEditView>();
+            ClothesEditView newView = container.Resolve<ClothesEditView>();
             region.Add(newView);
             region.Activate(newView);
+
         }
         IRegionManager regionManager;
         IUnityContainer container; 

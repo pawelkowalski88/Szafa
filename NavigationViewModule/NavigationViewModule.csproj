@@ -88,6 +88,10 @@
       <Project>{E05251FE-ABB8-4710-A4DA-C96308E4F547}</Project>
       <Name>ClothesEditViewModule</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ClothesService\ClothesService.csproj">
+      <Project>{81be3301-27cc-4d74-bb04-c61398ce161c}</Project>
+      <Name>ClothesService</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

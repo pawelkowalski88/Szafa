@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="ModuleDefinitions\ClothesEditViewModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\ClothesEditViewModel.cs" />
     <Compile Include="Views\ClothesEditView.xaml.cs">
       <DependentUpon>ClothesEditView.xaml</DependentUpon>
     </Compile>
@@ -85,9 +86,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="Views\ClothesEditView.xaml">
       <SubType>Designer</SubType>

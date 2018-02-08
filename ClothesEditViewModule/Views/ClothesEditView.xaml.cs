@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClothesEditViewModule.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,14 @@ namespace ClothesEditViewModule.Views
     /// </summary>
     public partial class ClothesEditView : UserControl
     {
-        public ClothesEditView()
+        public ClothesEditView(ClothesEditViewModel viewModel)
         {
             InitializeComponent();
+
+            Loaded += (s, e) =>
+            {
+                this.DataContext = viewModel;
+            };
         }
     }
 }

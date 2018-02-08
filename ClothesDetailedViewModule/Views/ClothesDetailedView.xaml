@@ -22,10 +22,15 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition MaxWidth="180" MinWidth="80"/>
+        </Grid.ColumnDefinitions>
         
         <!--Image-->
-        <Border>
-            <Image Source="{Binding CurrentItem.picture_path, Converter={StaticResource RelativePathConverter}}" Margin="20"/>
+        <Border Grid.ColumnSpan="2">
+            <Image Source="{Binding CurrentItem.picture_path, Converter={StaticResource RelativePathConverter}}" 
+                   Margin="20"/>
         </Border>
         
         <!--Details-->
@@ -45,6 +50,10 @@
                 </StackPanel>
             </WrapPanel>
         </StackPanel>
-        
+        <StackPanel Grid.Column="1" Grid.Row="1" Visibility="{Binding SelectedRow, Converter={StaticResource NullToVis}}">
+            <Button Height="80" Margin="10" Command="{Binding EditCommand}">Edytuj</Button>
+            <Button Content="Załóż" Height="80" Margin="10" Command="{Binding UseButton}"/>
+            <Button Content="Upierz" Height="80" Margin="10" Command="{Binding WashButton}" Visibility="{Binding SelectedRow.in_use, Converter={StaticResource BoolToVisibilityConv}}"/>
+        </StackPanel>
     </Grid>
 </UserControl>
