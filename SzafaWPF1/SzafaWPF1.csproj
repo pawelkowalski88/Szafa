@@ -179,6 +179,10 @@
       <Project>{f961da07-1ea3-430d-8749-36dcd782ecd4}</Project>
       <Name>SzafaEntities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TypesService\TypesService.csproj">
+      <Project>{09865297-b221-4135-a9af-daa3b248b1d0}</Project>
+      <Name>TypesService</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

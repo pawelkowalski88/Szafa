@@ -16,7 +16,8 @@ namespace SzafaEntities
                 return new clothes()
                 {
                     name = "Biała koszula",
-                    times_on = 5
+                    times_on = 5,
+                    description = "Biała koszula na specjalne okazje."
                 };
             }
         }

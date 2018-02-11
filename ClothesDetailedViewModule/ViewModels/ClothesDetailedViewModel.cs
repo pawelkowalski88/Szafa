@@ -10,17 +10,23 @@ using CustomEvents;
 using System.Windows.Input;
 using Prism.Commands;
 using System.Windows;
+using Microsoft.Practices.Unity;
+using Prism.Regions;
+using ClothesService.Enumerators;
+using ClothesEditViewModule.Views;
 
 namespace ClothesDetailedViewModule.ViewModels
 {
     public class ClothesDetailedViewModel : PropertyChangedImplementation
     {
-        public ClothesDetailedViewModel(IEventAggregator eventAggregator)
+        public ClothesDetailedViewModel(IEventAggregator eventAggregator, IUnityContainer container, IRegionManager regionManager)
         {
             this.eventAggregator = eventAggregator;
             PieceOfClothingChangedEvent evt =
                 eventAggregator.GetEvent<PieceOfClothingChangedEvent>();
             evt.Subscribe(OnCurrentItemChanged, true);
+            this.container = container;
+            this.regionManager = regionManager;
         }
 
         private void OnCurrentItemChanged(clothes obj)
@@ -28,6 +34,19 @@ namespace ClothesDetailedViewModule.ViewModels
             CurrentItem = obj;
         }
 
+        private void OnEdit()
+        {
+            container.RegisterInstance<EditActionType>(EditActionType.Edit);
+            IRegion region = regionManager.Regions["MainDetailsRegion"];
+            ClothesEditView newView = container.Resolve<ClothesEditView>();
+            region.Add(newView);
+            region.Activate(newView);
+            ClothesEditButtonClickedEvent evt = eventAggregator.GetEvent<ClothesEditButtonClickedEvent>();
+            evt.Publish(CurrentItem);
+        }
+
+        IUnityContainer container;
+        IRegionManager regionManager;
         private clothes currentItem;
         private IEventAggregator eventAggregator;
 
@@ -48,11 +67,6 @@ namespace ClothesDetailedViewModule.ViewModels
                 }
                 return editCommand;
             }
-        }
-
-        private void OnEdit()
-        {
-            MessageBox.Show("Edit");
         }
     }
 }
