@@ -22,6 +22,8 @@ namespace ClothesListModule.ViewModels
         {
             this.clothesService = clothesService;
             this.eventAggregator = eventAggregator;
+            eventAggregator.GetEvent<ClothesListUpdateRequestedEvent>().Subscribe(OnUpdateRequested, true);
+
             //Might be useful to use event aggregation in the future also for this
             clothesService.ClothesListUpdated += ClothesService_ClothesListUpdated;
             UpdateClothesList();
@@ -35,18 +37,17 @@ namespace ClothesListModule.ViewModels
 
         private void UpdateClothesList()
         {
-            clothesService.UpdateClothesList();
+            clothesService.RefreshClothesList();
             Updating = true;
+        }
+
+        private void OnUpdateRequested()
+        {
+            UpdateClothesList();
         }
 
         private void OnElementSelected(clothes obj)
         {
-            //clothes c = obj as clothes;
-
-            //if (c != null)
-            //{
-            //    MessageBox.Show(c.name);
-            //}
             PieceOfClothingChangedEvent evt = eventAggregator.GetEvent<PieceOfClothingChangedEvent>();
             evt.Publish(obj);
         }

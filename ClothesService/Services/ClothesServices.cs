@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ClothesService.Services
 {
@@ -16,7 +17,7 @@ namespace ClothesService.Services
             dbConnection = container.Resolve<DatabaseConnectionService>();
         }
 
-        public void UpdateClothesList()
+        public void RefreshClothesList()
         {
             //updating clothes list as an async operation
             updateClothesListTask = new Task(() =>
@@ -28,6 +29,25 @@ namespace ClothesService.Services
             });
             //Start the task
             updateClothesListTask.Start();
+        }
+
+        public void UpdatePieceOfClothing(clothes c)
+        {
+            dbConnection.UpdateClothes(c);
+        }
+
+        public clothes GetPieceOfClothing(long id)
+        {
+            return dbConnection.GetPieceOfClothing(id);
+        }
+
+        public void AddPieceOfClothing(clothes c)
+        {
+            if (c.picture_path == null)
+            {
+                c.picture_path = "";
+            }
+            dbConnection.AddClothes(c);
         }
 
         public List<clothes> ClothesList { get; private set; }

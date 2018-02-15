@@ -51,7 +51,17 @@
             <Image  Source="{Binding CurrentItem.picture_path, Converter={StaticResource BitmapConv}}"/>
         </Border>
 
-        <Button Content="OK" Margin="5" HorizontalAlignment="Center" Grid.Row="7" VerticalAlignment="Top" Width="262" Grid.Column="0" Height="65" IsDefault="True" Grid.ColumnSpan="2" Command="{Binding NewItemButton}"/>
+        <Button Content="OK" 
+                Margin="5" 
+                HorizontalAlignment="Center" 
+                Grid.Row="7" 
+                VerticalAlignment="Top" 
+                Width="262" 
+                Grid.Column="0" 
+                Height="65" 
+                IsDefault="True" 
+                Grid.ColumnSpan="2" 
+                Command="{Binding EditOKCommand}"/>
         <!--<TextBlock HorizontalAlignment="Left" Margin="3,5,0,0" Grid.Row="6" TextWrapping="Wrap" Text="{Binding Category}" VerticalAlignment="Top" Height="60" Width="88"/>-->
     </Grid>
 </UserControl>

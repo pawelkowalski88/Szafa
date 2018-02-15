@@ -76,8 +76,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClothesEditButtonClickedEvent.cs" />
+    <Compile Include="ClothesListUpdateRequestedEvent.cs" />
     <Compile Include="PieceOfClothingChangedEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SelectedPieceOfClothingUpdateRequested.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
