@@ -34,21 +34,21 @@
             <TextBlock Text="{Binding Title}" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="24" Margin="10"></TextBlock>
         </Viewbox>
         <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="3,7" FontSize="20">Nazwa:</TextBlock>
-        <TextBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="3,6" Text="{Binding Path=CurrentItem.name}" FontSize="20"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="3,6" Text="{Binding Path=CurrentItem.Name}" FontSize="20"></TextBox>
         <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="3,7" FontSize="20">Kategoria:</TextBlock>
-        <ComboBox Name="TypesCombo" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="3,4"  FontSize="20" ItemsSource="{Binding TypesList}" DisplayMemberPath="name" SelectedValue="{Binding CurrentItem.type_id}" SelectedValuePath="id" SelectedIndex="0">
+        <ComboBox Name="TypesCombo" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="3,4"  FontSize="20" ItemsSource="{Binding TypesList}" DisplayMemberPath="name" SelectedValue="{Binding CurrentItem.TypeId}" SelectedValuePath="id" SelectedIndex="0">
 
         </ComboBox>
         <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="3,32"  FontSize="20">Opis:</TextBlock>
-        <TextBox Grid.Row="4" Grid.Column="1" VerticalAlignment="Stretch" Margin="3" Text="{Binding CurrentItem.description}"  FontSize="16"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="1" VerticalAlignment="Stretch" Margin="3" Text="{Binding CurrentItem.Description}"  FontSize="16"></TextBox>
         <TextBlock Grid.Row="5" Grid.Column="0" VerticalAlignment="Top" Margin="3,5,0,0" FontSize="20">Obraz:</TextBlock>
         <StackPanel Grid.Row="5" Grid.Column="1" VerticalAlignment="Top" Margin="3,3,3,0">
-            <TextBox Text="{Binding CurrentItem.picture_path}"></TextBox>
+            <TextBox Text="{Binding CurrentItem.PicturePath}"></TextBox>
             <Button Height="30" Margin="0,3,0,0" Command="{Binding BrowseForFile}">Przeglądaj</Button>
         </StackPanel>
 
         <Border Grid.Column="1" Grid.Row="6" Margin="5">
-            <Image  Source="{Binding CurrentItem.picture_path, Converter={StaticResource BitmapConv}}"/>
+            <Image  Source="{Binding CurrentItem.PicturePath, Converter={StaticResource BitmapConv}}"/>
         </Border>
 
         <Button Content="OK" 

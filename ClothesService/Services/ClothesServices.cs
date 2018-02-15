@@ -3,10 +3,8 @@ using DatabaseConnectionSQLite.Services;
 using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
+using SzafaEntities;
 
 namespace ClothesService.Services
 {
@@ -23,7 +21,12 @@ namespace ClothesService.Services
             updateClothesListTask = new Task(() =>
             {
 
-                ClothesList = dbConnection.GetClothes();
+                var clothesList = dbConnection.GetClothes();
+                ClothesList = new List<PieceOfClothing>();
+                foreach (var c in clothesList)
+                {
+                    ClothesList.Add(new PieceOfClothing(c));
+                }
                 //when clothes list is updated, fire an event
                 ClothesListUpdated(this, new EventArgs());
             });
@@ -31,9 +34,10 @@ namespace ClothesService.Services
             updateClothesListTask.Start();
         }
 
-        public void UpdatePieceOfClothing(clothes c)
+        public void UpdatePieceOfClothing(PieceOfClothing c)
         {
-            dbConnection.UpdateClothes(c);
+            clothes cl = c.Toclothes();
+            dbConnection.UpdateClothes(cl);
         }
 
         public clothes GetPieceOfClothing(long id)
@@ -41,16 +45,17 @@ namespace ClothesService.Services
             return dbConnection.GetPieceOfClothing(id);
         }
 
-        public void AddPieceOfClothing(clothes c)
+        public void AddPieceOfClothing(PieceOfClothing c)
         {
-            if (c.picture_path == null)
+            clothes cl = c.Toclothes();
+            if (cl.picture_path == null)
             {
-                c.picture_path = "";
+                cl.picture_path = "";
             }
-            dbConnection.AddClothes(c);
+            dbConnection.AddClothes(cl);
         }
 
-        public List<clothes> ClothesList { get; private set; }
+        public List<PieceOfClothing> ClothesList { get; private set; }
         DatabaseConnectionService dbConnection;
         Task updateClothesListTask;
         public event EventHandler ClothesListUpdated;

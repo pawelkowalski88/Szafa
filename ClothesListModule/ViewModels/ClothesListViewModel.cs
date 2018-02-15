@@ -1,18 +1,12 @@
 ﻿using ClothesService.Services;
-using DatabaseConnectionSQLite;
-using DatabaseConnectionSQLite.Services;
-using Microsoft.Practices.Unity;
 using PresentationUtility;
 using Prism.Commands;
 using Prism.Events;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 using CustomEvents;
+using SzafaEntities;
 
 namespace ClothesListModule.ViewModels
 {
@@ -46,13 +40,13 @@ namespace ClothesListModule.ViewModels
             UpdateClothesList();
         }
 
-        private void OnElementSelected(clothes obj)
+        private void OnElementSelected(PieceOfClothing obj)
         {
             PieceOfClothingChangedEvent evt = eventAggregator.GetEvent<PieceOfClothingChangedEvent>();
             evt.Publish(obj);
         }
 
-        public List<clothes> ClothesList
+        public List<PieceOfClothing> ClothesList
         {
             get
             {
@@ -79,7 +73,7 @@ namespace ClothesListModule.ViewModels
             {
                 if(selectElementCommand == null)
                 {
-                    selectElementCommand = new DelegateCommand<clothes>(OnElementSelected);
+                    selectElementCommand = new DelegateCommand<PieceOfClothing>(OnElementSelected);
                 }
                 return selectElementCommand;
             }

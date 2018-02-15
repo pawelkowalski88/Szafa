@@ -1,9 +1,5 @@
 ﻿using DatabaseConnectionSQLite;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SzafaEntities
 {
@@ -25,8 +21,28 @@ namespace SzafaEntities
             PicturePath = c.picture_path;
             TimesOn = c.times_on;
             TypeId = c.type_id;
+            Type = new ClothingType(c.types);
+
+            //clothesbase = c;
         }
 
+        public clothes Toclothes()
+        {
+            return new clothes()
+            {
+                description = this.Description,
+                id = this.Id,
+                in_use = this.InUse,
+                in_use_from = this.InUseFrom,
+                last_time_on = this.LastTimeOn,
+                name = this.Name,
+                picture_path = this.PicturePath,
+                times_on = this.TimesOn,
+                type_id = this.TypeId
+            };
+        }
+
+        private clothes clothesbase;
         public long Id { get; set; }
         public string Name { get; set; }
         public string PicturePath { get; set; }

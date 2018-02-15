@@ -9,11 +9,10 @@ using Prism.Regions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
-using TypesService.Services;
-using System;
 using System.Windows;
 using ClothesService.Services;
 using Microsoft.Win32;
+using SzafaEntities;
 
 namespace ClothesEditViewModule.ViewModels
 {
@@ -34,7 +33,7 @@ namespace ClothesEditViewModule.ViewModels
             {
                 Title = "Nowy przedmiot";
                 InitializeTypesService();
-                CurrentItem = new clothes();
+                CurrentItem = new PieceOfClothing();
             }
             else
             {
@@ -59,7 +58,7 @@ namespace ClothesEditViewModule.ViewModels
         }
 
         //fires when an element is passed to the edit view model. The element is saved as current item.
-        private void OnEditElementAdded(clothes obj)
+        private void OnEditElementAdded(PieceOfClothing obj)
         {
             CurrentItem = obj;
         }
@@ -107,11 +106,11 @@ namespace ClothesEditViewModule.ViewModels
         EditActionType actionType;
         string title;
         ICommand cancelCommand, editOKCommand, browseForFile;
-        clothes currentItem;
+        PieceOfClothing currentItem;
         List<types> typesList;
         TypesService.Services.TypesService typesService;
 
-        public clothes CurrentItem
+        public PieceOfClothing CurrentItem
         {
             get
             {
@@ -179,7 +178,7 @@ namespace ClothesEditViewModule.ViewModels
             OpenDialog.ShowDialog();
             if (OpenDialog.FileName != null)
             {
-                CurrentItem.picture_path = OpenDialog.FileName;
+                CurrentItem.PicturePath = OpenDialog.FileName;
             }
         }
 

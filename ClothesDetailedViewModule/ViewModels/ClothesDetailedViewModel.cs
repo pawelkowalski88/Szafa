@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DatabaseConnectionSQLite;
-using PresentationUtility;
+﻿using PresentationUtility;
 using Prism.Events;
 using CustomEvents;
 using System.Windows.Input;
 using Prism.Commands;
-using System.Windows;
 using Microsoft.Practices.Unity;
 using Prism.Regions;
 using ClothesService.Enumerators;
 using ClothesEditViewModule.Views;
+using SzafaEntities;
 
 namespace ClothesDetailedViewModule.ViewModels
 {
@@ -29,7 +23,7 @@ namespace ClothesDetailedViewModule.ViewModels
             this.regionManager = regionManager;
         }
 
-        private void OnCurrentItemChanged(clothes obj)
+        private void OnCurrentItemChanged(PieceOfClothing obj)
         {
             CurrentItem = obj;
         }
@@ -47,10 +41,10 @@ namespace ClothesDetailedViewModule.ViewModels
 
         IUnityContainer container;
         IRegionManager regionManager;
-        private clothes currentItem;
+        private PieceOfClothing currentItem;
         private IEventAggregator eventAggregator;
 
-        public clothes CurrentItem
+        public PieceOfClothing CurrentItem
         {
             get { return currentItem; }
             set { currentItem = value; InvokePropertyChanged("CurrentItem"); }

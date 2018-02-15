@@ -1,23 +1,17 @@
-﻿using DatabaseConnectionSQLite;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SzafaEntities
+﻿namespace SzafaEntities
 {
     public class SampleClothesDetails
     {
-        public clothes CurrentItem
+        public PieceOfClothing CurrentItem
         {
             get
             {
-                return new clothes()
+                return new PieceOfClothing()
                 {
-                    name = "Biała koszula",
-                    times_on = 5,
-                    description = "Biała koszula na specjalne okazje."
+                    Name = "Biała koszula",
+                    TimesOn= 5,
+                    Description = "Biała koszula na specjalne okazje.",
+                    Type = new ClothingType() { Name = "shirts"}
                 };
             }
         }

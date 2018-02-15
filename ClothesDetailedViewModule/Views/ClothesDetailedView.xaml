@@ -5,9 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClothesDetailedViewModule.Views"
              xmlns:conv="clr-namespace:PresentationUtility.Converters;assembly=PresentationUtility"
-             mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="400" d:DataContext="{StaticResource SampleDetails}"
-             Background="White">
+             mc:Ignorable="d" d:DesignWidth="400" d:DataContext="{StaticResource SampleDetails}"
+             Background="White" Height="753.488">
     <UserControl.Resources>
         <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConv"/>
         <conv:NullToVisibilityConverter x:Key="NullToVis"/>
@@ -26,34 +25,34 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition MaxWidth="180" MinWidth="80"/>
         </Grid.ColumnDefinitions>
-        
+
         <!--Image-->
         <Border Grid.ColumnSpan="2">
-            <Image Source="{Binding CurrentItem.picture_path, Converter={StaticResource RelativePathConverter}}" 
+            <Image Source="{Binding CurrentItem.PicturePath, Converter={StaticResource RelativePathConverter}}" 
                    Margin="20"/>
         </Border>
-        
+
         <!--Details-->
         <StackPanel Orientation="Vertical" Grid.Row="1" Margin="20">
-            <TextBlock Text="{Binding Path=CurrentItem.name}" FontSize="28"/>
-            <TextBlock Text="{Binding Path=CurrentItem.types.name}" FontSize="24" Foreground="Gray" FontFamily="Segoe UI Light"/>
-            <TextBlock Text="{Binding Path=CurrentItem.description}" TextWrapping="Wrap" Margin="0,10"/>
+            <TextBlock Text="{Binding Path=CurrentItem.Name}" FontSize="28"/>
+            <TextBlock Text="{Binding Path=CurrentItem.Type.Name}" FontSize="24" Foreground="Gray" FontFamily="Segoe UI Light"/>
+            <TextBlock Text="{Binding Path=CurrentItem.Description}" TextWrapping="Wrap" Margin="0,10"/>
             <WrapPanel Orientation="Horizontal" Visibility="{Binding Path=CurrentItem, Converter={StaticResource NullToVis}}" Margin="0,40,0,10">
-                <StackPanel  Visibility="{Binding Path=CurrentItem.in_use, Converter={StaticResource BoolToVisibilityConv}}" Margin="0,10,10,0" Width="80" Height="80" Background="WhiteSmoke">
+                <StackPanel  Visibility="{Binding Path=CurrentItem.InUse, Converter={StaticResource BoolToVisibilityConv}}" Margin="0,10,10,0" Width="80" Height="80" Background="WhiteSmoke">
                     <TextBlock HorizontalAlignment="Center">W użyciu</TextBlock>
-                    <TextBlock HorizontalAlignment="Center" Text="{Binding Path=CurrentItem.in_use_from, Converter={StaticResource DateToDaysConv}}" FontSize="24"/>
-                    <TextBlock HorizontalAlignment="Center" Text="{Binding Path=CurrentItem.in_use_from, Converter={StaticResource DateConv}}" FontSize="12" Foreground="Gray"/>
+                    <TextBlock HorizontalAlignment="Center" Text="{Binding Path=CurrentItem.InUseFrom, Converter={StaticResource DateToDaysConv}}" FontSize="24"/>
+                    <TextBlock HorizontalAlignment="Center" Text="{Binding Path=CurrentItem.InUseFrom, Converter={StaticResource DateConv}}" FontSize="12" Foreground="Gray"/>
                 </StackPanel>
                 <StackPanel Margin="0,10,10,0" Width="80" Height="80" Background="WhiteSmoke">
-                    <TextBlock HorizontalAlignment="Center" Text="{Binding Path=CurrentItem.times_on, Converter={StaticResource TimesOnConv}}" FontSize="18"/>
-                    <TextBlock Margin="0,10,0,0" HorizontalAlignment="Center" Text="{Binding Path=CurrentItem.last_time_on, Converter={StaticResource LastTimeOnConv}}"/>
+                    <TextBlock HorizontalAlignment="Center" Text="{Binding Path=CurrentItem.TimesOn, Converter={StaticResource TimesOnConv}}" FontSize="18"/>
+                    <TextBlock Margin="0,10,0,0" HorizontalAlignment="Center" Text="{Binding Path=CurrentItem.LastTimeOn, Converter={StaticResource LastTimeOnConv}}"/>
                 </StackPanel>
             </WrapPanel>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="1" Visibility="{Binding SelectedRow, Converter={StaticResource NullToVis}}">
             <Button Height="80" Margin="10" Command="{Binding EditCommand}">Edytuj</Button>
             <Button Content="Załóż" Height="80" Margin="10" Command="{Binding UseButton}"/>
-            <Button Content="Upierz" Height="80" Margin="10" Command="{Binding WashButton}" Visibility="{Binding SelectedRow.in_use, Converter={StaticResource BoolToVisibilityConv}}"/>
+            <Button Content="Upierz" Height="80" Margin="10" Command="{Binding WashButton}" Visibility="{Binding CurrentItem.InUse, Converter={StaticResource BoolToVisibilityConv}}"/>
         </StackPanel>
     </Grid>
 </UserControl>
