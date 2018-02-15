@@ -4,6 +4,7 @@ using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using SzafaEntities;
 
 namespace TypesService.Services
 {
@@ -20,8 +21,12 @@ namespace TypesService.Services
             //updating types list as an async operation
             updateTypesListTask = new Task(() =>
             {
-
-                TypesList = dbConnection.GetTypes();
+                TypesList = new List<ClothingType>();
+                var typesList = dbConnection.GetTypes();
+                foreach (var t in typesList)
+                {
+                    TypesList.Add(new ClothingType(t));
+                }
                 //when types list is updated, fire an event
                 TypesListUpdated(this, new EventArgs());
             });
@@ -29,7 +34,7 @@ namespace TypesService.Services
             updateTypesListTask.Start();
         }
 
-        public List<types> TypesList { get; private set; }
+        public List<ClothingType> TypesList { get; private set; }
         DatabaseConnectionService dbConnection;
         Task updateTypesListTask;
         public event EventHandler TypesListUpdated;

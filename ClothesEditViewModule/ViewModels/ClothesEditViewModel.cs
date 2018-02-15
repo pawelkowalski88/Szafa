@@ -105,7 +105,7 @@ namespace ClothesEditViewModule.ViewModels
         string title;
         ICommand cancelCommand, editOKCommand, browseForFile;
         PieceOfClothing currentItem;
-        List<types> typesList;
+        List<ClothingType> typesList;
         TypesService.Services.TypesService typesService;
 
         public PieceOfClothing CurrentItem
@@ -121,7 +121,7 @@ namespace ClothesEditViewModule.ViewModels
             }
         }
 
-        public List<types> TypesList
+        public List<ClothingType> TypesList
         {
             get
             {

@@ -36,7 +36,7 @@
         <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="3,7" FontSize="20">Nazwa:</TextBlock>
         <TextBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="3,6" Text="{Binding Path=CurrentItem.Name}" FontSize="20"></TextBox>
         <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="3,7" FontSize="20">Kategoria:</TextBlock>
-        <ComboBox Name="TypesCombo" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="3,4"  FontSize="20" ItemsSource="{Binding TypesList}" DisplayMemberPath="name" SelectedValue="{Binding CurrentItem.TypeId}" SelectedValuePath="id" SelectedIndex="0">
+        <ComboBox Name="TypesCombo" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="3,4"  FontSize="20" ItemsSource="{Binding TypesList}" DisplayMemberPath="Name" SelectedValue="{Binding CurrentItem.TypeId}" SelectedValuePath="Id" SelectedIndex="0">
 
         </ComboBox>
         <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="3,32"  FontSize="20">Opis:</TextBlock>
