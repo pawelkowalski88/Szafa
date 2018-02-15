@@ -1,19 +1,20 @@
 ﻿using DatabaseConnectionSQLite;
 using DatabaseConnectionSQLite.Services;
 using ImageServiceModuleLibrary.Services;
-using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using SzafaEntities;
+using SzafaInterfaces;
 
 namespace ClothesService.Services
 {
-    public class ClothesServices
+    public class ClothesServices : IClothesServices
     {
-        public ClothesServices(IUnityContainer container)
+        public ClothesServices(ImageService imageService)
         {
-            dbConnection = container.Resolve<DatabaseConnectionService>();
+            dbConnection = new DatabaseConnectionService();
+            this.imageService = imageService;
         }
 
         public void RefreshClothesList()
@@ -21,7 +22,6 @@ namespace ClothesService.Services
             //updating clothes list as an async operation
             updateClothesListTask = new Task(() =>
             {
-                ImageService imageService = new ImageService();
                 var clothesList = dbConnection.GetClothes();
                 ClothesList = new List<PieceOfClothing>();
                 foreach (var c in clothesList)
@@ -67,5 +67,6 @@ namespace ClothesService.Services
         DatabaseConnectionService dbConnection;
         Task updateClothesListTask;
         public event EventHandler ClothesListUpdated;
+        ImageService imageService;
     }
 }

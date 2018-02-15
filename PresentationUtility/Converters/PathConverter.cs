@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ImageServiceModuleLibrary.Services;
+using Microsoft.Practices.Unity;
+using System;
 using System.Globalization;
 using System.IO;
 using System.Windows;

@@ -79,7 +79,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ImageService.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SzafaInterfaces\SzafaInterfaces.csproj">
+      <Project>{F38C4E38-123C-4415-9930-6B84F6D0EE7E}</Project>
+      <Name>SzafaInterfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

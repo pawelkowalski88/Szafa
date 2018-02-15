@@ -5,10 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using SzafaEntities;
+using SzafaInterfaces;
 
 namespace TypesService.Services
 {
-    public class TypesService
+    public class TypesService : ITypesService
     {
         public TypesService(IUnityContainer container)
         {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Practices.Unity;
 using Prism.Modularity;
+using SzafaInterfaces;
 
 namespace TypesService.ModuleDefinitions
 {
@@ -11,7 +12,7 @@ namespace TypesService.ModuleDefinitions
         }
         public void Initialize()
         {
-            container.RegisterInstance<TypesService.Services.TypesService>(new TypesService.Services.TypesService(container));
+            container.RegisterType<ITypesService, TypesService.Services.TypesService>(new ContainerControlledLifetimeManager());
         }
         IUnityContainer container;
     }

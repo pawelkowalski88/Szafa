@@ -1,6 +1,8 @@
 ﻿using Microsoft.Practices.Unity;
 using Prism.Modularity;
 using ClothesService.Services;
+using ImageServiceModuleLibrary.Services;
+using SzafaInterfaces;
 
 namespace ClothesService.ModuleDefinitions
 {
@@ -12,7 +14,7 @@ namespace ClothesService.ModuleDefinitions
         }
         public void Initialize()
         {
-            container.RegisterInstance<ClothesServices>(new ClothesServices(container));
+            container.RegisterType<IClothesServices, ClothesServices>(new ContainerControlledLifetimeManager());
         }
         IUnityContainer container;
     }

@@ -15,7 +15,7 @@ using SzafaEntities;
 
 namespace ClothesEditViewModule.ViewModels
 {
-    public class ClothesEditViewModel :PropertyChangedImplementation
+    public class ClothesEditViewModel : PropertyChangedImplementation
     {
         public ClothesEditViewModel(IEventAggregator eventAggregator, IRegionManager regionManager, IUnityContainer container)
         {

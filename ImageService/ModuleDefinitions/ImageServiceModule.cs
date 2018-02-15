@@ -1,6 +1,7 @@
 ﻿using ImageServiceModuleLibrary.Services;
 using Microsoft.Practices.Unity;
 using Prism.Modularity;
+using SzafaInterfaces;
 
 namespace ImageServiceModuleLibrary.ModuleDefinitions
 {
@@ -12,7 +13,7 @@ namespace ImageServiceModuleLibrary.ModuleDefinitions
         }
         public void Initialize()
         {
-            container.RegisterInstance<ImageService>(new ImageService());
+            container.RegisterType<IImageService, ImageService>(new ContainerControlledLifetimeManager());
         }
         IUnityContainer container;
     }

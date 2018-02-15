@@ -3,10 +3,11 @@ using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using SzafaInterfaces;
 
 namespace ImageServiceModuleLibrary.Services
 {
-    public class ImageService
+    public class ImageService : IImageService
     {
 
         public ImageService()

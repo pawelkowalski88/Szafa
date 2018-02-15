@@ -94,6 +94,10 @@
       <Project>{F961DA07-1EA3-430D-8749-36DCD782ECD4}</Project>
       <Name>SzafaEntities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SzafaInterfaces\SzafaInterfaces.csproj">
+      <Project>{F38C4E38-123C-4415-9930-6B84F6D0EE7E}</Project>
+      <Name>SzafaInterfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
