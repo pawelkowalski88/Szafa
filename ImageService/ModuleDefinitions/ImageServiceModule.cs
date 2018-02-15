@@ -12,7 +12,7 @@ namespace ImageServiceModuleLibrary.ModuleDefinitions
         }
         public void Initialize()
         {
-            container.RegisterInstance<ImageService>(new ImageService(container));
+            container.RegisterInstance<ImageService>(new ImageService());
         }
         IUnityContainer container;
     }

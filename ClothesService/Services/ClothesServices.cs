@@ -1,5 +1,6 @@
 ﻿using DatabaseConnectionSQLite;
 using DatabaseConnectionSQLite.Services;
+using ImageServiceModuleLibrary.Services;
 using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,14 @@ namespace ClothesService.Services
         public void UpdatePieceOfClothing(PieceOfClothing c)
         {
             clothes cl = c.Toclothes();
+            ImageService imageService = new ImageService();
+            string generatedName = imageService.SaveImage(c.PicturePath, c.Id);
+            if (generatedName != null)
+            {
+                cl.picture_path = generatedName;
+            }
             dbConnection.UpdateClothes(cl);
+
         }
 
         public clothes GetPieceOfClothing(long id)

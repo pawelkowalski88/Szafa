@@ -85,6 +85,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ImageService\ImageServiceModuleLibrary.csproj">
+      <Project>{8FADCA39-330D-48F7-912B-102786ABAA36}</Project>
+      <Name>ImageServiceModuleLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SzafaEntities\SzafaEntities.csproj">
       <Project>{F961DA07-1EA3-430D-8749-36DCD782ECD4}</Project>
       <Name>SzafaEntities</Name>

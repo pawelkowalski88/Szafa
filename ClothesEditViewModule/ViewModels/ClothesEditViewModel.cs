@@ -174,9 +174,10 @@ namespace ClothesEditViewModule.ViewModels
         {
             OpenFileDialog OpenDialog = new OpenFileDialog();
             OpenDialog.ShowDialog();
-            if (OpenDialog.FileName != null)
+            if (OpenDialog.FileName != null || OpenDialog.FileName != "")
             {
                 CurrentItem.PicturePath = OpenDialog.FileName;
+                InvokePropertyChanged("CurrentItem");
             }
         }
 

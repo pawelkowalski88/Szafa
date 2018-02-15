@@ -8,9 +8,9 @@ namespace ImageServiceModuleLibrary.Services
 {
     public class ImageService
     {
-        public ImageService(IUnityContainer container)
+
+        public ImageService()
         {
-            this.container = container;
         }
 
         public BitmapImage RetrieveImage(string path)
@@ -51,7 +51,36 @@ namespace ImageServiceModuleLibrary.Services
             }
             return null;
         }
-        IUnityContainer container;
-    }
 
+        public string SaveImage(string path, long id)
+        {
+            string NewPicturePath = GenerateSavePath(path, id);
+
+            //if old path and new path are the same then do nothing
+            if (path == NewPicturePath || path =="") return path;
+
+            try
+            {
+                if (File.Exists(NewPicturePath))
+                {
+                    File.Delete(NewPicturePath);
+                }
+
+                if (File.Exists(path))
+                {
+                    File.Copy(path, NewPicturePath);
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            return NewPicturePath;
+        }
+
+        private String GenerateSavePath(String p, long i)
+        {
+            return System.AppDomain.CurrentDomain.BaseDirectory + "szafa\\picture" + i.ToString() + Path.GetExtension(p); ;
+        }
+    }
 }
