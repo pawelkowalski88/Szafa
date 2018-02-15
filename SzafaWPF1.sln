@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NavigationViewModule", "Nav
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypesService", "TypesService\TypesService.csproj", "{09865297-B221-4135-A9AF-DAA3B248B1D0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageServiceModuleLibrary", "ImageService\ImageServiceModuleLibrary.csproj", "{8FADCA39-330D-48F7-912B-102786ABAA36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{09865297-B221-4135-A9AF-DAA3B248B1D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09865297-B221-4135-A9AF-DAA3B248B1D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09865297-B221-4135-A9AF-DAA3B248B1D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FADCA39-330D-48F7-912B-102786ABAA36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FADCA39-330D-48F7-912B-102786ABAA36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FADCA39-330D-48F7-912B-102786ABAA36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FADCA39-330D-48F7-912B-102786ABAA36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

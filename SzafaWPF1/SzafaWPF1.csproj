@@ -171,6 +171,10 @@
       <Project>{2be098ac-789a-49ac-b799-6050c59666d0}</Project>
       <Name>DatabaseConnectionModule</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ImageService\ImageServiceModuleLibrary.csproj">
+      <Project>{8fadca39-330d-48f7-912b-102786abaa36}</Project>
+      <Name>ImageServiceModuleLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NavigationViewModule\NavigationViewModule.csproj">
       <Project>{49a9e921-6f53-463e-aaa6-b11932ee3e7a}</Project>
       <Name>NavigationViewModule</Name>

@@ -13,6 +13,7 @@ using TypesService.Services;
 using System;
 using System.Windows;
 using ClothesService.Services;
+using Microsoft.Win32;
 
 namespace ClothesEditViewModule.ViewModels
 {
@@ -105,7 +106,7 @@ namespace ClothesEditViewModule.ViewModels
         IUnityContainer container;
         EditActionType actionType;
         string title;
-        ICommand cancelCommand, editOKCommand;
+        ICommand cancelCommand, editOKCommand, browseForFile;
         clothes currentItem;
         List<types> typesList;
         TypesService.Services.TypesService typesService;
@@ -157,6 +158,28 @@ namespace ClothesEditViewModule.ViewModels
                     editOKCommand = new DelegateCommand(OnEditOK);
                 }
                 return editOKCommand;
+            }
+        }
+
+        public ICommand BrowseForFile
+        {
+            get
+            {
+                if(browseForFile == null)
+                {
+                    browseForFile = new DelegateCommand(OnBrowseForFile);
+                }
+                return browseForFile;
+            }
+        }
+
+        private void OnBrowseForFile()
+        {
+            OpenFileDialog OpenDialog = new OpenFileDialog();
+            OpenDialog.ShowDialog();
+            if (OpenDialog.FileName != null)
+            {
+                CurrentItem.picture_path = OpenDialog.FileName;
             }
         }
 

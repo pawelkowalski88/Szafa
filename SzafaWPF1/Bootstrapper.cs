@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using ClothesListModule;
 using System.Collections.ObjectModel;
-using ClothesService.ModuleDefinitions;
+using ImageServiceModuleLibrary.ModuleDefinitions;
 
 namespace SzafaWPF1
 {
@@ -115,6 +115,14 @@ namespace SzafaWPF1
                 ModuleName = "NavigationViewModule",
                 ModuleType = moduleType.AssemblyQualifiedName
             });
+
+            moduleType = typeof(ImageServiceModule);
+            moduleCatalog.AddModule(new ModuleInfo()
+            {
+                ModuleName = "ImageServiceModule",
+                ModuleType = moduleType.AssemblyQualifiedName
+            });
+
         }
     }
 }
