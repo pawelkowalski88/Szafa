@@ -21,12 +21,12 @@ namespace ClothesService.Services
             //updating clothes list as an async operation
             updateClothesListTask = new Task(() =>
             {
-
+                ImageService imageService = new ImageService();
                 var clothesList = dbConnection.GetClothes();
                 ClothesList = new List<PieceOfClothing>();
                 foreach (var c in clothesList)
                 {
-                    ClothesList.Add(new PieceOfClothing(c));
+                    ClothesList.Add(new PieceOfClothing(c, imageService.RetrieveImage(c.picture_path)));
                 }
                 //when clothes list is updated, fire an event
                 ClothesListUpdated(this, new EventArgs());

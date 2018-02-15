@@ -1,5 +1,6 @@
 ﻿using DatabaseConnectionSQLite;
 using System;
+using System.Windows.Media.Imaging;
 
 namespace SzafaEntities
 {
@@ -22,6 +23,11 @@ namespace SzafaEntities
             TimesOn = c.times_on;
             TypeId = c.type_id;
             Type = new ClothingType(c.types);
+        }
+       
+        public PieceOfClothing(clothes c, BitmapImage i) : this(c)
+        {
+            Image = i;
         }
 
         public clothes Toclothes()
@@ -51,6 +57,8 @@ namespace SzafaEntities
         public Nullable<System.DateTime> LastTimeOn { get; set; }
 
         public virtual ClothingType Type { get; set; }
+
+        public BitmapImage Image { get; set; }
 
     }
 }

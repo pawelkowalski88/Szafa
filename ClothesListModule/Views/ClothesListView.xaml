@@ -11,7 +11,6 @@
     
     <UserControl.Resources>
         <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConv"/>
-        <conv:PathConverter x:Key="RelativePathConverter"/>
         <conv:DateConverter x:Key="DateConv"/>
         <conv:DateToDaysConverter x:Key="DateToDaysConv"/>
         <conv:TimesOnConverter x:Key="TimesOnConv"/>
@@ -43,7 +42,7 @@
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                <Image Source="{Binding PicturePath, Converter={StaticResource RelativePathConverter}}" Width="80" Height="80">
+                                <Image Source="{Binding Image}" Width="80" Height="80">
                                 </Image>
                                 <StackPanel Margin="20">
                                     <TextBlock Text="{Binding Name}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24"></TextBlock>

@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:ClothesDetailedViewModule.Views"
              xmlns:conv="clr-namespace:PresentationUtility.Converters;assembly=PresentationUtility"
              mc:Ignorable="d" d:DesignWidth="400" d:DataContext="{StaticResource SampleDetails}"
-             Background="White" Height="753.488">
+             Background="White" d:DesignHeight="753.488">
+    
     <UserControl.Resources>
         <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConv"/>
         <conv:NullToVisibilityConverter x:Key="NullToVis"/>
@@ -14,8 +15,8 @@
         <conv:DateToDaysConverter x:Key="DateToDaysConv"/>
         <conv:TimesOnConverter x:Key="TimesOnConv"/>
         <conv:LastTimeOnConverter x:Key="LastTimeOnConv"/>
-        <conv:PathConverter x:Key="RelativePathConverter"/>
     </UserControl.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -28,7 +29,7 @@
 
         <!--Image-->
         <Border Grid.ColumnSpan="2">
-            <Image Source="{Binding CurrentItem.PicturePath, Converter={StaticResource RelativePathConverter}}" 
+            <Image Source="{Binding CurrentItem.Image}" 
                    Margin="20"/>
         </Border>
 
