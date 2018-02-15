@@ -9,7 +9,6 @@ using Prism.Regions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
-using System.Windows;
 using ClothesService.Services;
 using Microsoft.Win32;
 using SzafaEntities;
@@ -89,7 +88,6 @@ namespace ClothesEditViewModule.ViewModels
         {
             if (actionType == EditActionType.Create)
             {
-                MessageBox.Show("Create new");
                 SaveCurrentItemAsNew();
             }
             else

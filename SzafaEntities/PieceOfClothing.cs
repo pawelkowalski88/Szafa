@@ -22,8 +22,6 @@ namespace SzafaEntities
             TimesOn = c.times_on;
             TypeId = c.type_id;
             Type = new ClothingType(c.types);
-
-            //clothesbase = c;
         }
 
         public clothes Toclothes()
@@ -42,7 +40,6 @@ namespace SzafaEntities
             };
         }
 
-        private clothes clothesbase;
         public long Id { get; set; }
         public string Name { get; set; }
         public string PicturePath { get; set; }

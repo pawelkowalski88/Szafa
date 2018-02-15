@@ -30,7 +30,6 @@ namespace NavigationViewModule.ViewModels
         }
         private void OnNewPieceClick()
         {
-            //MessageBox.Show("New");
             container.RegisterInstance<EditActionType>(EditActionType.Create);
             IRegion region = regionManager.Regions["MainDetailsRegion"];
             ClothesEditView newView = container.Resolve<ClothesEditView>();

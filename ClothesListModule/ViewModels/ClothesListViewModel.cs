@@ -12,6 +12,11 @@ namespace ClothesListModule.ViewModels
 {
     public class ClothesListViewModel : PropertyChangedImplementation
     {
+        ClothesServices clothesService;
+        bool updating;
+        ICommand selectElementCommand;
+        IEventAggregator eventAggregator;
+
         public ClothesListViewModel(ClothesServices clothesService, IEventAggregator eventAggregator)
         {
             this.clothesService = clothesService;
@@ -78,11 +83,5 @@ namespace ClothesListModule.ViewModels
                 return selectElementCommand;
             }
         }
-
-        ClothesServices clothesService;
-        bool updating;
-        ICommand selectElementCommand;
-        IEventAggregator eventAggregator;
-
     }
 }

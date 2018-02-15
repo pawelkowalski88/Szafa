@@ -17,12 +17,15 @@
             Background="White"
             Orientation="Horizontal"
             FlowDirection="RightToLeft">
+            
             <Button Command="{Binding NewPieceCommand}"
                     Width="120"
                     Margin="5"
                     Content="Nowy"/>
+            
         </StackPanel>
         
         <ContentControl Grid.Row="1" prism:RegionManager.RegionName="ClothesListRegion"/>
+        
     </Grid>
 </UserControl>
