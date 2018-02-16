@@ -8,17 +8,20 @@ using Prism.Regions;
 using ClothesService.Enumerators;
 using ClothesEditViewModule.Views;
 using SzafaEntities;
+using System;
+using SzafaInterfaces;
 
 namespace ClothesDetailedViewModule.ViewModels
 {
     public class ClothesDetailedViewModel : PropertyChangedImplementation
     {
-        IUnityContainer container;
-        IRegionManager regionManager;
+        private IUnityContainer container;
+        private IRegionManager regionManager;
+        private IClothesServices clothesService;
         private PieceOfClothing currentItem;
         private IEventAggregator eventAggregator;
 
-        public ClothesDetailedViewModel(IEventAggregator eventAggregator, IUnityContainer container, IRegionManager regionManager)
+        public ClothesDetailedViewModel(IEventAggregator eventAggregator, IUnityContainer container, IRegionManager regionManager, IClothesServices clothesService)
         {
             //Use the event aggregation to catch the newly selected item on the list
             this.eventAggregator = eventAggregator;
@@ -26,9 +29,10 @@ namespace ClothesDetailedViewModule.ViewModels
                 eventAggregator.GetEvent<PieceOfClothingChangedEvent>();
             evt.Subscribe(OnCurrentItemChanged, true);
 
-            //Register the container & region manager
+            //Register the injected fields
             this.container = container;
             this.regionManager = regionManager;
+            this.clothesService = clothesService;
         }
 
         private void OnCurrentItemChanged(PieceOfClothing obj)
@@ -55,6 +59,26 @@ namespace ClothesDetailedViewModule.ViewModels
             evt.Publish(CurrentItem);
         }
 
+        private void OnWash()
+        {
+            CurrentItem.InUse = false;
+            CurrentItem.TimesOn = 0;
+            clothesService.UpdatePieceOfClothing(CurrentItem);
+            eventAggregator.GetEvent<ClothesListUpdateRequestedEvent>().Publish();
+        }
+
+        private void OnUse()
+        {
+            if (CurrentItem.InUse == false)
+            {
+                CurrentItem.InUse = true;
+            }
+            CurrentItem.InUseFrom = DateTime.Now;
+            CurrentItem.TimesOn++;
+            clothesService.UpdatePieceOfClothing(CurrentItem);
+            eventAggregator.GetEvent<ClothesListUpdateRequestedEvent>().Publish();
+        }
+
         /// <summary>
         /// Currently shown item.
         /// </summary>
@@ -64,7 +88,7 @@ namespace ClothesDetailedViewModule.ViewModels
             set { currentItem = value; InvokePropertyChanged("CurrentItem"); }
         }
 
-        ICommand editCommand;
+        ICommand editCommand, washCommand, useCommand;
 
         /// <summary>
         /// Fired when the user clicks Edit button.
@@ -78,6 +102,30 @@ namespace ClothesDetailedViewModule.ViewModels
                     editCommand = new DelegateCommand(OnEdit);
                 }
                 return editCommand;
+            }
+        }
+
+        public ICommand WashCommand
+        {
+            get
+            {
+                if(washCommand == null)
+                {
+                    washCommand = new DelegateCommand(OnWash);
+                }
+                return washCommand;
+            }
+        }
+
+        public ICommand UseCommand
+        {
+            get
+            {
+                if(useCommand == null)
+                {
+                    useCommand = new DelegateCommand(OnUse);
+                }
+                return useCommand;
             }
         }
     }

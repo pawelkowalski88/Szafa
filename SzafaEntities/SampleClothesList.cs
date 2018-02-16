@@ -28,7 +28,7 @@ namespace SzafaEntities
 
         public bool Updating
         {
-            get { return false; }
+            get { return true; }
         }
     }
 }

@@ -12,16 +12,18 @@ using System.Windows.Input;
 using ClothesService.Services;
 using Microsoft.Win32;
 using SzafaEntities;
+using SzafaInterfaces;
 
 namespace ClothesEditViewModule.ViewModels
 {
     public class ClothesEditViewModel : PropertyChangedImplementation
     {
-        public ClothesEditViewModel(IEventAggregator eventAggregator, IRegionManager regionManager, IUnityContainer container)
+        public ClothesEditViewModel(IEventAggregator eventAggregator, IRegionManager regionManager, IUnityContainer container, IClothesServices clothesService)
         {
             this.eventAggregator = eventAggregator;
             this.regionManager = regionManager;
             this.container = container;
+            this.clothesService = clothesService;
             Initialize();
         }
 
@@ -73,13 +75,11 @@ namespace ClothesEditViewModule.ViewModels
 
         private void SaveCurrentItemChanges()
         {
-            ClothesServices clothesService = container.Resolve<ClothesServices>();
             clothesService.UpdatePieceOfClothing(CurrentItem);
         }
 
         private void SaveCurrentItemAsNew()
         {
-            ClothesServices clothesService = container.Resolve<ClothesServices>();
             clothesService.AddPieceOfClothing(CurrentItem);
         }
 
@@ -107,6 +107,7 @@ namespace ClothesEditViewModule.ViewModels
         PieceOfClothing currentItem;
         List<ClothingType> typesList;
         TypesService.Services.TypesService typesService;
+        IClothesServices clothesService;
 
         public PieceOfClothing CurrentItem
         {

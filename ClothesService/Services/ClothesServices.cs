@@ -45,7 +45,6 @@ namespace ClothesService.Services
                 cl.picture_path = generatedName;
             }
             dbConnection.UpdateClothes(cl);
-
         }
 
         public clothes GetPieceOfClothing(long id)

@@ -9,9 +9,10 @@
                 return new PieceOfClothing()
                 {
                     Name = "Biała koszula",
-                    TimesOn= 5,
+                    TimesOn = 5,
                     Description = "Biała koszula na specjalne okazje.",
-                    Type = new ClothingType() { Name = "shirts"}
+                    Type = new ClothingType() { Name = "shirts" },
+                    InUse = true
                 };
             }
         }
