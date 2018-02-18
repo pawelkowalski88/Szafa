@@ -83,8 +83,16 @@
     <Compile Include="ModuleDefinitions\ClothesDetailedViewModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ClothesDetailedViewModel.cs" />
+    <Compile Include="ViewModels\ClothesDetailsActionButtonsViewModel.cs" />
+    <Compile Include="ViewModels\ClothesDetailsLowerButtonsBarViewModel.cs" />
     <Compile Include="Views\ClothesDetailedView.xaml.cs">
       <DependentUpon>ClothesDetailedView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ClothesDetailsActionButtonsView.xaml.cs">
+      <DependentUpon>ClothesDetailsActionButtonsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ClothesDetailsLowerButtonsBar.xaml.cs">
+      <DependentUpon>ClothesDetailsLowerButtonsBar.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +101,14 @@
   <ItemGroup />
   <ItemGroup>
     <Page Include="Views\ClothesDetailedView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ClothesDetailsActionButtonsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ClothesDetailsLowerButtonsBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

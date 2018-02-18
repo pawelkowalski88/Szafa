@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClothesDetailedViewModule.Views"
              xmlns:conv="clr-namespace:PresentationUtility.Converters;assembly=PresentationUtility"
+             xmlns:prism="http://prismlibrary.com/"
              mc:Ignorable="d" d:DesignWidth="400" d:DataContext="{StaticResource SampleDetails}"
              Background="White" d:DesignHeight="753.488">
     
@@ -21,6 +22,7 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -50,10 +52,28 @@
                 </StackPanel>
             </WrapPanel>
         </StackPanel>
-        <StackPanel Grid.Column="1" Grid.Row="1" Visibility="{Binding SelectedRow, Converter={StaticResource NullToVis}}">
-            <Button Height="80" Margin="10" Command="{Binding EditCommand}">Edytuj</Button>
-            <Button Content="Załóż" Height="80" Margin="10" Command="{Binding UseCommand}"/>
-            <Button Content="Upierz" Height="80" Margin="10" Command="{Binding WashCommand}" Visibility="{Binding CurrentItem.InUse, Converter={StaticResource BoolToVisibilityConv}}"/>
-        </StackPanel>
+
+        <ContentControl Grid.Column="1" 
+                        Grid.Row="1" 
+                        Visibility="{Binding CurrentItem, Converter={StaticResource NullToVis}}"
+                        Name="ClothesDetailsActionButtons" 
+                        prism:RegionManager.RegionName="ActionButtonsRegion"
+                        Background="White"/>
+
+        <Viewbox Grid.ColumnSpan="2" 
+                 Grid.Row="2">
+            <TextBlock Margin="10">Wybierz element z listy, aby zobaczyć szczegóły.</TextBlock>
+        </Viewbox>
+
+        <Border Grid.Row="2"
+                Grid.ColumnSpan="2"
+                Visibility="{Binding CurrentItem, Converter={StaticResource NullToVis}}"
+                Background="White">
+            
+        <ContentControl 
+                        Name="ClothesDetailsLowerButtonsBar"
+                        prism:RegionManager.RegionName="LowerButtonsBar"/>
+        </Border>
+
     </Grid>
 </UserControl>

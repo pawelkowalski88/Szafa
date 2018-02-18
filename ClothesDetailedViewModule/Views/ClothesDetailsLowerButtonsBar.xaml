@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="ClothesDetailedViewModule.Views.ClothesDetailsLowerButtonsBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ClothesDetailedViewModule.Views"
+             xmlns:conv="clr-namespace:PresentationUtility.Converters;assembly=PresentationUtility"
+             xmlns:viewmodel="clr-namespace:ClothesDetailedViewModule.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.Resources>
+        <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConv"/>
+    </UserControl.Resources>
+    
+    <Grid Background="White">
+        <Border>
+        <Button Content="Usuń"
+                Width="80"
+                Height="40"
+                Command="{Binding PreDeleteCommand}"
+                Visibility="{Binding DisplayPreDeleteButton, Converter={StaticResource BoolToVisibilityConv}}"/>
+        </Border>
+
+        <Border Visibility="{Binding DisplayDeleteConfirmation, Converter={StaticResource BoolToVisibilityConv}}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="{Binding DisplayDeleteConfirmation}"/>
+                <TextBlock Text="Usunąć?"
+                           Margin="10"
+                           TextAlignment="Center" 
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Center"/>
+                
+                <Button Width="80"
+                        Height="40"
+                        Margin="10"
+                        Content="Tak"
+                        Command="{Binding ConfirmDeleteCommand}"/>
+                
+                <Button Width="80"
+                        Height="40"
+                        Margin="10"
+                        Content="Nie"
+                        Command="{Binding CancelDeleteCommand}"/>
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</UserControl>

@@ -21,6 +21,16 @@ namespace ClothesDetailedViewModule.ModuleDefinitions
             var newView = container.Resolve<ClothesDetailedView>();
             region.Add(newView);
             region.Activate(newView);
+
+            region = regionManager.Regions["ActionButtonsRegion"];
+            var newActionButtonsView = container.Resolve<ClothesDetailsActionButtonsView>();
+            region.Add(newActionButtonsView);
+            region.Activate(newActionButtonsView);
+
+            region = regionManager.Regions["LowerButtonsBar"];
+            var newLowerButtonsBar = container.Resolve<ClothesDetailsLowerButtonsBar>();
+            region.Add(newLowerButtonsBar);
+            region.Activate(newLowerButtonsBar);
         }
 
         private IUnityContainer container;

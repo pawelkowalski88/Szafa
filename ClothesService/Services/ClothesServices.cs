@@ -62,6 +62,12 @@ namespace ClothesService.Services
             dbConnection.AddClothes(cl);
         }
 
+        public void DeletePieceOfClothing(PieceOfClothing c)
+        {
+            clothes cl = c.Toclothes();
+            dbConnection.DeletePieceOfClothing(cl);
+        }
+
         public List<PieceOfClothing> ClothesList { get; private set; }
         DatabaseConnectionService dbConnection;
         Task updateClothesListTask;
