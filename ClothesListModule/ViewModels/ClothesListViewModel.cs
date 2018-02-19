@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using CustomEvents;
 using SzafaEntities;
+using System.Windows;
 
 namespace ClothesListModule.ViewModels
 {
@@ -16,6 +17,7 @@ namespace ClothesListModule.ViewModels
         bool updating;
         ICommand selectElementCommand;
         IEventAggregator eventAggregator;
+        private PieceOfClothing currentItem, temporaryItem;
 
         public ClothesListViewModel(ClothesServices clothesService, IEventAggregator eventAggregator)
         {
@@ -30,6 +32,7 @@ namespace ClothesListModule.ViewModels
 
         private void ClothesService_ClothesListUpdated(object sender, EventArgs e)
         {
+            temporaryItem = CurrentItem;
             InvokePropertyChanged("ClothesList");
             Updating = false;
         }
@@ -47,8 +50,23 @@ namespace ClothesListModule.ViewModels
 
         private void OnElementSelected(PieceOfClothing obj)
         {
+            if (obj == null && temporaryItem != null)
+            {
+                if (ClothesList.Exists(x => x.Id == temporaryItem.Id))
+                {
+                    CurrentItem = ClothesList.Find(x => x.Id == temporaryItem.Id);
+                }
+                else
+                {
+                    CurrentItem = obj;
+                }
+            }
+            else
+            {
+                CurrentItem = obj;
+            }
             PieceOfClothingChangedEvent evt = eventAggregator.GetEvent<PieceOfClothingChangedEvent>();
-            evt.Publish(obj);
+            evt.Publish(CurrentItem);
         }
 
         public List<PieceOfClothing> ClothesList
@@ -81,6 +99,20 @@ namespace ClothesListModule.ViewModels
                     selectElementCommand = new DelegateCommand<PieceOfClothing>(OnElementSelected);
                 }
                 return selectElementCommand;
+            }
+        }
+
+        public PieceOfClothing CurrentItem
+        {
+            get
+            {
+                return currentItem;
+            }
+
+            set
+            {
+                currentItem = value;
+                InvokePropertyChanged("CurrentItem");
             }
         }
     }

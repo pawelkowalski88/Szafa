@@ -29,6 +29,7 @@
                       BorderThickness="0"
                       comm:ListViewSelect.CommandProperty="{Binding SelectElementCommand}"
                       comm:ListViewSelect.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}"
+                      SelectedItem="{Binding Path=CurrentItem, Mode=OneWay}"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       HorizontalContentAlignment="Stretch"
                       VerticalContentAlignment="Stretch">

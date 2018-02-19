@@ -53,8 +53,6 @@ namespace ClothesDetailedViewModule.ViewModels
         /// </summary>
         private void OnEdit()
         {
-
-
             //move this to module?
 
             //Put the edit view window on
@@ -90,9 +88,11 @@ namespace ClothesDetailedViewModule.ViewModels
             if (CurrentItem.InUse == false)
             {
                 CurrentItem.InUse = true;
+                CurrentItem.InUseFrom = DateTime.Now;
+                CurrentItem.LastTimeOn = DateTime.Now;
             }
-            CurrentItem.InUseFrom = DateTime.Now;
             CurrentItem.TimesOn++;
+            CurrentItem.LastTimeOn = DateTime.Now;
             clothesService.UpdatePieceOfClothing(CurrentItem);
             eventAggregator.GetEvent<ClothesListUpdateRequestedEvent>().Publish();
         }

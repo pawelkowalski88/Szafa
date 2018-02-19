@@ -24,7 +24,6 @@
 
         <Border Visibility="{Binding DisplayDeleteConfirmation, Converter={StaticResource BoolToVisibilityConv}}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock Text="{Binding DisplayDeleteConfirmation}"/>
                 <TextBlock Text="Usunąć?"
                            Margin="10"
                            TextAlignment="Center" 

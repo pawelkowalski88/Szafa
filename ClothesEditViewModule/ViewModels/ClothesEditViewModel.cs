@@ -34,7 +34,13 @@ namespace ClothesEditViewModule.ViewModels
             {
                 Title = "Nowy przedmiot";
                 InitializeTypesService();
-                CurrentItem = new PieceOfClothing();
+                CurrentItem = new PieceOfClothing()
+                {
+                    Name = "",
+                    InUse = false,
+                    PicturePath = "",
+                    TimesOn = 0
+                };
             }
             else
             {
