@@ -85,6 +85,9 @@
     <Compile Include="Views\ClothesListView.xaml.cs">
       <DependentUpon>ClothesListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PieceOfClothingView.xaml.cs">
+      <DependentUpon>PieceOfClothingView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -109,6 +112,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\ClothesListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PieceOfClothingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

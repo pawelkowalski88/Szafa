@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:NavigationViewModule.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Background="White">
-    <Grid>
+    <Grid Background="LightGray">
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition/>
@@ -16,7 +16,8 @@
         <StackPanel 
             Background="White"
             Orientation="Horizontal"
-            FlowDirection="RightToLeft">
+            FlowDirection="RightToLeft"
+            Margin="2,1,2,2">
             
             <Button Command="{Binding NewPieceCommand}"
                     Width="120"

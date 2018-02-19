@@ -69,6 +69,7 @@ namespace ClothesListModule.ViewModels
             evt.Publish(CurrentItem);
         }
 
+        //Zmienić na ObservableCollection
         public List<PieceOfClothing> ClothesList
         {
             get
