@@ -8,7 +8,7 @@
              xmlns:comm="clr-namespace:PresentationUtility.AttachedCommands;assembly=PresentationUtility"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="400">
-    
+
     <UserControl.Resources>
         <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConv"/>
         <conv:DateConverter x:Key="DateConv"/>
@@ -17,40 +17,57 @@
         <conv:LastTimeOnConverter x:Key="LastTimeOnConv"/>
     </UserControl.Resources>
 
-    
-    <Border Background="LightGray">
-        <TabControl Margin="2">
-            
-        <Grid d:DataContext="{StaticResource SampleList}">
+    <Grid d:DataContext="{StaticResource SampleList}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TabControl Margin="2,2,2,0"
+                    BorderBrush="White" 
+                    ItemsSource="{Binding FilterTabs}" 
+                    SelectedItem="{Binding SelectedFilter}"
+                    comm:TabControlSelect.CommandProperty="{Binding SelectFilterCommand}"
+                    comm:TabControlSelect.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+        </TabControl>
+
+        <Border Background="LightGray" Grid.Row="1" Margin="2,0,2,2">
+
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-            <ListView ItemsSource="{Binding ClothesList}" 
-                      Grid.Row="0"
-                      BorderThickness="0"
-                      comm:ListViewSelect.CommandProperty="{Binding SelectElementCommand}"
-                      comm:ListViewSelect.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}"
-                      SelectedItem="{Binding Path=CurrentItem, Mode=OneWay}"
-                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                      HorizontalContentAlignment="Stretch"
-                      VerticalContentAlignment="Stretch">
+                <ListView ItemsSource="{Binding ClothesList}" 
+                          Grid.Row="0"
+                          BorderThickness="0"
+                          comm:ListViewSelect.CommandProperty="{Binding SelectElementCommand}"
+                          comm:ListViewSelect.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}"
+                          SelectedItem="{Binding Path=CurrentItem, Mode=OneWay}"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          HorizontalContentAlignment="Stretch"
+                          VerticalContentAlignment="Stretch">
 
-                <ListView.ItemTemplate>
-                    <DataTemplate>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
                             <local:PieceOfClothingView/>
                         </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            
-            <TextBlock Text="Loading..." 
-                       Grid.Row="1"
-                       FontSize="24"
-                       TextAlignment="Center"
-                       Visibility="{Binding Updating, Converter={StaticResource BoolToVisibilityConv}}"
-                       Background="LightBlue"/>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <TextBlock Text="Loading..." 
+                           Grid.Row="1"
+                           FontSize="24"
+                           TextAlignment="Center"
+                           Visibility="{Binding Updating, Converter={StaticResource BoolToVisibilityConv}}"
+                           Background="LightBlue"/>
             </Grid>
-        </TabControl>
-    </Border>
+        </Border>
+    </Grid>
 </UserControl>

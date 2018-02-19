@@ -77,6 +77,8 @@
   <ItemGroup>
     <Compile Include="AttachedCommands\ListViewSelect.cs" />
     <Compile Include="AttachedCommands\ListViewSelectCommandBehavior.cs" />
+    <Compile Include="AttachedCommands\TabControlSelect.cs" />
+    <Compile Include="AttachedCommands\TabControlSelectCommandBehavior.cs" />
     <Compile Include="Converters\BitmapConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\DateConverter.cs" />
