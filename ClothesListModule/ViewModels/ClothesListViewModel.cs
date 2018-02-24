@@ -9,6 +9,8 @@ using CustomEvents;
 using SzafaEntities;
 using System.Windows;
 using ClothesListModule.Filtering;
+using ClothesListModule.Events;
+using System.Linq;
 
 namespace ClothesListModule.ViewModels
 {
@@ -26,14 +28,11 @@ namespace ClothesListModule.ViewModels
             this.clothesService = clothesService;
             this.eventAggregator = eventAggregator;
             eventAggregator.GetEvent<ClothesListUpdateRequestedEvent>().Subscribe(OnUpdateRequested, true);
+            eventAggregator.GetEvent<FilteringConditionsChangedEvent>().Subscribe(OnFilterChanged, true);
 
             //Might be useful to use event aggregation in the future also for this
             clothesService.ClothesListUpdated += ClothesService_ClothesListUpdated;
             UpdateClothesList();
-
-            FilterTabs = FilteringConditions.GenerateStandardConditions();
-            SelectedFilter = FilterTabs[0];
-
         }
 
         private void ClothesService_ClothesListUpdated(object sender, EventArgs e)
@@ -75,10 +74,10 @@ namespace ClothesListModule.ViewModels
             evt.Publish(CurrentItem);
         }
 
-        private void OnFilterChanged(FilteringConditions obj)
+        private void OnFilterChanged(List<FilteringConditions> obj)
         {
-            //Predicate<PieceOfClothing> filteringConditions = (x => x.InUse == true);
-            SelectedFilter = obj;
+            SelectedFilter = obj[0];
+            SelectedTypeFilter = obj[1];
             InvokePropertyChanged("ClothesList");
         }
 
@@ -87,7 +86,7 @@ namespace ClothesListModule.ViewModels
         {
             get
             {
-                return clothesService.ClothesList.FindAll(SelectedFilter.Conditions);
+                return clothesService.ClothesList.FindAll(x => (SelectedFilter.Conditions(x) && SelectedTypeFilter.Conditions(x)));
             }
         }
 
@@ -116,18 +115,6 @@ namespace ClothesListModule.ViewModels
             }
         }
 
-        public ICommand SelectFilterCommand
-        {
-            get
-            {
-                if(selectFilterCommand == null)
-                {
-                    selectFilterCommand = new DelegateCommand<FilteringConditions>(OnFilterChanged);
-                }
-                return selectFilterCommand;
-            }
-        }
-
         public PieceOfClothing CurrentItem
         {
             get
@@ -142,19 +129,7 @@ namespace ClothesListModule.ViewModels
             }
         }
 
-        public List<FilteringConditions> FilterTabs
-        {
-            get
-            {
-                return filterTabs;
-            }
-
-            set
-            {
-                filterTabs = value;
-            }
-        }
-
         public FilteringConditions SelectedFilter { get; set; }
+        public FilteringConditions SelectedTypeFilter { get; set; }
     }
 }

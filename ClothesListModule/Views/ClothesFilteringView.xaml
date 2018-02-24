@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="ClothesListModule.Views.ClothesFilteringView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:comm="clr-namespace:PresentationUtility.AttachedCommands;assembly=PresentationUtility"
+             xmlns:local="clr-namespace:ClothesListModule.Views"
+             xmlns:datacontext="clr-namespace:ClothesListModule.DesignTimeDataContexts"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.Resources>
+        <datacontext:FilteringDataContext x:Key="SampleFilteringConditions"/>
+    </UserControl.Resources>
+
+    <Grid Margin="2,2,2,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <TabControl 
+                    BorderBrush="White" 
+                    ItemsSource="{Binding FilterTabs}" 
+                    SelectedItem="{Binding SelectedFilter}"
+                    comm:TabControlSelect.CommandProperty="{Binding SelectFilterCommand}"
+                    comm:TabControlSelect.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}"
+                    d:DataContext="{StaticResource SampleFilteringConditions}">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+        </TabControl>
+
+        <Border Grid.Row="1" Background="White">
+            <WrapPanel>
+                <StackPanel Margin="5">
+                    <TextBlock>Kategoria:</TextBlock>
+                    <ComboBox HorizontalAlignment="Left"  
+                              VerticalAlignment="Center" 
+                              Width="120" 
+                              ItemsSource="{Binding TypesFilterList}" 
+                              DisplayMemberPath="Name" 
+                              SelectedValue="{Binding SelectedTypeFilter}"
+                              comm:ComboBoxSelect.CommandProperty="{Binding SelectTypeFilterCommand}"
+                              comm:ComboBoxSelect.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}">
+                        <!--<i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding SelectTypeFilterCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>-->
+                    </ComboBox>
+                </StackPanel>
+                
+                <StackPanel DockPanel.Dock="Top" Margin="5">
+                    <TextBlock>Sortuj:</TextBlock>
+                    <ComboBox Name="SortComboBox" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="120" ItemsSource="{Binding SortingCategory}" DisplayMemberPath="Key" SelectedValue="{Binding SortColumn}" SelectedValuePath="Value">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding SelectFilterCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                </StackPanel>
+                
+                <ComboBox Margin="5,0,0,5" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="120" ItemsSource="{Binding SortingOrderList}" DisplayMemberPath="Key" SelectedValue="{Binding SortingOrder}" SelectedValuePath="Value">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectFilterCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+                
+            </WrapPanel>
+        </Border>
+
+    </Grid>
+</UserControl>

@@ -19,6 +19,11 @@ namespace ClothesListModule.ModuleDefinitions
             object newView = container.Resolve<Views.ClothesListView>();
             region.Add(newView);
             region.Activate(newView);
+
+            region = regionManager.Regions["ClothesFilteringRegion"];
+            object newFilterView = container.Resolve<Views.ClothesFilteringView>();
+            region.Add(newFilterView);
+            region.Activate(newFilterView);
         }
 
         IRegionManager regionManager;

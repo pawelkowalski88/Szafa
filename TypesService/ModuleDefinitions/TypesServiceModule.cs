@@ -12,6 +12,7 @@ namespace TypesService.ModuleDefinitions
         }
         public void Initialize()
         {
+            //container.RegisterInstance<ITypesService>(new TypesService.Services.TypesService(container));
             container.RegisterType<ITypesService, TypesService.Services.TypesService>(new ContainerControlledLifetimeManager());
         }
         IUnityContainer container;

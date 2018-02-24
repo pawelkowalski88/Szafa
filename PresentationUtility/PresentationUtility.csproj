@@ -75,6 +75,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttachedCommands\ComboBoxSelect.cs" />
+    <Compile Include="AttachedCommands\ComboBoxSelectCommandBehavior.cs" />
     <Compile Include="AttachedCommands\ListViewSelect.cs" />
     <Compile Include="AttachedCommands\ListViewSelectCommandBehavior.cs" />
     <Compile Include="AttachedCommands\TabControlSelect.cs" />
