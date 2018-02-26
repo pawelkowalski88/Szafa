@@ -23,6 +23,7 @@ namespace ClothesListModule.ViewModels
         private PieceOfClothing currentItem, temporaryItem;
 
         private List<FilteringConditions> filters;
+        private Tuple<SortingConditions, bool> sortingParamters;
 
         public ClothesListViewModel(ClothesServices clothesService, IEventAggregator eventAggregator)
         {
@@ -30,6 +31,7 @@ namespace ClothesListModule.ViewModels
             this.eventAggregator = eventAggregator;
             eventAggregator.GetEvent<ClothesListUpdateRequestedEvent>().Subscribe(OnUpdateRequested, true);
             eventAggregator.GetEvent<FilteringConditionsChangedEvent>().Subscribe(OnFilterChanged, true);
+            eventAggregator.GetEvent<SortingConditionsChangedEvent>().Subscribe(OnSortingConditionsChanged, true);
 
             //Might be useful to use event aggregation in the future also for this
             clothesService.ClothesListUpdated += ClothesService_ClothesListUpdated;
@@ -81,12 +83,20 @@ namespace ClothesListModule.ViewModels
             InvokePropertyChanged("ClothesList");
         }
 
+        private void OnSortingConditionsChanged(Tuple<SortingConditions, bool> obj)
+        {
+            sortingParamters = obj;
+            InvokePropertyChanged("ClothesList");
+        }
+
         //Zmienić na ObservableCollection
         public List<PieceOfClothing> ClothesList
         {
             get
             {
-                return clothesService.ClothesList.FindAll(x => ApplyFilters(x));
+                return sortingParamters.Item2 == false ?
+                    clothesService.ClothesList.FindAll(x => ApplyFilters(x)).OrderBy(sortingParamters.Item1.Condition).ToList() :
+                    clothesService.ClothesList.FindAll(x => ApplyFilters(x)).OrderByDescending(sortingParamters.Item1.Condition).ToList();
             }
         }
 

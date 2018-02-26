@@ -81,7 +81,10 @@
   <ItemGroup>
     <Compile Include="DesignTimeDataContexts\FilteringDataContext.cs" />
     <Compile Include="Events\FilteringConditionsChangedEvent.cs" />
+    <Compile Include="Events\SortingConditionsChangedEvent.cs" />
     <Compile Include="Filtering\FilteringConditions.cs" />
+    <Compile Include="Filtering\SortingConditions.cs" />
+    <Compile Include="Filtering\SortingOrder.cs" />
     <Compile Include="Filtering\TypeFilteringConditions.cs" />
     <Compile Include="Filtering\TypeFilteringConditionsService.cs" />
     <Compile Include="ModuleDefinitions\ClothesListModule.cs" />

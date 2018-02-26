@@ -14,19 +14,22 @@ using SzafaEntities;
 using SzafaInterfaces;
 
 namespace ClothesListModule.ViewModels
-{
+{ 
     public class ClothesFilteringViewModel : PropertyChangedImplementation
     {
         private List<FilteringConditions> filterTabs;
         private List<FilteringConditions> typesFilterList;
-        private ICommand selectFilterCommand, selectTypeFilterCommand;
+        private List<SortingConditions> sortingCategoriesList;
+        private ICommand selectFilterCommand, selectTypeFilterCommand, selectSortingCategoryCommand, selectSortingOrderCommand;
         private IEventAggregator eventAggregator;
         private TypeFilteringConditionsService typeFilteringConditionsService;
+        private SortingOrder sortingOrder;
 
         public ClothesFilteringViewModel(IEventAggregator eventAggregator, TypeFilteringConditionsService typeFilteringConditionsService)
         {
             this.eventAggregator = eventAggregator;
             this.typeFilteringConditionsService = typeFilteringConditionsService;
+
             FilterTabs = FilteringConditions.GenerateStandardConditions();
             SelectedFilter = FilterTabs[0];
 
@@ -34,7 +37,12 @@ namespace ClothesListModule.ViewModels
             typeFilteringConditionsService.FilteringConditionsUpdated += TypeFilteringConditionsService_FilteringConditionsUpdated;
             SelectedTypeFilter = TypesFilterList[0];
 
-            eventAggregator.GetEvent<FilteringConditionsChangedEvent>().Publish(new List<FilteringConditions>() { SelectedFilter, SelectedTypeFilter });
+            SortingCategoriesList = SortingConditions.GenerateStandardConditions();
+            SelectedSortingCategory = SortingCategoriesList[0];
+
+            SortingOrder = SortingOrder.Rosnąco;
+
+            PublishFilters();
         }
 
         private void TypeFilteringConditionsService_FilteringConditionsUpdated(object sender, EventArgs e)
@@ -54,27 +62,36 @@ namespace ClothesListModule.ViewModels
             PublishFilters();
         }
 
+        private void OnSortingCategoryChanged(SortingConditions obj)
+        {
+            SelectedSortingCategory = obj;
+            PublishFilters();
+        }
+
+        private void OnSortingOrderChanged(SortingOrder obj)
+        {
+            SortingOrder = obj;
+            PublishFilters();
+        }
+
         private void PublishFilters()
         {
-            FilteringConditionsChangedEvent evt = eventAggregator.GetEvent<FilteringConditionsChangedEvent>();
-            evt.Publish(new List<FilteringConditions>() { SelectedFilter, SelectedTypeFilter });
+            eventAggregator.GetEvent<FilteringConditionsChangedEvent>()
+                .Publish(new List<FilteringConditions>(){ SelectedFilter, SelectedTypeFilter });
+
+            if (SortingOrder == SortingOrder.Rosnąco)
+                eventAggregator.GetEvent<SortingConditionsChangedEvent>()
+                    .Publish(Tuple.Create(SelectedSortingCategory, false));
+            else
+                eventAggregator.GetEvent<SortingConditionsChangedEvent>()
+                    .Publish(Tuple.Create(SelectedSortingCategory, true));
+
         }
 
         public FilteringConditions SelectedFilter { get; set; }
         public FilteringConditions SelectedTypeFilter { get; set; }
+        public SortingConditions SelectedSortingCategory { get; set; }
 
-        public List<FilteringConditions> FilterTabs
-        {
-            get
-            {
-                return filterTabs;
-            }
-
-            set
-            {
-                filterTabs = value;
-            }
-        }
 
         public ICommand SelectFilterCommand
         {
@@ -100,6 +117,43 @@ namespace ClothesListModule.ViewModels
             }
         }
 
+        public ICommand SelectSortingCategoryCommand
+        {
+            get
+            {
+                if(selectSortingCategoryCommand == null)
+                {
+                    selectSortingCategoryCommand = new DelegateCommand<SortingConditions>(OnSortingCategoryChanged);
+                }
+                return selectSortingCategoryCommand;
+            }
+        }
+
+        public ICommand SelectSortingOrderCommand
+        {
+            get
+            {
+                if (selectSortingOrderCommand == null)
+                {
+                    selectSortingOrderCommand = new DelegateCommand<SortingOrder>(OnSortingOrderChanged);
+                }
+                return selectSortingOrderCommand;
+            }
+        }
+
+        public List<FilteringConditions> FilterTabs
+        {
+            get
+            {
+                return filterTabs;
+            }
+
+            set
+            {
+                filterTabs = value;
+            }
+        }
+
         public List<FilteringConditions> TypesFilterList
         {
             get
@@ -111,6 +165,31 @@ namespace ClothesListModule.ViewModels
             {
                 typesFilterList = value;
                 InvokePropertyChanged("TypesFilterList");
+            }
+        }
+
+        public List<SortingConditions> SortingCategoriesList
+        {
+            get
+            {
+                return sortingCategoriesList;
+            }
+
+            set
+            {
+                sortingCategoriesList = value;
+            }
+        }
+
+        public SortingOrder SortingOrder
+        {
+            get
+            {
+                return sortingOrder;
+            }
+            set
+            {
+                sortingOrder = value;
             }
         }
     }

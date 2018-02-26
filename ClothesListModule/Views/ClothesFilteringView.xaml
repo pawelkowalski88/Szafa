@@ -6,12 +6,19 @@
              xmlns:comm="clr-namespace:PresentationUtility.AttachedCommands;assembly=PresentationUtility"
              xmlns:local="clr-namespace:ClothesListModule.Views"
              xmlns:datacontext="clr-namespace:ClothesListModule.DesignTimeDataContexts"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:f="clr-namespace:ClothesListModule.Filtering"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
     <UserControl.Resources>
         <datacontext:FilteringDataContext x:Key="SampleFilteringConditions"/>
+        <ObjectDataProvider x:Key="SortOrder" MethodName="GetValues"
+                            ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="f:SortingOrder"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
     </UserControl.Resources>
 
     <Grid Margin="2,2,2,0">
@@ -46,31 +53,31 @@
                               SelectedValue="{Binding SelectedTypeFilter}"
                               comm:ComboBoxSelect.CommandProperty="{Binding SelectTypeFilterCommand}"
                               comm:ComboBoxSelect.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}">
-                        <!--<i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction Command="{Binding SelectTypeFilterCommand}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>-->
                     </ComboBox>
                 </StackPanel>
                 
                 <StackPanel DockPanel.Dock="Top" Margin="5">
                     <TextBlock>Sortuj:</TextBlock>
-                    <ComboBox Name="SortComboBox" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="120" ItemsSource="{Binding SortingCategory}" DisplayMemberPath="Key" SelectedValue="{Binding SortColumn}" SelectedValuePath="Value">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction Command="{Binding SelectFilterCommand}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </ComboBox>
+                    <ComboBox Name="SortComboBox" 
+                              HorizontalAlignment="Left"  
+                              VerticalAlignment="Center" 
+                              Width="160" 
+                              ItemsSource="{Binding SortingCategoriesList}" 
+                              DisplayMemberPath="Name" 
+                              SelectedValue="{Binding SelectedSortingCategory}"
+                              comm:ComboBoxSelect.CommandProperty="{Binding SelectSortingCategoryCommand}"
+                              comm:ComboBoxSelect.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}"/>
+
                 </StackPanel>
-                
-                <ComboBox Margin="5,0,0,5" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="120" ItemsSource="{Binding SortingOrderList}" DisplayMemberPath="Key" SelectedValue="{Binding SortingOrder}" SelectedValuePath="Value">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction Command="{Binding SelectFilterCommand}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
+
+                <ComboBox Margin="5,0,0,5" 
+                          HorizontalAlignment="Left" 
+                          VerticalAlignment="Bottom" 
+                          Width="120"
+                          ItemsSource="{Binding Source={StaticResource SortOrder}}"
+                          SelectedValue="{Binding SortingOrder}"
+                          comm:ComboBoxSelect.CommandProperty="{Binding SelectSortingOrderCommand}"
+                          comm:ComboBoxSelect.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}">
                 </ComboBox>
                 
             </WrapPanel>
