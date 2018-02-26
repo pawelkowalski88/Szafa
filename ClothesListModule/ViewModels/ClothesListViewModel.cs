@@ -18,10 +18,11 @@ namespace ClothesListModule.ViewModels
     {
         ClothesServices clothesService;
         bool updating;
-        ICommand selectElementCommand, selectFilterCommand;
+        ICommand selectElementCommand;
         IEventAggregator eventAggregator;
         private PieceOfClothing currentItem, temporaryItem;
-        private List<FilteringConditions> filterTabs;
+
+        private List<FilteringConditions> filters;
 
         public ClothesListViewModel(ClothesServices clothesService, IEventAggregator eventAggregator)
         {
@@ -76,8 +77,7 @@ namespace ClothesListModule.ViewModels
 
         private void OnFilterChanged(List<FilteringConditions> obj)
         {
-            SelectedFilter = obj[0];
-            SelectedTypeFilter = obj[1];
+            filters = obj;
             InvokePropertyChanged("ClothesList");
         }
 
@@ -86,8 +86,17 @@ namespace ClothesListModule.ViewModels
         {
             get
             {
-                return clothesService.ClothesList.FindAll(x => (SelectedFilter.Conditions(x) && SelectedTypeFilter.Conditions(x)));
+                return clothesService.ClothesList.FindAll(x => ApplyFilters(x));
             }
+        }
+
+        private bool ApplyFilters(PieceOfClothing p)
+        {
+            foreach (FilteringConditions filter in filters)
+            { 
+                if(filter.Conditions(p) == false) return false;
+            }
+            return true;
         }
 
         public bool Updating
@@ -128,8 +137,5 @@ namespace ClothesListModule.ViewModels
                 InvokePropertyChanged("CurrentItem");
             }
         }
-
-        public FilteringConditions SelectedFilter { get; set; }
-        public FilteringConditions SelectedTypeFilter { get; set; }
     }
 }
