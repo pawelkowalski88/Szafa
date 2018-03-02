@@ -13,7 +13,7 @@ namespace PresentationUtility.Converters
             try
             {
                 input = (bool)value;
-                if (input)
+                if (input == true)
                 {
                     return Visibility.Visible;
                 }

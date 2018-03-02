@@ -1,20 +1,26 @@
 ﻿
+using Prism.Events;
 using SQLiteDatabaseConnection;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
+using CustomEvents;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using SzafaInterfaces;
 
 namespace DatabaseConnectionModule.Services
 {
-    public class DatabaseConnectionService
+    public class DatabaseConnectionService : IDatabaseConnectionService
     {
-        public DatabaseConnectionService()
+        private IEventAggregator eventAggregator;
+
+        public DatabaseConnectionService(IEventAggregator eventAggregator)
         {
+            this.eventAggregator = eventAggregator;
         }
 
         public IEnumerable<T> GetEntities<T>() where T : class
@@ -44,7 +50,7 @@ namespace DatabaseConnectionModule.Services
                 }
                 catch(Exception e)
                 {
-                    MessageBox.Show(e.ToString());
+                    eventAggregator.GetEvent<DatabaseConnectionErrorOccuredEvent>().Publish(e);
                     return null;
                 }
             }

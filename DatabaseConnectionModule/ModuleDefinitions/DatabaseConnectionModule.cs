@@ -2,6 +2,7 @@
 using Microsoft.Practices.Unity;
 using Prism.Modularity;
 using Prism.Regions;
+using SzafaInterfaces;
 
 namespace DatabaseConnectionModule.ModuleDefinitions
 {
@@ -15,7 +16,7 @@ namespace DatabaseConnectionModule.ModuleDefinitions
         }
         public void Initialize()
         {
-            container.RegisterInstance<DatabaseConnectionService>(new DatabaseConnectionService());
+            container.RegisterType<IDatabaseConnectionService, DatabaseConnectionService>();
         }
 
         IRegionManager regionManager;

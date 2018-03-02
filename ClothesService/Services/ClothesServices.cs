@@ -11,9 +11,9 @@ namespace ClothesService.Services
 {
     public class ClothesServices : IClothesServices
     {
-        public ClothesServices(ImageService imageService)
+        public ClothesServices(ImageService imageService, IDatabaseConnectionService connectionService)
         {
-            dbConnection = new DatabaseConnectionService();
+            dbConnection = connectionService;
             this.imageService = imageService;
         }
 
@@ -69,7 +69,7 @@ namespace ClothesService.Services
         }
 
         public List<PieceOfClothing> ClothesList { get; private set; }
-        DatabaseConnectionService dbConnection;
+        IDatabaseConnectionService dbConnection;
         Task updateClothesListTask;
         public event EventHandler ClothesListUpdated;
         ImageService imageService;

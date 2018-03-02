@@ -32,10 +32,19 @@ namespace ClothesListModule.ViewModels
             eventAggregator.GetEvent<ClothesListUpdateRequestedEvent>().Subscribe(OnUpdateRequested, true);
             eventAggregator.GetEvent<FilteringConditionsChangedEvent>().Subscribe(OnFilterChanged, true);
             eventAggregator.GetEvent<SortingConditionsChangedEvent>().Subscribe(OnSortingConditionsChanged, true);
+            eventAggregator.GetEvent<DatabaseConnectionErrorOccuredEvent>().Subscribe(OnDatabaseConnectionError, true);
 
             //Might be useful to use event aggregation in the future also for this
             clothesService.ClothesListUpdated += ClothesService_ClothesListUpdated;
             UpdateClothesList();
+        }
+
+        private void OnDatabaseConnectionError(Exception obj)
+        {
+            Updating = false;
+            DatabaseConnectionError = true;
+            InvokePropertyChanged("DatabaseConnectionError");
+
         }
 
         private void ClothesService_ClothesListUpdated(object sender, EventArgs e)
@@ -121,6 +130,8 @@ namespace ClothesListModule.ViewModels
                 InvokePropertyChanged("Updating");
             }
         }
+
+        public bool DatabaseConnectionError { get; set; }
 
         public ICommand SelectElementCommand
         {

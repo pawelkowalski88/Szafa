@@ -32,6 +32,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <ListView ItemsSource="{Binding ClothesList}" 
@@ -55,8 +56,18 @@
                            Grid.Row="1"
                            FontSize="24"
                            TextAlignment="Center"
-                           Visibility="{Binding Updating, Converter={StaticResource BoolToVisibilityConv}}"
+                           Visibility="{Binding Updating, Converter={StaticResource BoolToVisibilityConv}, FallbackValue=Collapsed}"
                            Background="LightBlue"/>
+
+                <StackPanel Grid.Row="2" 
+                            Orientation="Horizontal"
+                            Visibility="{Binding DatabaseConnectionError, Converter={StaticResource BoolToVisibilityConv}, FallbackValue=Collapsed}"
+                            Background="#FFFFFF65">
+                    <Image Source="{StaticResource ResourceKey=ErrorImage}"/>
+                    <TextBlock Text="Błąd połączenia z bazą danych" 
+                               FontSize="24"
+                               TextAlignment="Center"/>
+                </StackPanel>
             </Grid>
         </Border>
     </Grid>

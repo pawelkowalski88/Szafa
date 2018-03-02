@@ -12,16 +12,16 @@ namespace SQLiteConnectionTestConsole
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("TEST");
-            DatabaseConnectionService dbconn = new DatabaseConnectionService();
+            //Console.WriteLine("TEST");
+            //DatabaseConnectionService dbconn = new DatabaseConnectionService()
 
-            List<clothes> clothesList = dbconn.GetClothes();
+            //List<clothes> clothesList = dbconn.GetClothes();
 
-            foreach(var c in clothesList)
-            {
-                Console.WriteLine(c.id.ToString() + "; " + c.name);
-            }
-            Console.ReadLine();
+            //foreach(var c in clothesList)
+            //{
+            //    Console.WriteLine(c.id.ToString() + "; " + c.name);
+            //}
+            //Console.ReadLine();
         }
     }
 }
