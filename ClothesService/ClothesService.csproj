@@ -30,9 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DatabaseConnectionSQLite">
-      <HintPath>..\..\SzafaDatabaseConnection\DatabaseConnectionSQLite\bin\Debug\DatabaseConnectionSQLite.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
@@ -86,9 +83,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DatabaseConnectionModule\DatabaseConnectionModule.csproj">
+      <Project>{2BE098AC-789A-49AC-B799-6050C59666D0}</Project>
+      <Name>DatabaseConnectionModule</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ImageService\ImageServiceModuleLibrary.csproj">
       <Project>{8FADCA39-330D-48F7-912B-102786ABAA36}</Project>
       <Name>ImageServiceModuleLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SQLiteDatabaseConnection\SQLiteDatabaseConnection.csproj">
+      <Project>{64438d0d-d49d-494c-a366-79b02691853c}</Project>
+      <Name>SQLiteDatabaseConnection</Name>
     </ProjectReference>
     <ProjectReference Include="..\SzafaEntities\SzafaEntities.csproj">
       <Project>{F961DA07-1EA3-430D-8749-36DCD782ECD4}</Project>

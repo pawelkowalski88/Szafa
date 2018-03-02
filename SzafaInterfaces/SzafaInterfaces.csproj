@@ -30,9 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DatabaseConnectionSQLite">
-      <HintPath>..\..\SzafaDatabaseConnection\DatabaseConnectionSQLite\bin\Debug\DatabaseConnectionSQLite.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -45,11 +42,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IClothesServices.cs" />
+    <Compile Include="IDatabaseConnectionService.cs" />
     <Compile Include="IImageService.cs" />
     <Compile Include="ITypesService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SQLiteDatabaseConnection\SQLiteDatabaseConnection.csproj">
+      <Project>{64438d0d-d49d-494c-a366-79b02691853c}</Project>
+      <Name>SQLiteDatabaseConnection</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SzafaEntities\SzafaEntities.csproj">
       <Project>{F961DA07-1EA3-430D-8749-36DCD782ECD4}</Project>
       <Name>SzafaEntities</Name>

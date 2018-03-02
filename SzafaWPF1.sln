@@ -29,6 +29,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageServiceModuleLibrary",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SzafaInterfaces", "SzafaInterfaces\SzafaInterfaces.csproj", "{F38C4E38-123C-4415-9930-6B84F6D0EE7E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLiteDatabaseConnection", "SQLiteDatabaseConnection\SQLiteDatabaseConnection.csproj", "{64438D0D-D49D-494C-A366-79B02691853C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLiteConnectionTestConsole", "SQLiteConnectionTestConsole\SQLiteConnectionTestConsole.csproj", "{A39A2CF9-3424-43A2-A9DD-10A3E03BAED5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +91,14 @@ Global
 		{F38C4E38-123C-4415-9930-6B84F6D0EE7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F38C4E38-123C-4415-9930-6B84F6D0EE7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F38C4E38-123C-4415-9930-6B84F6D0EE7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64438D0D-D49D-494C-A366-79B02691853C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64438D0D-D49D-494C-A366-79B02691853C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64438D0D-D49D-494C-A366-79B02691853C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64438D0D-D49D-494C-A366-79B02691853C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A39A2CF9-3424-43A2-A9DD-10A3E03BAED5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A39A2CF9-3424-43A2-A9DD-10A3E03BAED5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A39A2CF9-3424-43A2-A9DD-10A3E03BAED5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A39A2CF9-3424-43A2-A9DD-10A3E03BAED5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SzafaModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=&quot;C:\Users\Pawel\Documents\Visual Studio 2015\Projects\Szafa_nowe\SzafaWPF1\test1.db&quot;" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="clothes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="picture_path" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="type_id" Type="integer" />
+          <Property Name="description" Type="varchar" MaxLength="2000" />
+          <Property Name="in_use" Type="bit" />
+          <Property Name="in_use_from" Type="datetime" />
+          <Property Name="times_on" Type="integer" />
+          <Property Name="last_time_on" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'main.database_version' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="database_version">
+          <Property Name="version" Type="varchar" MaxLength="2147483647" />
+        </EntityType>-->
+        <EntityType Name="types">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="60" />
+        </EntityType>
+        <Association Name="FK_clothes_0_0">
+          <End Role="types" Type="Self.types" Multiplicity="0..1" />
+          <End Role="clothes" Type="Self.clothes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="types">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="clothes">
+              <PropertyRef Name="type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SzafaModelStoreContainer">
+          <EntitySet Name="clothes" EntityType="Self.clothes" store:Type="Tables" />
+          <EntitySet Name="types" EntityType="Self.types" store:Type="Tables" />
+          <AssociationSet Name="FK_clothes_0_0" Association="Self.FK_clothes_0_0">
+            <End Role="types" EntitySet="types" />
+            <End Role="clothes" EntitySet="clothes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SzafaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="clothes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="picture_path" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="type_id" Type="Int64" />
+          <Property Name="description" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="in_use" Type="Boolean" />
+          <Property Name="in_use_from" Type="DateTime" />
+          <Property Name="times_on" Type="Int64" />
+          <Property Name="last_time_on" Type="DateTime" />
+          <NavigationProperty Name="types" Relationship="Self.FK_clothes_0_0" FromRole="clothes" ToRole="types" />
+        </EntityType>
+        <EntityType Name="types">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="clothes" Relationship="Self.FK_clothes_0_0" FromRole="types" ToRole="clothes" />
+        </EntityType>
+        <Association Name="FK_clothes_0_0">
+          <End Role="types" Type="Self.types" Multiplicity="0..1" />
+          <End Role="clothes" Type="Self.clothes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="types">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="clothes">
+              <PropertyRef Name="type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SzafaSQLiteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="clothes" EntityType="Self.clothes" />
+          <EntitySet Name="types" EntityType="Self.types" />
+          <AssociationSet Name="FK_clothes_0_0" Association="Self.FK_clothes_0_0">
+            <End Role="types" EntitySet="types" />
+            <End Role="clothes" EntitySet="clothes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SzafaModelStoreContainer" CdmEntityContainer="SzafaSQLiteEntities">
+          <EntitySetMapping Name="clothes">
+            <EntityTypeMapping TypeName="SzafaModel.clothes">
+              <MappingFragment StoreEntitySet="clothes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="picture_path" ColumnName="picture_path" />
+                <ScalarProperty Name="type_id" ColumnName="type_id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="in_use" ColumnName="in_use" />
+                <ScalarProperty Name="in_use_from" ColumnName="in_use_from" />
+                <ScalarProperty Name="times_on" ColumnName="times_on" />
+                <ScalarProperty Name="last_time_on" ColumnName="last_time_on" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="types">
+            <EntityTypeMapping TypeName="SzafaModel.types">
+              <MappingFragment StoreEntitySet="types">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

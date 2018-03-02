@@ -94,7 +94,7 @@ namespace ClothesListModule.ViewModels
         {
             get
             {
-                return sortingParamters.Item2 == false ?
+                return sortingParamters.Item2 == true ?
                     clothesService.ClothesList.FindAll(x => ApplyFilters(x)).OrderBy(sortingParamters.Item1.Condition).ToList() :
                     clothesService.ClothesList.FindAll(x => ApplyFilters(x)).OrderByDescending(sortingParamters.Item1.Condition).ToList();
             }

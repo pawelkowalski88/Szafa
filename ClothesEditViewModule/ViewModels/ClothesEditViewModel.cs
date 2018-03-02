@@ -1,6 +1,5 @@
 ﻿using ClothesService.Enumerators;
 using CustomEvents;
-using DatabaseConnectionSQLite;
 using Microsoft.Practices.Unity;
 using PresentationUtility;
 using Prism.Commands;

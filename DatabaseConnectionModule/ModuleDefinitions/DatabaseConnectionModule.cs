@@ -1,7 +1,7 @@
-﻿using Microsoft.Practices.Unity;
+﻿using DatabaseConnectionModule.Services;
+using Microsoft.Practices.Unity;
 using Prism.Modularity;
 using Prism.Regions;
-using DatabaseConnectionSQLite.Services;
 
 namespace DatabaseConnectionModule.ModuleDefinitions
 {

@@ -1,4 +1,4 @@
-﻿using DatabaseConnectionSQLite;
+﻿using SQLiteDatabaseConnection;
 using System;
 using System.Windows.Media.Imaging;
 

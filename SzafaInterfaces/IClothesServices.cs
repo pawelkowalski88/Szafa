@@ -1,6 +1,6 @@
-﻿using System;
+﻿using SQLiteDatabaseConnection;
+using System;
 using System.Collections.Generic;
-using DatabaseConnectionSQLite;
 using SzafaEntities;
 
 namespace SzafaInterfaces

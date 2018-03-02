@@ -74,11 +74,11 @@
                           HorizontalAlignment="Left" 
                           VerticalAlignment="Bottom" 
                           Width="120"
-                          ItemsSource="{Binding Source={StaticResource SortOrder}}"
-                          SelectedValue="{Binding SortingOrder}"
+                          ItemsSource="{Binding SortingOrderList}" 
+                          SelectedValue="{Binding SelectedSortingOrder}"
+                          DisplayMemberPath="Name"
                           comm:ComboBoxSelect.CommandProperty="{Binding SelectSortingOrderCommand}"
-                          comm:ComboBoxSelect.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}">
-                </ComboBox>
+                          comm:ComboBoxSelect.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}"/>
                 
             </WrapPanel>
         </Border>

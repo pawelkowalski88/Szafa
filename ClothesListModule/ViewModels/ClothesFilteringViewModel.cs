@@ -17,13 +17,10 @@ namespace ClothesListModule.ViewModels
 { 
     public class ClothesFilteringViewModel : PropertyChangedImplementation
     {
-        private List<FilteringConditions> filterTabs;
         private List<FilteringConditions> typesFilterList;
-        private List<SortingConditions> sortingCategoriesList;
         private ICommand selectFilterCommand, selectTypeFilterCommand, selectSortingCategoryCommand, selectSortingOrderCommand;
         private IEventAggregator eventAggregator;
         private TypeFilteringConditionsService typeFilteringConditionsService;
-        private SortingOrder sortingOrder;
 
         public ClothesFilteringViewModel(IEventAggregator eventAggregator, TypeFilteringConditionsService typeFilteringConditionsService)
         {
@@ -40,7 +37,8 @@ namespace ClothesListModule.ViewModels
             SortingCategoriesList = SortingConditions.GenerateStandardConditions();
             SelectedSortingCategory = SortingCategoriesList[0];
 
-            SortingOrder = SortingOrder.Rosnąco;
+            SortingOrderList = SortingOrder.GenerateStandardList();
+            SelectedSortingOrder = SortingOrderList[0];
 
             PublishFilters();
         }
@@ -70,7 +68,7 @@ namespace ClothesListModule.ViewModels
 
         private void OnSortingOrderChanged(SortingOrder obj)
         {
-            SortingOrder = obj;
+            SelectedSortingOrder = obj;
             PublishFilters();
         }
 
@@ -79,19 +77,9 @@ namespace ClothesListModule.ViewModels
             eventAggregator.GetEvent<FilteringConditionsChangedEvent>()
                 .Publish(new List<FilteringConditions>(){ SelectedFilter, SelectedTypeFilter });
 
-            if (SortingOrder == SortingOrder.Rosnąco)
-                eventAggregator.GetEvent<SortingConditionsChangedEvent>()
-                    .Publish(Tuple.Create(SelectedSortingCategory, false));
-            else
-                eventAggregator.GetEvent<SortingConditionsChangedEvent>()
-                    .Publish(Tuple.Create(SelectedSortingCategory, true));
-
+            eventAggregator.GetEvent<SortingConditionsChangedEvent>()
+                .Publish(Tuple.Create(SelectedSortingCategory, SelectedSortingOrder.Direction));
         }
-
-        public FilteringConditions SelectedFilter { get; set; }
-        public FilteringConditions SelectedTypeFilter { get; set; }
-        public SortingConditions SelectedSortingCategory { get; set; }
-
 
         public ICommand SelectFilterCommand
         {
@@ -141,19 +129,6 @@ namespace ClothesListModule.ViewModels
             }
         }
 
-        public List<FilteringConditions> FilterTabs
-        {
-            get
-            {
-                return filterTabs;
-            }
-
-            set
-            {
-                filterTabs = value;
-            }
-        }
-
         public List<FilteringConditions> TypesFilterList
         {
             get
@@ -168,29 +143,12 @@ namespace ClothesListModule.ViewModels
             }
         }
 
-        public List<SortingConditions> SortingCategoriesList
-        {
-            get
-            {
-                return sortingCategoriesList;
-            }
-
-            set
-            {
-                sortingCategoriesList = value;
-            }
-        }
-
-        public SortingOrder SortingOrder
-        {
-            get
-            {
-                return sortingOrder;
-            }
-            set
-            {
-                sortingOrder = value;
-            }
-        }
+        public FilteringConditions SelectedFilter { get; set; }
+        public FilteringConditions SelectedTypeFilter { get; set; }
+        public SortingConditions SelectedSortingCategory { get; set; }
+        public List<SortingConditions> SortingCategoriesList { get; set; }
+        public List<SortingOrder> SortingOrderList { get; set; }
+        public SortingOrder SelectedSortingOrder { get; set; }
+        public List<FilteringConditions> FilterTabs { get; set; }
     }
 }
