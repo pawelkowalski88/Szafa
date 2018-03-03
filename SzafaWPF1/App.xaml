@@ -6,5 +6,6 @@
     <Application.Resources>
         <sample:SampleClothesList x:Key="SampleList"/>
         <sample:SampleClothesDetails x:Key="SampleDetails"/>
+        <BitmapImage UriSource="../Images/icons8-błąd-64.png" x:Key="ErrorImage"/>
     </Application.Resources>
 </Application>

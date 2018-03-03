@@ -67,7 +67,7 @@
                             HorizontalAlignment="Stretch" 
                             VerticalAlignment="Center">
                     <!--<Image Source="{StaticResource ResourceKey=ErrorImage}" Margin="10"/>-->
-                    <TextBlock Text="Loading..." 
+                    <TextBlock Text="Ładowanie..." 
                            Grid.Row="1"
                            FontSize="24"
                            TextAlignment="Center" VerticalAlignment="Center"/>
@@ -79,7 +79,7 @@
                             Background="#FFFFFF65"
                             HorizontalAlignment="Stretch" 
                             VerticalAlignment="Center">
-                    <Image Source="{StaticResource ResourceKey=ErrorImage}" Margin="10"/>
+                    <Image Source="{StaticResource ResourceKey=ErrorImage}" Margin="10" Width="32" Height="32"/>
                     <TextBlock Text="Błąd połączenia z bazą danych" 
                                FontSize="24"
                                TextAlignment="Center"
