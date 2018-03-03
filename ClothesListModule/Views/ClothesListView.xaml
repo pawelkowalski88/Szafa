@@ -7,6 +7,7 @@
              xmlns:conv="clr-namespace:PresentationUtility.Converters;assembly=PresentationUtility"
              xmlns:comm="clr-namespace:PresentationUtility.AttachedCommands;assembly=PresentationUtility"
              xmlns:prism="http://prismlibrary.com/"
+             xmlns:l="clr-namespace:LoadingIconLibrary;assembly=LoadingIconLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="400">
 
@@ -52,21 +53,38 @@
                     </ListView.ItemTemplate>
                 </ListView>
 
-                <TextBlock Text="Loading..." 
+                <!--<TextBlock Text="Loading..." 
                            Grid.Row="1"
                            FontSize="24"
                            TextAlignment="Center"
                            Visibility="{Binding Updating, Converter={StaticResource BoolToVisibilityConv}, FallbackValue=Collapsed}"
-                           Background="LightBlue"/>
+                           Background="LightBlue"/>-->
+                
+                <StackPanel Grid.Row="1" 
+                            Orientation="Horizontal"
+                            Visibility="{Binding Updating, Converter={StaticResource BoolToVisibilityConv}, FallbackValue=Collapsed}"
+                            Background="LightBlue"
+                            HorizontalAlignment="Stretch" 
+                            VerticalAlignment="Center">
+                    <!--<Image Source="{StaticResource ResourceKey=ErrorImage}" Margin="10"/>-->
+                    <TextBlock Text="Loading..." 
+                           Grid.Row="1"
+                           FontSize="24"
+                           TextAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
 
                 <StackPanel Grid.Row="2" 
                             Orientation="Horizontal"
                             Visibility="{Binding DatabaseConnectionError, Converter={StaticResource BoolToVisibilityConv}, FallbackValue=Collapsed}"
-                            Background="#FFFFFF65">
-                    <Image Source="{StaticResource ResourceKey=ErrorImage}"/>
+                            Background="#FFFFFF65"
+                            HorizontalAlignment="Stretch" 
+                            VerticalAlignment="Center">
+                    <Image Source="{StaticResource ResourceKey=ErrorImage}" Margin="10"/>
                     <TextBlock Text="Błąd połączenia z bazą danych" 
                                FontSize="24"
-                               TextAlignment="Center"/>
+                               TextAlignment="Center"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
                 </StackPanel>
             </Grid>
         </Border>
