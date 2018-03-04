@@ -19,7 +19,7 @@ namespace SQLiteDatabaseConnection
         public SzafaSQLiteEntities()
             : base("name=SzafaSQLiteEntities")
         {
-            Database.SetInitializer<SzafaSQLiteEntities>(new SzafaDbInitializer());
+            //Database.SetInitializer<SzafaSQLiteEntities>(new SzafaDbInitializer());
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

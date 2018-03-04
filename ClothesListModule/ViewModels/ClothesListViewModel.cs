@@ -11,21 +11,22 @@ using System.Windows;
 using ClothesListModule.Filtering;
 using ClothesListModule.Events;
 using System.Linq;
+using SzafaInterfaces;
 
 namespace ClothesListModule.ViewModels
 {
     public class ClothesListViewModel : PropertyChangedImplementation
     {
-        ClothesServices clothesService;
+        IClothesServices clothesService;
         bool updating;
-        ICommand selectElementCommand;
+        ICommand selectElementCommand, refreshDataConnection;
         IEventAggregator eventAggregator;
         private PieceOfClothing currentItem, temporaryItem;
 
         private List<FilteringConditions> filters;
         private Tuple<SortingConditions, bool> sortingParamters;
 
-        public ClothesListViewModel(ClothesServices clothesService, IEventAggregator eventAggregator)
+        public ClothesListViewModel(IClothesServices clothesService, IEventAggregator eventAggregator)
         {
             this.clothesService = clothesService;
             this.eventAggregator = eventAggregator;
@@ -98,6 +99,14 @@ namespace ClothesListModule.ViewModels
             InvokePropertyChanged("ClothesList");
         }
 
+        private void OnRefreshDatabaseConnection()
+        {
+            Updating = true;
+            DatabaseConnectionError = false;
+            InvokePropertyChanged("DatabaseConnectionError");
+            eventAggregator.GetEvent<DatabaseConnectionRefreshRequestedEvent>().Publish();
+        }
+
         //Zmienić na ObservableCollection
         public List<PieceOfClothing> ClothesList
         {
@@ -156,6 +165,18 @@ namespace ClothesListModule.ViewModels
             {
                 currentItem = value;
                 InvokePropertyChanged("CurrentItem");
+            }
+        }
+
+        public ICommand RefreshDataConnection
+        {
+            get
+            {
+                if(refreshDataConnection == null)
+                {
+                    refreshDataConnection = new DelegateCommand(OnRefreshDatabaseConnection);
+                }
+                return refreshDataConnection;
             }
         }
     }

@@ -48,6 +48,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CustomEvents\CustomEvents.csproj">
+      <Project>{b564227f-9e56-4f25-a741-59283b35af93}</Project>
+      <Name>CustomEvents</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SQLiteDatabaseConnection\SQLiteDatabaseConnection.csproj">
       <Project>{64438d0d-d49d-494c-a366-79b02691853c}</Project>
       <Name>SQLiteDatabaseConnection</Name>

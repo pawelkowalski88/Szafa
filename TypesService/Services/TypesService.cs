@@ -1,19 +1,22 @@
 ﻿
 using DatabaseConnectionModule.Services;
 using Microsoft.Practices.Unity;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using SzafaEntities;
 using SzafaInterfaces;
+using CustomEvents;
 
 namespace TypesService.Services
 {
     public class TypesService : ITypesService
     {
-        public TypesService(IUnityContainer container)
+        public TypesService(IUnityContainer container, IDatabaseConnectionService connectionService, IEventAggregator eventAggragator)
         {
-            dbConnection = container.Resolve<DatabaseConnectionService>();
+            dbConnection = connectionService;
+            eventAggragator.GetEvent<DatabaseConnectionRefreshRequestedEvent>().Subscribe(UpdateTypesList);
             UpdateTypesList();
         }
 
@@ -36,7 +39,7 @@ namespace TypesService.Services
         }
 
         public List<ClothingType> TypesList { get; private set; }
-        DatabaseConnectionService dbConnection;
+        IDatabaseConnectionService dbConnection;
         Task updateTypesListTask;
         public event EventHandler TypesListUpdated;
     }

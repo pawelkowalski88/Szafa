@@ -30,5 +30,7 @@ namespace SzafaEntities
         {
             get { return true; }
         }
+
+        public bool DatabaseConnectionError { get; } = true;
     }
 }

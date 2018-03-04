@@ -9,7 +9,7 @@
              xmlns:prism="http://prismlibrary.com/"
              xmlns:icons="clr-namespace:IconsForSzafa;assembly=IconsForSzafa"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="400">
+             d:DesignHeight="300" d:DesignWidth="500">
 
     <UserControl.Resources>
         <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConv"/>
@@ -27,7 +27,7 @@
 
         <ContentControl Name="ClothesFiltering" prism:RegionManager.RegionName="ClothesFilteringRegion"/>
 
-        <Border Background="LightGray" Grid.Row="1" Margin="2,0,2,2">
+        <Border Background="LightGray" Grid.Row="1" Margin="0,0,0,0">
 
             <Grid>
                 <Grid.RowDefinitions>
@@ -74,19 +74,25 @@
                            TextAlignment="Center" VerticalAlignment="Center"/>
                 </StackPanel>
 
-                <StackPanel Grid.Row="2" 
+                <WrapPanel Grid.Row="2" 
                             Orientation="Horizontal"
                             Visibility="{Binding DatabaseConnectionError, Converter={StaticResource BoolToVisibilityConv}, FallbackValue=Collapsed}"
                             Background="#FFFFFF65"
                             HorizontalAlignment="Stretch" 
                             VerticalAlignment="Center">
-                    <Image Source="{StaticResource ResourceKey=ErrorImage}" Margin="10" Width="32" Height="32"/>
+                    <!--<Image Source="{StaticResource ResourceKey=ErrorImage}" Margin="10" Width="32" Height="32"/>-->
+                    <icons:ErrorIcon/>
                     <TextBlock Text="Błąd połączenia z bazą danych" 
                                FontSize="24"
                                TextAlignment="Center"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"/>
-                </StackPanel>
+                    <Button Margin="20,5"
+                            Width="60"
+                            Height="32"
+                            Content="Odśwież"
+                            Command="{Binding RefreshDataConnection}"/>
+                </WrapPanel>
             </Grid>
         </Border>
     </Grid>

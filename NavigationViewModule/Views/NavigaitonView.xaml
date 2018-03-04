@@ -17,8 +17,8 @@
         <StackPanel Grid.Row="1"
             Background="White"
             Orientation="Horizontal"
-            FlowDirection="RightToLeft"
-            Margin="2,0,2,2">
+            FlowDirection="RightToLeft">
+            <!--Margin="1,0,1,1">-->
             
             <Button Command="{Binding NewPieceCommand}"
                     Width="120"
@@ -27,9 +27,9 @@
             
         </StackPanel>
 
-        <Border    Background="White"
-                   Margin="2,2,2,0">
-            <TextBlock Text="Twoja garderoba:"
+        <Border    Background="White">
+            <!--Margin="1,1,1,0">-->
+            <TextBlock Text="Twoja garderoba"
                        Grid.Row="0"
                        FontSize="26"
                        Foreground="Gray"

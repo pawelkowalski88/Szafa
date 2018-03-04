@@ -1,9 +1,5 @@
 ﻿using SQLiteDatabaseConnection;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SzafaInterfaces
 {
@@ -14,6 +10,6 @@ namespace SzafaInterfaces
         List<clothes> GetClothes();
         clothes GetPieceOfClothing(long id);
         List<types> GetTypes();
-        bool UpdateClothes(clothes c);
+        void UpdateClothes(clothes c);
     }
 }

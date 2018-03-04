@@ -17,9 +17,10 @@
                       Foreground="Gray"
                       HorizontalAlignment="Right"
                       VerticalAlignment="Stretch"
-                      Width="2"/>
+                      Width="2"
+                      Margin="0,0,0,0"/>
 
-        <Border Margin="2">
+        <Border Margin="2,2,4,2">
             <ContentControl Name="ClothesList"
                             prism:RegionManager.RegionName="NavigationRegion"/>
         </Border>

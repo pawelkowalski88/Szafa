@@ -1,5 +1,7 @@
-﻿using DatabaseConnectionModule.Services;
+﻿using CustomEvents;
+using DatabaseConnectionModule.Services;
 using ImageServiceModuleLibrary.Services;
+using Prism.Events;
 using SQLiteDatabaseConnection;
 using System;
 using System.Collections.Generic;
@@ -11,10 +13,13 @@ namespace ClothesService.Services
 {
     public class ClothesServices : IClothesServices
     {
-        public ClothesServices(ImageService imageService, IDatabaseConnectionService connectionService)
+        IEventAggregator eventAggregator;
+        public ClothesServices(ImageService imageService, IDatabaseConnectionService connectionService, IEventAggregator eventAggregator)
         {
+            this.eventAggregator = eventAggregator;
             dbConnection = connectionService;
             this.imageService = imageService;
+            eventAggregator.GetEvent<DatabaseConnectionRefreshRequestedEvent>().Subscribe(RefreshClothesList);
         }
 
         public void RefreshClothesList()
@@ -22,14 +27,23 @@ namespace ClothesService.Services
             //updating clothes list as an async operation
             updateClothesListTask = new Task(() =>
             {
-                var clothesList = dbConnection.GetClothes();
-                ClothesList = new List<PieceOfClothing>();
-                foreach (var c in clothesList)
+                try
                 {
-                    ClothesList.Add(new PieceOfClothing(c, imageService.RetrieveImage(c.picture_path)));
+                    var clothesList = dbConnection.GetClothes();
+                    ClothesList = new List<PieceOfClothing>();
+                    foreach (var c in clothesList)
+                    {
+                        ClothesList.Add(new PieceOfClothing(c, imageService.RetrieveImage(c.picture_path)));
+                    }
+                    //when clothes list is updated, fire an event
+                    ClothesListUpdated(this, new EventArgs());
                 }
-                //when clothes list is updated, fire an event
-                ClothesListUpdated(this, new EventArgs());
+                catch (Exception e)
+                {
+                    ClothesList = new List<PieceOfClothing>();
+                    ClothesListUpdated(this, new EventArgs());
+                    eventAggregator.GetEvent<DatabaseConnectionErrorOccuredEvent>().Publish(e.ToString());
+                }
             });
             //Start the task
             updateClothesListTask.Start();
@@ -37,35 +51,63 @@ namespace ClothesService.Services
 
         public void UpdatePieceOfClothing(PieceOfClothing c)
         {
-            clothes cl = c.Toclothes();
-            ImageService imageService = new ImageService();
-            string generatedName = imageService.SaveImage(c.PicturePath, c.Id);
-            if (generatedName != null)
+            try
             {
-                cl.picture_path = generatedName;
+                clothes cl = c.Toclothes();
+                ImageService imageService = new ImageService();
+                string generatedName = imageService.SaveImage(c.PicturePath, c.Id);
+                if (generatedName != null)
+                {
+                    cl.picture_path = generatedName;
+                }
+                dbConnection.UpdateClothes(cl);
             }
-            dbConnection.UpdateClothes(cl);
+            catch (Exception e)
+            {
+                eventAggregator.GetEvent<DatabaseConnectionErrorOccuredEvent>().Publish(e.ToString());
+            }
         }
 
         public clothes GetPieceOfClothing(long id)
         {
-            return dbConnection.GetPieceOfClothing(id);
+            try
+            {
+                return dbConnection.GetPieceOfClothing(id);
+            }
+            catch (Exception e)
+            {
+                eventAggregator.GetEvent<DatabaseConnectionErrorOccuredEvent>().Publish(e.ToString());
+                return null;
+            }
         }
 
         public void AddPieceOfClothing(PieceOfClothing c)
         {
-            clothes cl = c.Toclothes();
-            if (cl.picture_path == null)
+            try
             {
-                cl.picture_path = "";
+                clothes cl = c.Toclothes();
+                if (cl.picture_path == null) cl.picture_path = "";
+                dbConnection.AddClothes(cl);
             }
-            dbConnection.AddClothes(cl);
+            catch(Exception e)
+            {
+                eventAggregator.GetEvent<DatabaseConnectionErrorOccuredEvent>().Publish(e.ToString());
+                return;
+            }
         }
 
         public void DeletePieceOfClothing(PieceOfClothing c)
         {
-            clothes cl = c.Toclothes();
-            dbConnection.DeletePieceOfClothing(cl);
+            try
+            {
+                clothes cl = c.Toclothes();
+                dbConnection.DeletePieceOfClothing(cl);
+            }
+            catch(Exception e)
+            {
+                eventAggregator.GetEvent<DatabaseConnectionErrorOccuredEvent>().Publish(e.ToString());
+                return;
+            }
         }
 
         public List<PieceOfClothing> ClothesList { get; private set; }
