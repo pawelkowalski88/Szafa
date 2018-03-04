@@ -39,7 +39,7 @@ namespace ClothesListModule.ViewModels
             UpdateClothesList();
         }
 
-        private void OnDatabaseConnectionError(Exception obj)
+        private void OnDatabaseConnectionError(string obj)
         {
             Updating = false;
             DatabaseConnectionError = true;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CustomEvents
 {
-    public class DatabaseConnectionErrorOccuredEvent : PubSubEvent<Exception>
+    public class DatabaseConnectionErrorOccuredEvent : PubSubEvent<string>
     {
     }
 }

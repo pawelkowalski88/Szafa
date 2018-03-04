@@ -12,12 +12,14 @@ namespace SQLiteDatabaseConnection
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+    using System.Windows;
+
     public partial class SzafaSQLiteEntities : DbContext
     {
         public SzafaSQLiteEntities()
             : base("name=SzafaSQLiteEntities")
         {
+            Database.SetInitializer<SzafaSQLiteEntities>(new SzafaDbInitializer());
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -27,5 +29,17 @@ namespace SQLiteDatabaseConnection
     
         public virtual DbSet<clothes> clothes { get; set; }
         public virtual DbSet<types> types { get; set; }
+
+        public class SzafaDbInitializer : IDatabaseInitializer<SzafaSQLiteEntities>
+        {
+            public void InitializeDatabase(SzafaSQLiteEntities context)
+            {
+                bool exists = context.Database.Exists();
+                if (!exists)
+                {
+                    MessageBox.Show("No database found");
+                }
+            }
+        }
     }
 }

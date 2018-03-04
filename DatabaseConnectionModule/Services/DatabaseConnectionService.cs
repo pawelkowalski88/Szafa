@@ -11,12 +11,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using SzafaInterfaces;
+using System.Data.Entity.Infrastructure;
 
 namespace DatabaseConnectionModule.Services
 {
     public class DatabaseConnectionService : IDatabaseConnectionService
     {
         private IEventAggregator eventAggregator;
+        private SzafaSQLiteEntities dbconn = new SzafaSQLiteEntities();
 
         public DatabaseConnectionService(IEventAggregator eventAggregator)
         {
@@ -25,8 +27,8 @@ namespace DatabaseConnectionModule.Services
 
         public IEnumerable<T> GetEntities<T>() where T : class
         {
-            using (var dbconn = new SzafaSQLiteEntities())
-            {
+            //using (var dbconn = new SzafaSQLiteEntities())
+            //{
                 //parse the property name (remove the namespaces with Split method)
                 string typeName = typeof(T).ToString().Split('.').Last();
                 //get the elements from the right table
@@ -36,41 +38,41 @@ namespace DatabaseConnectionModule.Services
                 {
                     yield return el;
                 }
-            }
+            //}
         }
 
         public List<clothes> GetClothes()
         {
-            using (var dbconn = new SzafaSQLiteEntities())
-            {
+            //using (var dbconn = new SzafaSQLiteEntities())
+           // {
                 try
                 {
                     var searchresults = dbconn.clothes.Include(c => c.types).ToList<clothes>();
                     return searchresults;
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
-                    eventAggregator.GetEvent<DatabaseConnectionErrorOccuredEvent>().Publish(e);
+                    eventAggregator.GetEvent<DatabaseConnectionErrorOccuredEvent>().Publish(e.ToString());
                     return null;
                 }
-            }
+            //}
         }
 
         public List<types> GetTypes()
         {
-            using (var dbconn = new SzafaSQLiteEntities())
-            {
+           // using (var dbconn = new SzafaSQLiteEntities())
+            //{
                 var searchresults = dbconn.types.ToList<types>();
                 return searchresults;
-            }
+           // }
         }
 
         public bool UpdateClothes(clothes c)
         {
             try
             {
-                using (var dbconn = new SzafaSQLiteEntities())
-                {
+              //  using (var dbconn = new SzafaSQLiteEntities())
+               // {
                     clothes cloth = dbconn.clothes.Find(c.id);
                     cloth.description = c.description;
                     cloth.name = c.name;
@@ -81,7 +83,7 @@ namespace DatabaseConnectionModule.Services
                     cloth.times_on = c.times_on;
                     cloth.type_id = c.type_id;
                     dbconn.SaveChanges();
-                }
+                //}
             }
             catch (Exception e)
             {
@@ -94,26 +96,26 @@ namespace DatabaseConnectionModule.Services
 
         public clothes GetPieceOfClothing(long id)
         {
-            using (var dbconn = new SzafaSQLiteEntities())
-            {
+          //  using (var dbconn = new SzafaSQLiteEntities())
+           // {
                 return dbconn.clothes.Find(id);
-            }
+           // }
         }
 
         public void DeletePieceOfClothing(clothes c)
         {
-            using (var dbconn = new SzafaSQLiteEntities())
-            {
+          //  using (var dbconn = new SzafaSQLiteEntities())
+           // {
                 clothes cloth = dbconn.clothes.Find(c.id);
                 dbconn.clothes.Remove(cloth);
                 dbconn.SaveChanges();
-            }
+           // }
         }
 
         public void AddClothes(clothes c)
         {
-            using (var dbconn = new SzafaSQLiteEntities())
-            {
+          //  using (var dbconn = new SzafaSQLiteEntities())
+          //  {
                 dbconn.clothes.Add(c);
                 try
                 {
@@ -133,7 +135,11 @@ namespace DatabaseConnectionModule.Services
                     }
                     throw;
                 }
-            }
+                catch(DbUpdateException)
+                {
+                    MessageBox.Show("Błąd połączenia.");
+                }
+           // }
         }
     }
 }
