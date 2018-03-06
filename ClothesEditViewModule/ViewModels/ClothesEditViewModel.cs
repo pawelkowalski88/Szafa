@@ -12,6 +12,7 @@ using ClothesService.Services;
 using Microsoft.Win32;
 using SzafaEntities;
 using SzafaInterfaces;
+using System;
 
 namespace ClothesEditViewModule.ViewModels
 {
@@ -80,12 +81,61 @@ namespace ClothesEditViewModule.ViewModels
 
         private void SaveCurrentItemChanges()
         {
+            if(CurrentItem.Name == "")
+            {
+                return;
+            }
             clothesService.UpdatePieceOfClothing(CurrentItem);
         }
 
-        private void SaveCurrentItemAsNew()
+        private bool SaveCurrentItemAsNew()
         {
-            clothesService.AddPieceOfClothing(CurrentItem);
+            if (Validate(CurrentItem))
+            {
+                try
+                {
+                    clothesService.AddPieceOfClothing(CurrentItem);
+                }
+                catch (Exception e)
+                {
+                    ShowSaveWarning = true;
+                    SaveWarning = e.Message;
+                    InvokePropertyChanged("ShowSaveWarning");
+                    InvokePropertyChanged("SaveWarning");
+                    return false;
+                }
+                return true;
+            }
+            return false;
+        }
+
+        private bool Validate(PieceOfClothing item)
+        {
+            bool output = true;
+            if (item.Name == "")
+            {
+                ShowMisingNameWarning = true;
+                InvokePropertyChanged("ShowMisingNameWarning");
+                output = false;
+            }
+            else
+            {
+                ShowMisingNameWarning = false;
+                InvokePropertyChanged("ShowMisingNameWarning");
+            }
+
+            if (item.TypeId == null)
+            {
+                ShowMissingTypeWarning = true;
+                InvokePropertyChanged("ShowMissingTypeWarning");
+                output = false;
+            }
+            else
+            {
+                ShowMissingTypeWarning = false;
+                InvokePropertyChanged("ShowMissingTypeWarning");
+            }
+            return output;
         }
 
         //saving the changes
@@ -93,13 +143,13 @@ namespace ClothesEditViewModule.ViewModels
         {
             if (actionType == EditActionType.Create)
             {
-                SaveCurrentItemAsNew();
+                if (SaveCurrentItemAsNew()) OnCancel();
             }
             else
             {
                 SaveCurrentItemChanges();
+                OnCancel();
             }
-            OnCancel();
             eventAggregator.GetEvent<ClothesListUpdateRequestedEvent>().Publish();
         }
 
@@ -199,5 +249,10 @@ namespace ClothesEditViewModule.ViewModels
                 InvokePropertyChanged("Title");
             }
         }
+
+        public bool ShowMisingNameWarning { get; private set; }
+        public bool ShowMissingTypeWarning { get; private set; }
+        public bool ShowSaveWarning { get; private set; }
+        public string SaveWarning { get; private set; }
     }
 }

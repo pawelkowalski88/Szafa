@@ -16,5 +16,7 @@
                 };
             }
         }
+
+        public bool ShowMisingNameWarning { get; } = true;
     }
 }
