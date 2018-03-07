@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IClothesEditViewModel.cs" />
     <Compile Include="IClothesServices.cs" />
     <Compile Include="IDatabaseConnectionService.cs" />
     <Compile Include="IImageService.cs" />

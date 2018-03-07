@@ -1,37 +1,43 @@
-﻿using ClothesService.Enumerators;
-using CustomEvents;
-using Microsoft.Practices.Unity;
+﻿using CustomEvents;
+using Microsoft.Win32;
 using PresentationUtility;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Regions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
-using Microsoft.Win32;
 using SzafaEntities;
 using SzafaInterfaces;
-using System;
 
 namespace ClothesEditViewModule.ViewModels
 {
-    public class ClothesEditViewModel : PropertyChangedImplementation, IClothesEditViewModel
+    class ClothesCreateViewModel : PropertyChangedImplementation, IClothesEditViewModel
     {
-        public ClothesEditViewModel(IEventAggregator eventAggregator, IRegionManager regionManager, IClothesServices clothesService, ITypesService typesService, PieceOfClothing pieceOfClothing)
+        public ClothesCreateViewModel(IEventAggregator eventAggregator, IRegionManager regionManager, IClothesServices clothesService, ITypesService typesService)
         {
             this.eventAggregator = eventAggregator;
             this.regionManager = regionManager;
             this.clothesService = clothesService;
             this.typesService = typesService;
-            CurrentItem = pieceOfClothing;
+            typesList = typesService.TypesList;
+            typesService.TypesListUpdated += TypesService_TypesListUpdated;//unsubscribe on exit!!!!
             Initialize();
         }
 
         private void Initialize()
         {
-            Title = "Edytuj przedmiot";
-            typesList = typesService.TypesList;
-            typesService.TypesListUpdated += TypesService_TypesListUpdated;
+            Title = "Nowy przedmiot";
+            CurrentItem = new PieceOfClothing()
+            {
+                Name = "",
+                InUse = false,
+                PicturePath = "",
+                TimesOn = 0
+            };
         }
 
         //private void InitializeTypesService()
@@ -47,12 +53,6 @@ namespace ClothesEditViewModule.ViewModels
             TypesList = typesService.TypesList;
         }
 
-        //fires when an element is passed to the edit view model. The element is saved as current item.
-        private void OnEditElementAdded(PieceOfClothing obj)
-        {
-            CurrentItem = obj;
-        }
-
         //gettting back to the last view
         private void OnCancel()
         {
@@ -63,13 +63,22 @@ namespace ClothesEditViewModule.ViewModels
             typesService.TypesListUpdated -= TypesService_TypesListUpdated;
         }
 
-        private bool SaveCurrentItemChanges()
+        private void SaveCurrentItemChanges()
+        {
+            if (CurrentItem.Name == "")
+            {
+                return;
+            }
+            clothesService.UpdatePieceOfClothing(CurrentItem);
+        }
+
+        private bool SaveCurrentItemAsNew()
         {
             if (Validate(CurrentItem))
             {
                 try
                 {
-                    clothesService.UpdatePieceOfClothing(CurrentItem);
+                    clothesService.AddPieceOfClothing(CurrentItem);
                 }
                 catch (Exception e)
                 {
@@ -116,7 +125,7 @@ namespace ClothesEditViewModule.ViewModels
         //saving the changes
         private void OnEditOK()
         {
-            if (SaveCurrentItemChanges())
+            if (SaveCurrentItemAsNew())
             {
                 OnCancel();
                 eventAggregator.GetEvent<ClothesListUpdateRequestedEvent>().Publish();
@@ -125,14 +134,12 @@ namespace ClothesEditViewModule.ViewModels
 
         IEventAggregator eventAggregator;
         IRegionManager regionManager;
-        IUnityContainer container;
-        EditActionType actionType;
         string title;
         ICommand cancelCommand, editOKCommand, browseForFile;
         PieceOfClothing currentItem;
         List<ClothingType> typesList;
-        ITypesService typesService;
         IClothesServices clothesService;
+        ITypesService typesService;
 
         public PieceOfClothing CurrentItem
         {
@@ -188,7 +195,7 @@ namespace ClothesEditViewModule.ViewModels
         {
             get
             {
-                if(browseForFile == null)
+                if (browseForFile == null)
                 {
                     browseForFile = new DelegateCommand(OnBrowseForFile);
                 }

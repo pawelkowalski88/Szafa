@@ -1,4 +1,5 @@
-﻿using ClothesEditViewModule.Views;
+﻿using ClothesEditViewModule.ViewModels;
+using ClothesEditViewModule.Views;
 using ClothesService.Enumerators;
 using CustomEvents;
 using Microsoft.Practices.Unity;
@@ -23,13 +24,15 @@ namespace ClothesDetailedViewModule.ViewModels
         private IRegionManager regionManager;
         private IClothesServices clothesService;
         private IEventAggregator eventAggregator;
+        private ClothesEditViewModelFactory editViewModelFactory;
         private PieceOfClothing currentItem;
         ICommand editCommand, washCommand, useCommand;
 
         public ClothesDetailsActionButtonsViewModel(IEventAggregator eventAggregator,
             IUnityContainer container,
             IRegionManager regionManager,
-            IClothesServices clothesService)
+            IClothesServices clothesService,
+            ClothesEditViewModelFactory viewModelFactory)
         {
             //Use the event aggregation to catch the newly selected item on the list
             this.eventAggregator = eventAggregator;
@@ -41,6 +44,7 @@ namespace ClothesDetailedViewModule.ViewModels
             this.container = container;
             this.regionManager = regionManager;
             this.clothesService = clothesService;
+            this.editViewModelFactory = viewModelFactory;
         }
 
         private void OnCurrentItemChanged(PieceOfClothing obj)
@@ -56,17 +60,18 @@ namespace ClothesDetailedViewModule.ViewModels
             //move this to module?
 
             //Put the edit view window on
-            container.RegisterInstance<EditActionType>(EditActionType.Edit);
+            //container.RegisterInstance<EditActionType>(EditActionType.Edit);
             IRegion region = regionManager.Regions["MainDetailsRegion"];
 
-            ClothesEditView newView = container.Resolve<ClothesEditView>();
+            // ClothesEditView newView = container.Resolve<ClothesEditView>();
+            ClothesEditView newView = new ClothesEditView(editViewModelFactory.GenerateViewModel(CurrentItem));
             region.Add(newView);
             region.Activate(newView);
 
             //Publish the event to populate the new view with the CurrentItem data
-            ClothesEditButtonClickedEvent evt =
-                eventAggregator.GetEvent<ClothesEditButtonClickedEvent>();
-            evt.Publish(CurrentItem);
+            //ClothesEditButtonClickedEvent evt =
+            //    eventAggregator.GetEvent<ClothesEditButtonClickedEvent>();
+            //evt.Publish(CurrentItem);
         }
 
         /// <summary>

@@ -1,5 +1,5 @@
-﻿using ClothesEditViewModule.ViewModels;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
+using SzafaInterfaces;
 
 namespace ClothesEditViewModule.Views
 {
@@ -8,7 +8,7 @@ namespace ClothesEditViewModule.Views
     /// </summary>
     public partial class ClothesEditView : UserControl
     {
-        public ClothesEditView(ClothesEditViewModel viewModel)
+        public ClothesEditView(IClothesEditViewModel viewModel)
         {
             InitializeComponent();
 
