@@ -43,14 +43,14 @@
         <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="3,7" FontSize="20">Nazwa:</TextBlock>
         <TextBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="3,6" Text="{Binding Path=CurrentItem.Name}" FontSize="20"></TextBox>
 
-        <Border Grid.Row="3" Grid.ColumnSpan="2" Background="#FFFFA6A6">
+        <Border Grid.Row="3" Grid.ColumnSpan="2" Background="#FFFFDBDB">
         <TextBlock  Text="Podaj nazwę elementu." TextAlignment="Center" Foreground="Red" Visibility="{Binding ShowMisingNameWarning, Converter={StaticResource VisibilityConv}}"/>
         </Border>
         
         <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="3,7" FontSize="20">Kategoria:</TextBlock>
-        <ComboBox Name="TypesCombo" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="3,4"  FontSize="20" ItemsSource="{Binding TypesList}" DisplayMemberPath="Name" SelectedValue="{Binding CurrentItem.TypeId}" SelectedValuePath="Id" SelectedIndex="0"/>
+        <ComboBox Name="TypesCombo" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="3,4" ItemsSource="{Binding TypesList, Mode=OneWay}" DisplayMemberPath="Name" SelectedValue="{Binding CurrentItem.TypeId}" SelectedValuePath="Id" SelectedIndex="0" FontSize="20" />
 
-        <Border Grid.Row="5" Grid.ColumnSpan="2" Background="#FFFFA6A6">
+        <Border Grid.Row="5" Grid.ColumnSpan="2" Background="#FFFFDBDB">
             <TextBlock  Text="Wybierz kategorię." TextAlignment="Center" Foreground="Red" Visibility="{Binding ShowMissingTypeWarning, Converter={StaticResource VisibilityConv}}"/>
         </Border>
 
@@ -67,7 +67,7 @@
             <Image  Source="{Binding CurrentItem.PicturePath, Converter={StaticResource BitmapConv}}"/>
         </Border>
 
-        <Border Grid.Row="9" Grid.ColumnSpan="2" Background="#FFFFA6A6">
+        <Border Grid.Row="9" Grid.ColumnSpan="2" Background="#FFFFDBDB">
             <TextBlock  Text="Błąd zapisu, sprawdź poprawność danych." Foreground="Red" TextAlignment="Center" Visibility="{Binding ShowSaveWarning, Converter={StaticResource VisibilityConv}}"/>
         </Border>
         <Button Content="OK" 

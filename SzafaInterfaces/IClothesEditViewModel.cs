@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,6 @@ namespace SzafaInterfaces
         PieceOfClothing CurrentItem { get; set; }
         ICommand EditOKCommand { get; }
         string Title { get; set; }
-        List<ClothingType> TypesList { get; set; }
+        ObservableCollection<ClothingType> TypesList { get; set; }
     }
 }

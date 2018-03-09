@@ -3,8 +3,10 @@ using Microsoft.Practices.Unity;
 using Prism.Commands;
 using Prism.Regions;
 using System.Windows.Input;
-using ClothesService.Enumerators;
+using System.Linq;
 using ClothesEditViewModule.ViewModels;
+using System;
+using System.Collections;
 
 namespace NavigationViewModule.ViewModels
 {
@@ -34,11 +36,19 @@ namespace NavigationViewModule.ViewModels
         }
         private void OnNewPieceClick()
         {
-            //container.RegisterInstance<EditActionType>(EditActionType.Create);
             IRegion region = regionManager.Regions["MainDetailsRegion"];
-            //ClothesEditView newView = container.Resolve<ClothesEditView>();
             ClothesEditView newView = new ClothesEditView(editViewModelFactory.GenerateViewModel());
-            region.Add(newView);
+            try
+            {
+                region.Add(newView, "NewPieceOfClothingView");
+            }
+            catch (InvalidOperationException)
+            {
+                ClothesEditView view = (ClothesEditView)region.Views.First<object>(x => x.GetType() == typeof(ClothesEditView));
+                {
+                    newView = view;
+                }
+            }
             region.Activate(newView);
         }
     }

@@ -12,11 +12,21 @@ using Microsoft.Win32;
 using SzafaEntities;
 using SzafaInterfaces;
 using System;
+using System.Collections.ObjectModel;
 
 namespace ClothesEditViewModule.ViewModels
 {
     public class ClothesEditViewModel : PropertyChangedImplementation, IClothesEditViewModel
     {
+        IEventAggregator eventAggregator;
+        IRegionManager regionManager;
+        string title;
+        ICommand cancelCommand, editOKCommand, browseForFile;
+        PieceOfClothing currentItem;
+        ObservableCollection<ClothingType> typesList;
+        ITypesService typesService;
+        IClothesServices clothesService;
+
         public ClothesEditViewModel(IEventAggregator eventAggregator, IRegionManager regionManager, IClothesServices clothesService, ITypesService typesService, PieceOfClothing pieceOfClothing)
         {
             this.eventAggregator = eventAggregator;
@@ -30,24 +40,23 @@ namespace ClothesEditViewModule.ViewModels
         private void Initialize()
         {
             Title = "Edytuj przedmiot";
-            typesList = typesService.TypesList;
+            //typesList = typesService.TypesList;
+            TypesService_TypesListUpdated(this, null);
             typesService.TypesListUpdated += TypesService_TypesListUpdated;
         }
 
-        //private void InitializeTypesService()
-        //{
-        //    typesService = container.Resolve<TypesService.Services.TypesService>();
-        //    typesList = typesService.TypesList;
-        //    typesService.TypesListUpdated += TypesService_TypesListUpdated;
-        //}
-
-        //when the types list gets updated, update the property.
+        //When the types list gets updated, update the property.
         private void TypesService_TypesListUpdated(object sender, System.EventArgs e)
         {
-            TypesList = typesService.TypesList;
+            var tempList = new ObservableCollection<ClothingType>();
+            foreach (var t in typesService.TypesList)
+            {
+                tempList.Add(t);
+            }
+            TypesList = tempList;
         }
 
-        //fires when an element is passed to the edit view model. The element is saved as current item.
+        //Fires when an element is passed to the edit view model. The element is saved as current item.
         private void OnEditElementAdded(PieceOfClothing obj)
         {
             CurrentItem = obj;
@@ -123,17 +132,6 @@ namespace ClothesEditViewModule.ViewModels
             }
         }
 
-        IEventAggregator eventAggregator;
-        IRegionManager regionManager;
-        IUnityContainer container;
-        EditActionType actionType;
-        string title;
-        ICommand cancelCommand, editOKCommand, browseForFile;
-        PieceOfClothing currentItem;
-        List<ClothingType> typesList;
-        ITypesService typesService;
-        IClothesServices clothesService;
-
         public PieceOfClothing CurrentItem
         {
             get
@@ -147,7 +145,7 @@ namespace ClothesEditViewModule.ViewModels
             }
         }
 
-        public List<ClothingType> TypesList
+        public ObservableCollection<ClothingType> TypesList
         {
             get
             {

@@ -6,9 +6,12 @@ using Prism.Events;
 using Prism.Regions;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using SzafaEntities;
 using SzafaInterfaces;
@@ -17,13 +20,23 @@ namespace ClothesEditViewModule.ViewModels
 {
     class ClothesCreateViewModel : PropertyChangedImplementation, IClothesEditViewModel
     {
+        IEventAggregator eventAggregator;
+        IRegionManager regionManager;
+        string title;
+        ICommand cancelCommand, editOKCommand, browseForFile;
+        PieceOfClothing currentItem;
+        ObservableCollection<ClothingType> typesList;
+        IClothesServices clothesService;
+        ITypesService typesService;
+
         public ClothesCreateViewModel(IEventAggregator eventAggregator, IRegionManager regionManager, IClothesServices clothesService, ITypesService typesService)
         {
             this.eventAggregator = eventAggregator;
             this.regionManager = regionManager;
             this.clothesService = clothesService;
             this.typesService = typesService;
-            typesList = typesService.TypesList;
+            //typesList = typesService.TypesList;
+            TypesService_TypesListUpdated(this, null);
             typesService.TypesListUpdated += TypesService_TypesListUpdated;//unsubscribe on exit!!!!
             Initialize();
         }
@@ -40,27 +53,27 @@ namespace ClothesEditViewModule.ViewModels
             };
         }
 
-        //private void InitializeTypesService()
-        //{
-        //    typesService = container.Resolve<TypesService.Services.TypesService>();
-        //    typesList = typesService.TypesList;
-        //    typesService.TypesListUpdated += TypesService_TypesListUpdated;
-        //}
-
         //when the types list gets updated, update the property.
         private void TypesService_TypesListUpdated(object sender, System.EventArgs e)
-        {
-            TypesList = typesService.TypesList;
+        {   //typesService.TypesList;
+            var tempList = new ObservableCollection<ClothingType>();
+            foreach (var t in typesService.TypesList)
+            {
+                tempList.Add(t);
+            }
+            TypesList = tempList;
         }
 
         //gettting back to the last view
         private void OnCancel()
         {
             IRegion region = regionManager.Regions["MainDetailsRegion"];
-            object activeView = region.ActiveViews.First();
+            UserControl activeView = (UserControl)region.ActiveViews.First();
             region.Remove(activeView);
             region.Activate(region.Views.First());
             typesService.TypesListUpdated -= TypesService_TypesListUpdated;
+            activeView.DataContext = null;
+            BindingOperations.ClearAllBindings(activeView);
         }
 
         private void SaveCurrentItemChanges()
@@ -132,15 +145,6 @@ namespace ClothesEditViewModule.ViewModels
             }
         }
 
-        IEventAggregator eventAggregator;
-        IRegionManager regionManager;
-        string title;
-        ICommand cancelCommand, editOKCommand, browseForFile;
-        PieceOfClothing currentItem;
-        List<ClothingType> typesList;
-        IClothesServices clothesService;
-        ITypesService typesService;
-
         public PieceOfClothing CurrentItem
         {
             get
@@ -154,7 +158,7 @@ namespace ClothesEditViewModule.ViewModels
             }
         }
 
-        public List<ClothingType> TypesList
+        public ObservableCollection<ClothingType> TypesList
         {
             get
             {
