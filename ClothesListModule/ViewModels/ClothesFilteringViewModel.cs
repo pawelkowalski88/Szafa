@@ -34,7 +34,7 @@ namespace ClothesListModule.ViewModels
             typeFilteringConditionsService.FilteringConditionsUpdated += TypeFilteringConditionsService_FilteringConditionsUpdated;
             SelectedTypeFilter = TypesFilterList[0];
 
-            SortingCategoriesList = SortingConditions.GenerateStandardConditions();
+            SortingCategoriesList = SelectedFilter.SortingConditionsList;//SortingConditions.GenerateStandardConditions();
             SelectedSortingCategory = SortingCategoriesList[0];
 
             SortingOrderList = SortingOrder.GenerateStandardList();
@@ -57,6 +57,8 @@ namespace ClothesListModule.ViewModels
         private void OnTypeFilterChanged(FilteringConditions obj)
         {
             SelectedTypeFilter = obj;
+            //SortingCategoriesList = obj.SortingConditionsList;
+            //SelectedSortingCategory = obj.Sorting;
             PublishFilters();
         }
 

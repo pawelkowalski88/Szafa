@@ -11,6 +11,8 @@ namespace ClothesListModule.Filtering
     {
         string name;
         Predicate<PieceOfClothing> conditions;
+        List<SortingConditions> sortingConditionsList;
+        SortingConditions sorting;
         public Predicate<PieceOfClothing> Conditions
         {
             get
@@ -37,27 +39,63 @@ namespace ClothesListModule.Filtering
             }
         }
 
+        public List<SortingConditions> SortingConditionsList
+        {
+            get
+            {
+                return sortingConditionsList;
+            }
+
+            set
+            {
+                sortingConditionsList = value;
+            }
+        }
+
+        public SortingConditions Sorting
+        {
+            get
+            {
+                return sorting;
+            }
+
+            set
+            {
+                sorting = value;
+            }
+        }
+
         public static List<FilteringConditions> GenerateStandardConditions()
         {
-            return new List<FilteringConditions>()
+            List<FilteringConditions> output = new List<FilteringConditions>()
             {
                 new FilteringConditions()
                 {
                     Name = "Wszystkie",
-                    Conditions = new Predicate<PieceOfClothing>(x => { return true; })
+                    Conditions = new Predicate<PieceOfClothing>(x => { return true; }),
+                    SortingConditionsList = SortingConditions.GenerateStandardConditions()
                 },
                 new FilteringConditions()
                 {
                     Name = "Używane",
-                    Conditions = new Predicate<PieceOfClothing>(x => x.InUse == true)
+                    Conditions = new Predicate<PieceOfClothing>(x => x.InUse == true),
+                    SortingConditionsList = SortingConditions.GenerateNotUsedConditions()
                 },
 
                 new FilteringConditions()
                 {
                     Name = "Nieużywane",
-                    Conditions = new Predicate<PieceOfClothing>(x => x.InUse == false)
+                    Conditions = new Predicate<PieceOfClothing>(x => x.InUse == false),
+                    SortingConditionsList = SortingConditions.GenerateStandardConditions()
                 }
             };
+
+            foreach(var f in output)
+            {
+                f.Sorting = f.SortingConditionsList[0];
+            }
+
+            return output;
         }
     }
 }

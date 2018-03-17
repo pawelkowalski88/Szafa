@@ -67,5 +67,23 @@ namespace ClothesListModule.Filtering
                 }
             };
         }
+
+        public static List<SortingConditions> GenerateNotUsedConditions()
+        {
+            return new List<SortingConditions>()
+            {
+                new SortingConditions()
+                {
+                    Name = "Nazwa",
+                    Condition = x => x.Name
+                },
+
+                new SortingConditions()
+                {
+                    Name = "Kiedy ostatnio założone",
+                    Condition = x => x.LastTimeOn
+                }
+            };
+        }
     }
 }
