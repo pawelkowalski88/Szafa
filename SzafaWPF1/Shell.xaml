@@ -6,7 +6,7 @@
         xmlns:prism="http://prismlibrary.com/"
         xmlns:local="clr-namespace:SzafaWPF1"
         mc:Ignorable="d"
-        Title="Szafa" Height="350" Width="525" Background="LightGray" WindowState="Maximized">
+        Title="Szafa" Height="350" Width="525" Background="LightGray" WindowState="Maximized" UseLayoutRounding="True">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />

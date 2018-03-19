@@ -51,26 +51,24 @@ namespace ClothesListModule.ViewModels
         private void OnFilterChanged(FilteringConditions obj)
         {
             SelectedFilter = obj;
+            InvokePropertyChanged("SelectedFilter");
             PublishFilters();
         }
 
         private void OnTypeFilterChanged(FilteringConditions obj)
         {
             SelectedTypeFilter = obj;
-            //SortingCategoriesList = obj.SortingConditionsList;
-            //SelectedSortingCategory = obj.Sorting;
             PublishFilters();
         }
 
         private void OnSortingCategoryChanged(SortingConditions obj)
         {
-            SelectedSortingCategory = obj;
             PublishFilters();
         }
 
         private void OnSortingOrderChanged(SortingOrder obj)
         {
-            SelectedSortingOrder = obj;
+            //SelectedSortingOrder = obj;
             PublishFilters();
         }
 
@@ -80,7 +78,7 @@ namespace ClothesListModule.ViewModels
                 .Publish(new List<FilteringConditions>(){ SelectedFilter, SelectedTypeFilter });
 
             eventAggregator.GetEvent<SortingConditionsChangedEvent>()
-                .Publish(Tuple.Create(SelectedSortingCategory, SelectedSortingOrder.Direction));
+                .Publish(Tuple.Create(SelectedFilter.Sorting, SelectedFilter.SelectedSortingOrder.Direction));
         }
 
         public ICommand SelectFilterCommand

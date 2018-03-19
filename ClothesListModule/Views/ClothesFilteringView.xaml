@@ -62,9 +62,9 @@
                               HorizontalAlignment="Left"  
                               VerticalAlignment="Center" 
                               Width="160" 
-                              ItemsSource="{Binding SortingCategoriesList}" 
+                              ItemsSource="{Binding SelectedFilter.SortingConditionsList}" 
                               DisplayMemberPath="Name" 
-                              SelectedValue="{Binding SelectedSortingCategory}"
+                              SelectedValue="{Binding SelectedFilter.Sorting}"
                               comm:ComboBoxSelect.CommandProperty="{Binding SelectSortingCategoryCommand}"
                               comm:ComboBoxSelect.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}"/>
 
@@ -74,8 +74,8 @@
                           HorizontalAlignment="Left" 
                           VerticalAlignment="Bottom" 
                           Width="120"
-                          ItemsSource="{Binding SortingOrderList}" 
-                          SelectedValue="{Binding SelectedSortingOrder}"
+                          ItemsSource="{Binding SelectedFilter.SortingOrderList}" 
+                          SelectedValue="{Binding SelectedFilter.SelectedSortingOrder}"
                           DisplayMemberPath="Name"
                           comm:ComboBoxSelect.CommandProperty="{Binding SelectSortingOrderCommand}"
                           comm:ComboBoxSelect.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}"/>

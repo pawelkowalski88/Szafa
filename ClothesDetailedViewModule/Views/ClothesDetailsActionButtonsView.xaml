@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:conv="clr-namespace:PresentationUtility.Converters;assembly=PresentationUtility"
              xmlns:local="clr-namespace:ClothesDetailedViewModule.Views"
+             xmlns:icons="clr-namespace:IconsForSzafa;assembly=IconsForSzafa"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
@@ -12,26 +13,41 @@
         <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConv"/>
     </UserControl.Resources>
 
-    <Grid>
+    <Grid Width="Auto">
         <Grid.RowDefinitions>
-            <RowDefinition MaxHeight="90" MinHeight="32"/>
-            <RowDefinition MaxHeight="90" MinHeight="32"/>
-            <RowDefinition MaxHeight="90" MinHeight="32"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Button Content="Edytuj" 
-                Margin="5" 
-                Command="{Binding EditCommand}"/>
-        
-        <Button Grid.Row="1"
-                Content="Załóż" 
-                Margin="5" 
-                Command="{Binding UseCommand}"/>
-        
+        <Button Margin="5" Height="64" Width="64"
+                Command="{Binding EditCommand}"
+                Background="White">
+            <StackPanel>
+                <icons:EditIcon/>
+                <TextBlock>Edytuj</TextBlock>
+            </StackPanel>
+        </Button>
+
+        <Button Grid.Row="1" 
+                Margin="5" Height="64" Width="64"
+                Command="{Binding UseCommand}"
+                Background="White">
+            <StackPanel>
+                <icons:ClosetIcon/>
+                <TextBlock>Załóż</TextBlock>
+            </StackPanel>
+        </Button>
+
         <Button Grid.Row="2"
-                Content="Upierz" 
-                Margin="5" 
+                Margin="5" Height="64" Width="64"
                 Command="{Binding WashCommand}" 
-                Visibility="{Binding CurrentItem.InUse, Converter={StaticResource BoolToVisibilityConv}}"/>
+                Visibility="{Binding CurrentItem.InUse, Converter={StaticResource BoolToVisibilityConv}}"
+                Background="White">
+            <StackPanel>
+                <icons:WashingIcon/>
+                <TextBlock>Upierz</TextBlock>
+            </StackPanel>
+        </Button>
     </Grid>
 </UserControl>

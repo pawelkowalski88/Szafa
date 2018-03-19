@@ -5,12 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:prism="http://prismlibrary.com/"
              xmlns:local="clr-namespace:NavigationViewModule.Views"
+             xmlns:icons="clr-namespace:IconsForSzafa;assembly=IconsForSzafa"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Background="White">
     <Grid Background="LightGray">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
@@ -19,12 +20,19 @@
             Orientation="Horizontal"
             FlowDirection="RightToLeft">
             <!--Margin="1,0,1,1">-->
-            
+
             <Button Command="{Binding NewPieceCommand}"
-                    Width="120"
-                    Margin="5"
-                    Content="Nowy"/>
-            
+                    Width="64"
+                    Height="64"
+                    Margin="5" 
+                    Background="White"
+                    BorderThickness="0">
+                <StackPanel>
+                <icons:AddIcon/>
+                    <TextBlock>Dodaj</TextBlock>
+                </StackPanel>
+            </Button>
+
         </StackPanel>
 
         <Border    Background="White">

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClothesDetailedViewModule.Views"
              xmlns:conv="clr-namespace:PresentationUtility.Converters;assembly=PresentationUtility"
+             xmlns:icons="clr-namespace:IconsForSzafa;assembly=IconsForSzafa"
              xmlns:viewmodel="clr-namespace:ClothesDetailedViewModule.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
@@ -15,11 +16,16 @@
     
     <Grid Background="White">
         <Border>
-        <Button Content="Usuń"
-                Width="80"
-                Height="40"
+            <Button Width="64"
+                Height="64"
                 Command="{Binding PreDeleteCommand}"
-                Visibility="{Binding DisplayPreDeleteButton, Converter={StaticResource BoolToVisibilityConv}}"/>
+                Visibility="{Binding DisplayPreDeleteButton, Converter={StaticResource BoolToVisibilityConv}}"
+                    Background="White">
+                <StackPanel>
+                    <icons:DeleteIcon/>
+                    <TextBlock>Usuń</TextBlock>
+                </StackPanel>
+            </Button>
         </Border>
 
         <Border Visibility="{Binding DisplayDeleteConfirmation, Converter={StaticResource BoolToVisibilityConv}}">
