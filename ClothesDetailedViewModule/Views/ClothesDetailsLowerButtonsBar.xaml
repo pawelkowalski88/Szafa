@@ -35,18 +35,28 @@
                            TextAlignment="Center" 
                            HorizontalAlignment="Center" 
                            VerticalAlignment="Center"/>
-                
-                <Button Width="80"
-                        Height="40"
+
+                <Button Width="64"
+                        Height="64"
                         Margin="10"
-                        Content="Tak"
-                        Command="{Binding ConfirmDeleteCommand}"/>
-                
-                <Button Width="80"
-                        Height="40"
+                        Command="{Binding ConfirmDeleteCommand}"
+                        Background="White">
+                    <StackPanel>
+                        <icons:AcceptIcon/>
+                        <TextBlock TextAlignment="Center">Tak</TextBlock>
+                    </StackPanel>
+                </Button>
+
+                <Button Width="64"
+                        Height="64"
                         Margin="10"
-                        Content="Nie"
-                        Command="{Binding CancelDeleteCommand}"/>
+                        Command="{Binding CancelDeleteCommand}"
+                        Background="White">
+                    <StackPanel>
+                        <icons:CancelIcon/>
+                        <TextBlock TextAlignment="Center">Nie</TextBlock>
+                    </StackPanel>
+                </Button>
             </StackPanel>
         </Border>
 

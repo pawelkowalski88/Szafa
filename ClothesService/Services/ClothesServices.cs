@@ -6,6 +6,7 @@ using SQLiteDatabaseConnection;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows;
 using SzafaEntities;
 using SzafaInterfaces;
 
@@ -43,6 +44,7 @@ namespace ClothesService.Services
                     ClothesList = new List<PieceOfClothing>();
                     ClothesListUpdated(this, new EventArgs());
                     eventAggregator.GetEvent<DatabaseConnectionErrorOccuredEvent>().Publish(e.ToString());
+                    MessageBox.Show(e.ToString());
                 }
             });
             //Start the task

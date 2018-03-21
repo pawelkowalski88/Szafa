@@ -22,7 +22,10 @@ namespace SzafaEntities
             PicturePath = c.picture_path;
             TimesOn = c.times_on;
             TypeId = c.type_id;
-            Type = new ClothingType(c.types);
+            if (c.types != null)
+            {
+                Type = new ClothingType(c.types);
+            }
         }
        
         public PieceOfClothing(clothes c, BitmapImage i) : this(c)

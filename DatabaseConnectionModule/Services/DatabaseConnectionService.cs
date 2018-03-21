@@ -24,6 +24,7 @@ namespace DatabaseConnectionModule.Services
         public DatabaseConnectionService(IEventAggregator eventAggregator)
         {
             this.eventAggregator = eventAggregator;
+            
         }
 
         public IEnumerable<T> GetEntities<T>() where T : class
@@ -105,6 +106,8 @@ namespace DatabaseConnectionModule.Services
 
         private bool CheckDatabaseExistence(SzafaSQLiteEntities conn)
         {
+            conn.Database.Connection.ConnectionString = "data source=" + "\"" + AppDomain.CurrentDomain.BaseDirectory + "main.db\"";
+            //MessageBox.Show(conn.Database.Connection.ConnectionString);
             return File.Exists(ExctractDataSource(conn.Database.Connection.ConnectionString));
         }
     }
