@@ -112,9 +112,18 @@ namespace ClothesListModule.ViewModels
         {
             get
             {
-                return sortingParamters.Item2 == true ?
-                    clothesService.ClothesList.FindAll(x => ApplyFilters(x)).OrderBy(sortingParamters.Item1.Condition).ToList() :
-                    clothesService.ClothesList.FindAll(x => ApplyFilters(x)).OrderByDescending(sortingParamters.Item1.Condition).ToList();
+                try
+                {
+                    var output = sortingParamters.Item2 == true ?
+                        clothesService.ClothesList.FindAll(x => ApplyFilters(x)).OrderBy(sortingParamters.Item1.Condition).ToList() :
+                        clothesService.ClothesList.FindAll(x => ApplyFilters(x)).OrderByDescending(sortingParamters.Item1.Condition).ToList();
+                    return output;
+                }
+                catch(Exception e)
+                {
+                    //MessageBox.Show(e.ToString());
+                    return new List<PieceOfClothing>();
+                }
             }
         }
 

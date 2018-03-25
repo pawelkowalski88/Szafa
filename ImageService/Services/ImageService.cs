@@ -81,7 +81,7 @@ namespace ImageServiceModuleLibrary.Services
 
         private String GenerateSavePath(String p, long i)
         {
-            return System.AppDomain.CurrentDomain.BaseDirectory + "szafa\\picture" + i.ToString() + Path.GetExtension(p); ;
+            return "szafa\\picture" + i.ToString() + Path.GetExtension(p);
         }
     }
 }

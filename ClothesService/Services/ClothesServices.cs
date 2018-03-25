@@ -44,7 +44,7 @@ namespace ClothesService.Services
                     ClothesList = new List<PieceOfClothing>();
                     ClothesListUpdated(this, new EventArgs());
                     eventAggregator.GetEvent<DatabaseConnectionErrorOccuredEvent>().Publish(e.ToString());
-                    MessageBox.Show(e.ToString());
+                    //MessageBox.Show(e.ToString());
                 }
             });
             //Start the task
@@ -70,6 +70,28 @@ namespace ClothesService.Services
             }
         }
 
+        public void AddPieceOfClothing(PieceOfClothing c)
+        {
+            try
+            {
+                clothes cl = c.Toclothes();
+                //if (cl.picture_path == null) cl.picture_path = "";
+                dbConnection.AddClothes(cl);
+                MessageBox.Show(cl.id.ToString());
+                ImageService imageService = new ImageService();
+                string generatedName = imageService.SaveImage(c.PicturePath, cl.id);
+                if (generatedName != null)
+                {
+                    cl.picture_path = generatedName;
+                }
+            }
+            catch (Exception e)
+            {
+                eventAggregator.GetEvent<DatabaseConnectionErrorOccuredEvent>().Publish(e.ToString());
+                return;
+            }
+        }
+
         public clothes GetPieceOfClothing(long id)
         {
             try
@@ -80,21 +102,6 @@ namespace ClothesService.Services
             {
                 eventAggregator.GetEvent<DatabaseConnectionErrorOccuredEvent>().Publish(e.ToString());
                 return null;
-            }
-        }
-
-        public void AddPieceOfClothing(PieceOfClothing c)
-        {
-            try
-            {
-                clothes cl = c.Toclothes();
-                if (cl.picture_path == null) cl.picture_path = "";
-                dbConnection.AddClothes(cl);
-            }
-            catch(Exception e)
-            {
-                eventAggregator.GetEvent<DatabaseConnectionErrorOccuredEvent>().Publish(e.ToString());
-                return;
             }
         }
 

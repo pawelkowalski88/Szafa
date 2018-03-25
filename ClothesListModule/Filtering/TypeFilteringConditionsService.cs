@@ -38,12 +38,21 @@ namespace ClothesListModule.Filtering
                 Conditions.Add(new FilteringConditions()
                 {
                     Name = t.Name,
-                    Conditions = new Predicate<PieceOfClothing>(x => x.Type.Name == searchName)
+                    Conditions = new Predicate<PieceOfClothing>(x => Check(x, searchName))
                 });
              
             }
 
             FilteringConditionsUpdated(Conditions, new EventArgs());
+        }
+
+        private bool Check(PieceOfClothing x, string name)
+        {
+            if (x.Type != null)
+            {
+                return x.Type.Name == name;
+            }
+            return false;
         }
     }
 }

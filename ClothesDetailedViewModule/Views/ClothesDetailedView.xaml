@@ -47,8 +47,9 @@
                     <TextBlock HorizontalAlignment="Center" Text="{Binding Path=CurrentItem.InUseFrom, Converter={StaticResource DateConv}}" FontSize="12" Foreground="Gray"/>
                 </StackPanel>
                 <StackPanel Margin="0,10,10,0" Width="80" Height="80" Background="WhiteSmoke">
+                    <TextBlock Text="Założone" TextAlignment="Center"/>
                     <TextBlock HorizontalAlignment="Center" Text="{Binding Path=CurrentItem.TimesOn, Converter={StaticResource TimesOnConv}}" FontSize="18"/>
-                    <TextBlock Margin="0,10,0,0" HorizontalAlignment="Center" Text="{Binding Path=CurrentItem.LastTimeOn, Converter={StaticResource LastTimeOnConv}}"/>
+                    <TextBlock HorizontalAlignment="Center" Text="{Binding Path=CurrentItem.LastTimeOn, Converter={StaticResource LastTimeOnConv}}" Foreground="Gray"/>
                 </StackPanel>
             </WrapPanel>
         </StackPanel>
