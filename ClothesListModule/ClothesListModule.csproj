@@ -105,10 +105,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClothesService\ClothesService.csproj">
-      <Project>{81BE3301-27CC-4D74-BB04-C61398CE161C}</Project>
-      <Name>ClothesService</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CustomEvents\CustomEvents.csproj">
       <Project>{b564227f-9e56-4f25-a741-59283b35af93}</Project>
       <Name>CustomEvents</Name>
@@ -116,10 +112,6 @@
     <ProjectReference Include="..\PresentationUtility\PresentationUtility.csproj">
       <Project>{0F6A4AE4-772D-4801-8F89-7D0F568E9810}</Project>
       <Name>PresentationUtility</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SQLiteDatabaseConnection\SQLiteDatabaseConnection.csproj">
-      <Project>{64438d0d-d49d-494c-a366-79b02691853c}</Project>
-      <Name>SQLiteDatabaseConnection</Name>
     </ProjectReference>
     <ProjectReference Include="..\SzafaEntities\SzafaEntities.csproj">
       <Project>{f961da07-1ea3-430d-8749-36dcd782ecd4}</Project>

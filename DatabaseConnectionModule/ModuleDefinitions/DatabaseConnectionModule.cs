@@ -1,10 +1,10 @@
-﻿using DatabaseConnectionModule.Services;
+﻿using SQLiteDatabaseConnectionModule.Services;
 using Microsoft.Practices.Unity;
 using Prism.Modularity;
 using Prism.Regions;
 using SzafaInterfaces;
 
-namespace DatabaseConnectionModule.ModuleDefinitions
+namespace SQLiteDatabaseConnectionModule.ModuleDefinitions
 {
     public class DatabaseConnectionModule : IModule
     {
@@ -16,7 +16,7 @@ namespace DatabaseConnectionModule.ModuleDefinitions
         }
         public void Initialize()
         {
-            container.RegisterType<IDatabaseConnectionService, DatabaseConnectionService>();
+            container.RegisterType<IDatabaseConnectionService, SQLiteDatabaseConnectionService>();
         }
 
         IRegionManager regionManager;

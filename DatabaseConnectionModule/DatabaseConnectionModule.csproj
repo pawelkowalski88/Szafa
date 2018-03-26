@@ -96,7 +96,7 @@
   <ItemGroup>
     <Compile Include="ModuleDefinitions\DatabaseConnectionModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\DatabaseConnectionService.cs" />
+    <Compile Include="Services\SQLiteDatabaseConnectionService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

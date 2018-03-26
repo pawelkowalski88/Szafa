@@ -1,30 +1,23 @@
-﻿
-using Prism.Events;
+﻿using Prism.Events;
 using SQLiteDatabaseConnection;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Validation;
 using System.Linq;
-using CustomEvents;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using SzafaInterfaces;
 using System.Data.Entity.Infrastructure;
 using System.IO;
 
-namespace DatabaseConnectionModule.Services
+namespace SQLiteDatabaseConnectionModule.Services
 {
-    public class DatabaseConnectionService : IDatabaseConnectionService
+    public class SQLiteDatabaseConnectionService : IDatabaseConnectionService
     {
         private IEventAggregator eventAggregator;
         private SzafaSQLiteEntities dbconn = new SzafaSQLiteEntities();
 
-        public DatabaseConnectionService(IEventAggregator eventAggregator)
+        public SQLiteDatabaseConnectionService(IEventAggregator eventAggregator)
         {
             this.eventAggregator = eventAggregator;
-            
         }
 
         public IEnumerable<T> GetEntities<T>() where T : class

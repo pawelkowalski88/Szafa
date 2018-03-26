@@ -87,10 +87,6 @@
       <Project>{B564227F-9E56-4F25-A741-59283B35AF93}</Project>
       <Name>CustomEvents</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DatabaseConnectionModule\DatabaseConnectionModule.csproj">
-      <Project>{2BE098AC-789A-49AC-B799-6050C59666D0}</Project>
-      <Name>DatabaseConnectionModule</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ImageService\ImageServiceModuleLibrary.csproj">
       <Project>{8FADCA39-330D-48F7-912B-102786ABAA36}</Project>
       <Name>ImageServiceModuleLibrary</Name>

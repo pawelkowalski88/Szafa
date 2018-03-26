@@ -1,5 +1,4 @@
-﻿using ClothesService.Enumerators;
-using CustomEvents;
+﻿using CustomEvents;
 using Microsoft.Practices.Unity;
 using PresentationUtility;
 using Prism.Commands;

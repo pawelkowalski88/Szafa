@@ -5,7 +5,6 @@ using System.Windows.Input;
 using Prism.Commands;
 using Microsoft.Practices.Unity;
 using Prism.Regions;
-using ClothesService.Enumerators;
 using ClothesEditViewModule.Views;
 using SzafaEntities;
 using System;

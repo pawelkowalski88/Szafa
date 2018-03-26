@@ -28,7 +28,7 @@ namespace SzafaWPF1
             ModuleCatalog moduleCatalog = (ModuleCatalog)this.ModuleCatalog;
 
             //Adding Database connection module
-            var moduleType = typeof(DatabaseConnectionModule.ModuleDefinitions.DatabaseConnectionModule);
+            var moduleType = typeof(SQLiteDatabaseConnectionModule.ModuleDefinitions.DatabaseConnectionModule);
             moduleCatalog.AddModule(new ModuleInfo()
             {
                 ModuleName = "DatabaseConnectionModule",

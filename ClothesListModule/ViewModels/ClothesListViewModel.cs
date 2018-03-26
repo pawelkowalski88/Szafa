@@ -1,5 +1,4 @@
-﻿using ClothesService.Services;
-using PresentationUtility;
+﻿using PresentationUtility;
 using Prism.Commands;
 using Prism.Events;
 using System;

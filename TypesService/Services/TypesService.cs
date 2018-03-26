@@ -1,5 +1,5 @@
 ﻿
-using DatabaseConnectionModule.Services;
+using SQLiteDatabaseConnectionModule.Services;
 using Microsoft.Practices.Unity;
 using Prism.Events;
 using System;

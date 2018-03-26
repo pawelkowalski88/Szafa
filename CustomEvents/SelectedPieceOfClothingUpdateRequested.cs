@@ -1,13 +1,11 @@
-﻿using DatabaseConnectionSQLite;
-using Prism.Events;
-
+﻿using Prism.Events;
 namespace CustomEvents
 {
-    public class SelectedPieceOfClothingUpdateRequested : PubSubEvent<clothes>
-    {
-        public SelectedPieceOfClothingUpdateRequested()
-        {
+    //public class SelectedPieceOfClothingUpdateRequested : PubSubEvent<clothes>
+    //{
+    //    public SelectedPieceOfClothingUpdateRequested()
+    //    {
 
-        }
-    }
+    //    }
+    //}
 }

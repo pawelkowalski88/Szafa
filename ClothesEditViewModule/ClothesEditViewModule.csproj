@@ -96,25 +96,13 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClothesService\ClothesService.csproj">
-      <Project>{81be3301-27cc-4d74-bb04-c61398ce161c}</Project>
-      <Name>ClothesService</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CustomEvents\CustomEvents.csproj">
       <Project>{B564227F-9E56-4F25-A741-59283B35AF93}</Project>
       <Name>CustomEvents</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DatabaseConnectionModule\DatabaseConnectionModule.csproj">
-      <Project>{2be098ac-789a-49ac-b799-6050c59666d0}</Project>
-      <Name>DatabaseConnectionModule</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PresentationUtility\PresentationUtility.csproj">
       <Project>{0f6a4ae4-772d-4801-8f89-7d0f568e9810}</Project>
       <Name>PresentationUtility</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SQLiteDatabaseConnection\SQLiteDatabaseConnection.csproj">
-      <Project>{64438d0d-d49d-494c-a366-79b02691853c}</Project>
-      <Name>SQLiteDatabaseConnection</Name>
     </ProjectReference>
     <ProjectReference Include="..\SzafaEntities\SzafaEntities.csproj">
       <Project>{f961da07-1ea3-430d-8749-36dcd782ecd4}</Project>
@@ -123,10 +111,6 @@
     <ProjectReference Include="..\SzafaInterfaces\SzafaInterfaces.csproj">
       <Project>{F38C4E38-123C-4415-9930-6B84F6D0EE7E}</Project>
       <Name>SzafaInterfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TypesService\TypesService.csproj">
-      <Project>{09865297-B221-4135-A9AF-DAA3B248B1D0}</Project>
-      <Name>TypesService</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

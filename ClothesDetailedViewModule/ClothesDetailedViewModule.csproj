@@ -30,10 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DatabaseConnectionSQLite, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SzafaDatabaseConnection\DatabaseConnectionSQLite\bin\Debug\DatabaseConnectionSQLite.dll</HintPath>
-    </Reference>
     <Reference Include="IconsForSzafa">
       <HintPath>..\..\..\VariousTests\IconsForSzafa\IconsForSzafa\bin\Debug\IconsForSzafa.dll</HintPath>
     </Reference>
@@ -121,17 +117,9 @@
       <Project>{E05251FE-ABB8-4710-A4DA-C96308E4F547}</Project>
       <Name>ClothesEditViewModule</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ClothesService\ClothesService.csproj">
-      <Project>{81be3301-27cc-4d74-bb04-c61398ce161c}</Project>
-      <Name>ClothesService</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CustomEvents\CustomEvents.csproj">
       <Project>{b564227f-9e56-4f25-a741-59283b35af93}</Project>
       <Name>CustomEvents</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DatabaseConnectionModule\DatabaseConnectionModule.csproj">
-      <Project>{2be098ac-789a-49ac-b799-6050c59666d0}</Project>
-      <Name>DatabaseConnectionModule</Name>
     </ProjectReference>
     <ProjectReference Include="..\PresentationUtility\PresentationUtility.csproj">
       <Project>{0f6a4ae4-772d-4801-8f89-7d0f568e9810}</Project>

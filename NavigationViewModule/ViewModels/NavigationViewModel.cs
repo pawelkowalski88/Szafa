@@ -6,7 +6,6 @@ using System.Windows.Input;
 using System.Linq;
 using ClothesEditViewModule.ViewModels;
 using System;
-using System.Collections;
 
 namespace NavigationViewModule.ViewModels
 {

@@ -88,15 +88,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ClothesEditViewModule\ClothesEditViewModule.csproj">
-      <Project>{E05251FE-ABB8-4710-A4DA-C96308E4F547}</Project>
+      <Project>{e05251fe-abb8-4710-a4da-c96308e4f547}</Project>
       <Name>ClothesEditViewModule</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ClothesService\ClothesService.csproj">
-      <Project>{81be3301-27cc-4d74-bb04-c61398ce161c}</Project>
-      <Name>ClothesService</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SzafaInterfaces\SzafaInterfaces.csproj">
-      <Project>{F38C4E38-123C-4415-9930-6B84F6D0EE7E}</Project>
+      <Project>{f38c4e38-123c-4415-9930-6b84f6d0ee7e}</Project>
       <Name>SzafaInterfaces</Name>
     </ProjectReference>
   </ItemGroup>

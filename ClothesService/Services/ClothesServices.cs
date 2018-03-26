@@ -1,5 +1,4 @@
 ﻿using CustomEvents;
-using DatabaseConnectionModule.Services;
 using ImageServiceModuleLibrary.Services;
 using Prism.Events;
 using SQLiteDatabaseConnection;

@@ -1,6 +1,5 @@
 ﻿using ClothesEditViewModule.ViewModels;
 using ClothesEditViewModule.Views;
-using ClothesService.Enumerators;
 using CustomEvents;
 using Microsoft.Practices.Unity;
 using PresentationUtility;
@@ -8,10 +7,6 @@ using Prism.Commands;
 using Prism.Events;
 using Prism.Regions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using SzafaEntities;
 using SzafaInterfaces;
