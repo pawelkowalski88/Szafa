@@ -14,19 +14,19 @@
         <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConv"/>
     </UserControl.Resources>
     
-    <Grid Background="White">
-        <Border>
-            <Button Width="64"
-                Height="64"
-                Command="{Binding PreDeleteCommand}"
-                Visibility="{Binding DisplayPreDeleteButton, Converter={StaticResource BoolToVisibilityConv}}"
-                    Background="White">
-                <StackPanel>
-                    <icons:DeleteIcon/>
-                    <TextBlock>Usuń</TextBlock>
-                </StackPanel>
-            </Button>
-        </Border>
+    <Grid Background="White" Height="84">
+        
+        <Button Width="64"
+            Height="64"
+            Margin="10"
+            Command="{Binding PreDeleteCommand}"
+            Visibility="{Binding DisplayPreDeleteButton, Converter={StaticResource BoolToVisibilityConv}}"
+                Background="White">
+            <StackPanel>
+                <icons:DeleteIcon/>
+                <TextBlock>Usuń</TextBlock>
+            </StackPanel>
+        </Button>
 
         <Border Visibility="{Binding DisplayDeleteConfirmation, Converter={StaticResource BoolToVisibilityConv}}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

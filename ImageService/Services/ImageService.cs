@@ -58,7 +58,7 @@ namespace ImageServiceModuleLibrary.Services
             string NewPicturePath = GenerateSavePath(path, id);
 
             //if old path and new path are the same then do nothing
-            if (path == NewPicturePath || path =="") return path;
+            if (path == NewPicturePath || path =="" || AppDomain.CurrentDomain.BaseDirectory + NewPicturePath == path) return NewPicturePath;
 
             try
             {
