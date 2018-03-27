@@ -10,7 +10,6 @@ namespace SzafaWPF1
     {
         protected override DependencyObject CreateShell()
         {
-            MessageBox.Show(System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
             return new Shell();
         }
 
