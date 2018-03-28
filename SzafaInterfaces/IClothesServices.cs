@@ -1,4 +1,4 @@
-﻿using SQLiteDatabaseConnection;
+﻿using SQLiteDBConnection;
 using System;
 using System.Collections.Generic;
 using SzafaEntities;

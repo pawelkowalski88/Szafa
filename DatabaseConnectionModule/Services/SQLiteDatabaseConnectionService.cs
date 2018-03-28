@@ -1,5 +1,5 @@
 ﻿using Prism.Events;
-using SQLiteDatabaseConnection;
+using SQLiteDBConnection;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -13,7 +13,7 @@ namespace SQLiteDatabaseConnectionModule.Services
     public class SQLiteDatabaseConnectionService : IDatabaseConnectionService
     {
         private IEventAggregator eventAggregator;
-        private SzafaSQLiteEntities dbconn = new SzafaSQLiteEntities();
+        private SzafaModel dbconn = new SzafaModel();
 
         public SQLiteDatabaseConnectionService(IEventAggregator eventAggregator)
         {
@@ -97,7 +97,7 @@ namespace SQLiteDatabaseConnectionModule.Services
             return String.Empty;
         }
 
-        private bool CheckDatabaseExistence(SzafaSQLiteEntities conn)
+        private bool CheckDatabaseExistence(SzafaModel conn)
         {
             conn.Database.Connection.ConnectionString = "data source=" + "\"" + AppDomain.CurrentDomain.BaseDirectory + "main.db\"";
             //MessageBox.Show(conn.Database.Connection.ConnectionString);

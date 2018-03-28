@@ -106,9 +106,9 @@
       <Project>{b564227f-9e56-4f25-a741-59283b35af93}</Project>
       <Name>CustomEvents</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SQLiteDatabaseConnection\SQLiteDatabaseConnection.csproj">
-      <Project>{64438D0D-D49D-494C-A366-79B02691853C}</Project>
-      <Name>SQLiteDatabaseConnection</Name>
+    <ProjectReference Include="..\SQliteDBConnection\SQLiteDBConnection.csproj">
+      <Project>{c6df1b29-4468-4957-9613-37aee26b8eb4}</Project>
+      <Name>SQLiteDBConnection</Name>
     </ProjectReference>
     <ProjectReference Include="..\SzafaInterfaces\SzafaInterfaces.csproj">
       <Project>{f38c4e38-123c-4415-9930-6b84f6d0ee7e}</Project>

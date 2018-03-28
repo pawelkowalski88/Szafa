@@ -1,7 +1,7 @@
 ﻿using CustomEvents;
 using ImageServiceModuleLibrary.Services;
 using Prism.Events;
-using SQLiteDatabaseConnection;
+using SQLiteDBConnection;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

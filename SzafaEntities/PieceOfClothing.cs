@@ -1,4 +1,4 @@
-﻿using SQLiteDatabaseConnection;
+﻿using SQLiteDBConnection;
 using System;
 using System.Windows.Media.Imaging;
 
@@ -45,7 +45,7 @@ namespace SzafaEntities
                 name = this.Name,
                 picture_path = this.PicturePath,
                 times_on = this.TimesOn,
-                type_id = this.TypeId
+                type_id = (long)this.TypeId
             };
         }
 

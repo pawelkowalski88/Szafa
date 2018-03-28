@@ -86,9 +86,9 @@
     <Folder Include="Events\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SQLiteDatabaseConnection\SQLiteDatabaseConnection.csproj">
-      <Project>{64438d0d-d49d-494c-a366-79b02691853c}</Project>
-      <Name>SQLiteDatabaseConnection</Name>
+    <ProjectReference Include="..\SQliteDBConnection\SQLiteDBConnection.csproj">
+      <Project>{c6df1b29-4468-4957-9613-37aee26b8eb4}</Project>
+      <Name>SQLiteDBConnection</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
