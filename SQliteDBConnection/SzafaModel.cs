@@ -2,6 +2,7 @@ namespace SQLiteDBConnection
 {
     using System;
     using System.Data.Entity;
+    using DatabaseEntities;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
@@ -12,8 +13,8 @@ namespace SQLiteDBConnection
         {
         }
 
-        public virtual DbSet<clothes> clothes { get; set; }
-        public virtual DbSet<types> types { get; set; }
+        public virtual DbSet<DatabaseEntities.clothes> clothes { get; set; }
+        public virtual DbSet<DatabaseEntities.types> types { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

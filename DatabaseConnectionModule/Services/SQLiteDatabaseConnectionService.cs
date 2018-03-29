@@ -7,6 +7,7 @@ using System.Linq;
 using SzafaInterfaces;
 using System.Data.Entity.Infrastructure;
 using System.IO;
+using DatabaseEntities;
 
 namespace SQLiteDatabaseConnectionModule.Services
 {

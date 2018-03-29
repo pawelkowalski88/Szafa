@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F38C4E38-123C-4415-9930-6B84F6D0EE7E}</ProjectGuid>
+    <ProjectGuid>{91D3B769-D6DC-45E5-9211-D095C824BE1C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SzafaInterfaces</RootNamespace>
-    <AssemblyName>SzafaInterfaces</AssemblyName>
+    <RootNamespace>DatabaseEntities</RootNamespace>
+    <AssemblyName>DatabaseEntities</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,8 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PresentationCore" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,30 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IClothesEditViewModel.cs" />
-    <Compile Include="IClothesServices.cs" />
-    <Compile Include="IDatabaseConnectionService.cs" />
-    <Compile Include="IImageService.cs" />
-    <Compile Include="ITypesService.cs" />
+    <Compile Include="clothes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CustomEvents\CustomEvents.csproj">
-      <Project>{b564227f-9e56-4f25-a741-59283b35af93}</Project>
-      <Name>CustomEvents</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DatabaseEntities\DatabaseEntities.csproj">
-      <Project>{91d3b769-d6dc-45e5-9211-d095c824be1c}</Project>
-      <Name>DatabaseEntities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SQliteDBConnection\SQLiteDBConnection.csproj">
-      <Project>{c6df1b29-4468-4957-9613-37aee26b8eb4}</Project>
-      <Name>SQLiteDBConnection</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SzafaEntities\SzafaEntities.csproj">
-      <Project>{F961DA07-1EA3-430D-8749-36DCD782ECD4}</Project>
-      <Name>SzafaEntities</Name>
-    </ProjectReference>
+    <Compile Include="types.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

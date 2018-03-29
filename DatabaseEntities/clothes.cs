@@ -1,10 +1,9 @@
-namespace SQLiteDBConnection
+namespace DatabaseEntities
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     public partial class clothes
     {
@@ -14,7 +13,7 @@ namespace SQLiteDBConnection
         [StringLength(100)]
         public string name { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(256)]
         public string picture_path { get; set; }
 

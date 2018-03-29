@@ -1,4 +1,5 @@
 ﻿using CustomEvents;
+using DatabaseEntities;
 using ImageServiceModuleLibrary.Services;
 using Prism.Events;
 using SQLiteDBConnection;
@@ -74,9 +75,9 @@ namespace ClothesService.Services
             try
             {
                 clothes cl = c.Toclothes();
-                //if (cl.picture_path == null) cl.picture_path = "";
+                if (cl.picture_path == null) cl.picture_path = "";
                 dbConnection.AddClothes(cl);
-                MessageBox.Show(cl.id.ToString());
+                //MessageBox.Show(cl.id.ToString());
                 ImageService imageService = new ImageService();
                 string generatedName = imageService.SaveImage(c.PicturePath, cl.id);
                 if (generatedName != null)

@@ -1,4 +1,4 @@
-﻿using SQLiteDBConnection;
+﻿using DatabaseEntities;
 using System.Collections.Generic;
 
 namespace SzafaInterfaces

@@ -1,6 +1,4 @@
-﻿
-using SQLiteDatabaseConnectionModule.Services;
-using Microsoft.Practices.Unity;
+﻿using Microsoft.Practices.Unity;
 using Prism.Events;
 using System;
 using System.Collections.Generic;

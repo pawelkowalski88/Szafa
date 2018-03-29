@@ -86,6 +86,10 @@
     <Folder Include="Events\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DatabaseEntities\DatabaseEntities.csproj">
+      <Project>{91d3b769-d6dc-45e5-9211-d095c824be1c}</Project>
+      <Name>DatabaseEntities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SQliteDBConnection\SQLiteDBConnection.csproj">
       <Project>{c6df1b29-4468-4957-9613-37aee26b8eb4}</Project>
       <Name>SQLiteDBConnection</Name>

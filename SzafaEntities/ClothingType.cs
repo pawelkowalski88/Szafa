@@ -1,4 +1,4 @@
-﻿using SQLiteDBConnection;
+﻿using DatabaseEntities;
 
 namespace SzafaEntities
 {

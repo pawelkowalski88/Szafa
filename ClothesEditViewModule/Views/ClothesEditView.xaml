@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:conv="clr-namespace:PresentationUtility.Converters;assembly=PresentationUtility"
              xmlns:sample="clr-namespace:SzafaEntities;assembly=SzafaEntities"
+             xmlns:icons="clr-namespace:IconsForSzafa;assembly=IconsForSzafa"
              xmlns:local="clr-namespace:ClothesEditViewModule.Views"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="400" Background="White">
@@ -15,13 +16,13 @@
         <conv:BoolToVisibilityConverter x:Key="VisibilityConv"/>
     </UserControl.Resources>
 
-    <Grid Margin="20" d:DataContext="{StaticResource SampleDetails}">
+    <Grid Margin="5" d:DataContext="{StaticResource SampleDetails}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="181*"></ColumnDefinition>
             <ColumnDefinition Width="383*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="90"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="Auto"/>
@@ -33,9 +34,19 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
-        <Button Width="80" Content="Anuluj" Command="{Binding CancelCommand}" Grid.Column="1" HorizontalAlignment="Right"/>
-        
+
+        <Button Grid.Column="1" 
+                Margin="1" Height="64" Width="64"
+                Command="{Binding CancelCommand}"
+                Background="White"
+                HorizontalAlignment="Right"
+                BorderBrush="White">
+            <StackPanel>
+                <icons:CancelIcon/>
+                <TextBlock>Anuluj</TextBlock>
+            </StackPanel>
+        </Button>
+
         <Viewbox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             <TextBlock Text="{Binding Title}" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="24" Margin="10"></TextBlock>
         </Viewbox>
@@ -63,24 +74,27 @@
             <Button Height="30" Margin="0,3,0,0" Command="{Binding BrowseForFile}">Przeglądaj</Button>
         </StackPanel>
 
-        <Border Grid.Column="1" Grid.Row="8" Margin="5">
+        <Border Grid.Column="0" Grid.Row="8" Margin="5" Grid.ColumnSpan="2">
             <Image  Source="{Binding CurrentItem.PicturePath, Converter={StaticResource BitmapConv}}"/>
         </Border>
 
         <Border Grid.Row="9" Grid.ColumnSpan="2" Background="#FFFFDBDB">
             <TextBlock  Text="Błąd zapisu, sprawdź poprawność danych." Foreground="Red" TextAlignment="Center" Visibility="{Binding ShowSaveWarning, Converter={StaticResource VisibilityConv}}"/>
         </Border>
-        <Button Content="OK" 
-                Margin="5" 
-                HorizontalAlignment="Center" 
-                Grid.Row="10" 
-                VerticalAlignment="Top" 
-                Width="262" 
-                Grid.Column="0" 
-                Height="65" 
-                IsDefault="True" 
+
+        <Button Grid.Row="10" 
+                Margin="1" Height="64" Width="220"
+                Command="{Binding EditOKCommand}"
+                Background="White"
+                HorizontalAlignment="Center"
+                BorderBrush="White"
                 Grid.ColumnSpan="2" 
-                Command="{Binding EditOKCommand}"/>
-        <!--<TextBlock HorizontalAlignment="Left" Margin="3,5,0,0" Grid.Row="6" TextWrapping="Wrap" Text="{Binding Category}" VerticalAlignment="Top" Height="60" Width="88"/>-->
+                IsDefault="True">
+            <StackPanel>
+                <icons:AcceptIcon/>
+                <TextBlock HorizontalAlignment="Center">OK</TextBlock>
+            </StackPanel>
+        </Button>
+        
     </Grid>
 </UserControl>
