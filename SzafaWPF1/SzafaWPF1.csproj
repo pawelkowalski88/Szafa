@@ -195,9 +195,21 @@
       <Project>{8fadca39-330d-48f7-912b-102786abaa36}</Project>
       <Name>ImageServiceModuleLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MainViewModule\MainViewModule.csproj">
+      <Project>{f0f6b59e-1f60-40a6-a391-ce3e1d8ac6b1}</Project>
+      <Name>MainViewModule</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NavigationViewModule\NavigationViewModule.csproj">
       <Project>{49a9e921-6f53-463e-aaa6-b11932ee3e7a}</Project>
       <Name>NavigationViewModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SettingsViewModule\SettingsViewModule.csproj">
+      <Project>{57D5946B-6D44-49FA-9B2D-BF2431843E94}</Project>
+      <Name>SettingsViewModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StatusBarModule\StatusBarModule.csproj">
+      <Project>{1624E02A-475E-4662-9A26-A475CC8820CA}</Project>
+      <Name>StatusBarModule</Name>
     </ProjectReference>
     <ProjectReference Include="..\SzafaEntities\SzafaEntities.csproj">
       <Project>{f961da07-1ea3-430d-8749-36dcd782ecd4}</Project>

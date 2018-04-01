@@ -57,16 +57,10 @@ namespace ClothesDetailedViewModule.ViewModels
             //Put the edit view window on
             //container.RegisterInstance<EditActionType>(EditActionType.Edit);
             IRegion region = regionManager.Regions["MainDetailsRegion"];
-
-            // ClothesEditView newView = container.Resolve<ClothesEditView>();
+            
             ClothesEditView newView = new ClothesEditView(editViewModelFactory.GenerateViewModel(CurrentItem));
             region.Add(newView);
             region.Activate(newView);
-
-            //Publish the event to populate the new view with the CurrentItem data
-            //ClothesEditButtonClickedEvent evt =
-            //    eventAggregator.GetEvent<ClothesEditButtonClickedEvent>();
-            //evt.Publish(CurrentItem);
         }
 
         /// <summary>

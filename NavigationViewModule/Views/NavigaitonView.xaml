@@ -15,34 +15,36 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="1"
-            Background="White"
-            Orientation="Horizontal"
-            FlowDirection="RightToLeft">
-            <!--Margin="1,0,1,1">-->
+        <Grid Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" MinWidth="{Binding ElementName=AddButton, Path=Width}">
+                </ColumnDefinition>
+            </Grid.ColumnDefinitions>
 
             <Button Command="{Binding NewPieceCommand}"
+                    Name="AddButton"
                     Width="64"
                     Height="64"
                     Margin="5" 
                     Background="White"
-                    BorderBrush="White">
+                    BorderBrush="White"
+                    HorizontalAlignment="Right"
+                    Grid.Column="1">
                 <StackPanel>
                 <icons:AddIcon/>
                     <TextBlock>Dodaj</TextBlock>
                 </StackPanel>
             </Button>
 
-        </StackPanel>
-
-        <Border    Background="White">
-            <!--Margin="1,1,1,0">-->
             <TextBlock Text="Twoja garderoba"
-                       Grid.Row="0"
+                       Grid.Row="1"
                        FontSize="26"
                        Foreground="Gray"
-                       Margin="5"/>
-        </Border>
+                       Margin="5"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"/>
+        </Grid>
         <ContentControl Grid.Row="2" prism:RegionManager.RegionName="ClothesListRegion"/>
         
     </Grid>

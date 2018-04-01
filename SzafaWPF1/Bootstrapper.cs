@@ -3,6 +3,10 @@ using Prism.Unity;
 using System.Windows;
 using System.Collections.ObjectModel;
 using ImageServiceModuleLibrary.ModuleDefinitions;
+using StatusBarModule.ModuleDefinitions;
+using Prism.Regions;
+using Microsoft.Practices.Unity;
+using SettingsViewModule.ModuleDefinitions;
 
 namespace SzafaWPF1
 {
@@ -10,7 +14,9 @@ namespace SzafaWPF1
     {
         protected override DependencyObject CreateShell()
         {
-            return new Shell();
+            var shell = new Shell();
+
+            return shell;
         }
 
         protected override void InitializeShell()
@@ -84,7 +90,8 @@ namespace SzafaWPF1
                 //depends on clothes service
                 DependsOn = new Collection<string>()
                 {
-                    "ClothesServiceModule"
+                    "ClothesServiceModule",
+                    "MainViewModule"
                 }
             });
 
@@ -107,13 +114,38 @@ namespace SzafaWPF1
             moduleCatalog.AddModule(new ModuleInfo()
             {
                 ModuleName = "NavigationViewModule",
-                ModuleType = moduleType.AssemblyQualifiedName
+                ModuleType = moduleType.AssemblyQualifiedName,
+                DependsOn = new Collection<string>()
+                {
+                    "MainViewModule"
+                }
             });
 
             moduleType = typeof(ImageServiceModule);
             moduleCatalog.AddModule(new ModuleInfo()
             {
                 ModuleName = "ImageServiceModule",
+                ModuleType = moduleType.AssemblyQualifiedName
+            });
+
+            moduleType = typeof(StatusBarModule.ModuleDefinitions.StatusBarModule);
+            moduleCatalog.AddModule(new ModuleInfo()
+            {
+                ModuleName = "StatusBarModule",
+                ModuleType = moduleType.AssemblyQualifiedName
+            });
+
+            moduleType = typeof(SettingsModule);
+            moduleCatalog.AddModule(new ModuleInfo()
+            {
+                ModuleName = "SettingsModule",
+                ModuleType = moduleType.AssemblyQualifiedName
+            });
+
+            moduleType = typeof(MainViewModule.ModuleDefinitions.MainViewModule);
+            moduleCatalog.AddModule(new ModuleInfo()
+            {
+                ModuleName = "MainViewModule",
                 ModuleType = moduleType.AssemblyQualifiedName
             });
 
