@@ -15,7 +15,8 @@ namespace SzafaWPF1
         protected override DependencyObject CreateShell()
         {
             var shell = new Shell();
-
+            MessageBox.Show(System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
+            
             return shell;
         }
 
