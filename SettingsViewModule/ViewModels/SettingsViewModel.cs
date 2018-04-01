@@ -51,7 +51,7 @@ namespace SettingsViewModule.ViewModels
                 return version;
             }
 
-            set
+            private set
             {
                 version = value;
             }

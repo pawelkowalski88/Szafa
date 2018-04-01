@@ -14,6 +14,13 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
+        <TextBlock Text="Ustawienia"
+                       Grid.Row="0"
+                       FontSize="26"
+                       Foreground="Gray"
+                       Margin="5"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"/>
         <Button Grid.Column="1" 
                 Margin="1" Height="64" Width="64"
                 Command="{Binding CancelCommand}"
