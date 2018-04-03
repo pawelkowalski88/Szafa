@@ -30,7 +30,7 @@ namespace ClothesService.Services
             {
                 try
                 {
-                    var clothesList = dbConnection.GetClothes();
+                    List<clothes> clothesList = dbConnection.GetClothes();
                     ClothesList = new List<PieceOfClothing>();
                     foreach (var c in clothesList)
                     {
@@ -44,7 +44,7 @@ namespace ClothesService.Services
                     ClothesList = new List<PieceOfClothing>();
                     ClothesListUpdated(this, new EventArgs());
                     eventAggregator.GetEvent<DatabaseConnectionErrorOccuredEvent>().Publish(e.ToString());
-                    //MessageBox.Show(e.ToString());
+                    MessageBox.Show(e.ToString());
                 }
             });
             //Start the task

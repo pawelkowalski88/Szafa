@@ -1,4 +1,5 @@
 ﻿using DatabaseEntities;
+using System;
 
 namespace SzafaEntities
 {
@@ -13,7 +14,14 @@ namespace SzafaEntities
         {
             Id = t.id;
             Name = t.name;
-            ClothesCount = t.clothes.Count;
+            try
+            {
+                ClothesCount = t.clothes.Count;
+            }
+            catch (Exception)
+            {
+                ClothesCount = 0;
+            }
         }
 
         public types Totypes()
