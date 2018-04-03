@@ -82,8 +82,12 @@
     <Compile Include="ModuleDefinitions\SettingsModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\TypesDetailsViewModel.cs" />
     <Compile Include="Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TypeDetailsView.xaml.cs">
+      <DependentUpon>TypeDetailsView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -95,11 +99,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\TypeDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MainViewModule\MainViewModule.csproj">
       <Project>{F0F6B59E-1F60-40A6-A391-CE3E1D8AC6B1}</Project>
       <Name>MainViewModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PresentationUtility\PresentationUtility.csproj">
+      <Project>{0F6A4AE4-772D-4801-8F89-7D0F568E9810}</Project>
+      <Name>PresentationUtility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SzafaEntities\SzafaEntities.csproj">
+      <Project>{F961DA07-1EA3-430D-8749-36DCD782ECD4}</Project>
+      <Name>SzafaEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SzafaInterfaces\SzafaInterfaces.csproj">
+      <Project>{F38C4E38-123C-4415-9930-6B84F6D0EE7E}</Project>
+      <Name>SzafaInterfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

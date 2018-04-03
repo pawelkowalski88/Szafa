@@ -11,5 +11,6 @@ namespace SzafaInterfaces
         clothes GetPieceOfClothing(long id);
         List<types> GetTypes();
         void UpdateClothes(clothes c);
+        void UpdateTypes(types t);
     }
 }

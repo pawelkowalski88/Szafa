@@ -36,6 +36,14 @@ namespace TypesService.Services
             updateTypesListTask.Start();
         }
 
+        public void UpdateType(ClothingType t)
+        {
+            if (t.Name != "" && t.Name != null)
+            {
+                dbConnection.UpdateTypes(t.Totypes());
+            }
+        }
+
         public List<ClothingType> TypesList { get; private set; }
         IDatabaseConnectionService dbConnection;
         Task updateTypesListTask;

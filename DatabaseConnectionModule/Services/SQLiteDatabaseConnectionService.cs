@@ -63,6 +63,8 @@ namespace SQLiteDatabaseConnectionModule.Services
             dbconn.SaveChanges();
         }
 
+        
+
         public clothes GetPieceOfClothing(long id)
         {
             if (!CheckDatabaseExistence(dbconn)) throw new DbUpdateException();
@@ -103,6 +105,14 @@ namespace SQLiteDatabaseConnectionModule.Services
             conn.Database.Connection.ConnectionString = "data source=" + "\"" + AppDomain.CurrentDomain.BaseDirectory + "main.db\"";
             //MessageBox.Show(conn.Database.Connection.ConnectionString);
             return File.Exists(ExctractDataSource(conn.Database.Connection.ConnectionString));
+        }
+
+        public void UpdateTypes(types t)
+        {
+            if (!CheckDatabaseExistence(dbconn)) throw new DbUpdateException();
+            types type = dbconn.types.Find(t.id);
+            type.name = t.name;
+            dbconn.SaveChanges();
         }
     }
 }

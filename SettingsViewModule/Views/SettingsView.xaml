@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:icons="clr-namespace:IconsForSzafa;assembly=IconsForSzafa"
+             xmlns:comm="clr-namespace:PresentationUtility.AttachedCommands;assembly=PresentationUtility"
              xmlns:local="clr-namespace:SettingsViewModule.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
@@ -32,6 +33,17 @@
                 <TextBlock>Anuluj</TextBlock>
             </StackPanel>
         </Button>
+
+        <ListView Grid.Row="1" 
+                  ItemsSource="{Binding Types}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBox Text="{Binding Name}"
+                              comm:TextBoxTextChanged.CommandProperty="{Binding RelativeSource={RelativeSource AncestorType=ListView}, Path=DataContext.TypeNameChangedCommand}"
+                              comm:TextBoxTextChanged.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
         <TextBlock Text="{Binding Version}" Grid.Row="2"/>
     </Grid>

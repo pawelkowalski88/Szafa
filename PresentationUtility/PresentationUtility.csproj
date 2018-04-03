@@ -81,6 +81,8 @@
     <Compile Include="AttachedCommands\ListViewSelectCommandBehavior.cs" />
     <Compile Include="AttachedCommands\TabControlSelect.cs" />
     <Compile Include="AttachedCommands\TabControlSelectCommandBehavior.cs" />
+    <Compile Include="AttachedCommands\TextBoxTextChanged.cs" />
+    <Compile Include="AttachedCommands\TextBoxTextChangedCommandBehavior.cs" />
     <Compile Include="Converters\BitmapConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\DateConverter.cs" />

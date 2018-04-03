@@ -14,5 +14,6 @@ namespace SzafaInterfaces
         event EventHandler TypesListUpdated;
 
         void UpdateTypesList();
+        void UpdateType(ClothingType t);
     }
 }
