@@ -105,6 +105,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CustomEvents\CustomEvents.csproj">
+      <Project>{B564227F-9E56-4F25-A741-59283B35AF93}</Project>
+      <Name>CustomEvents</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MainViewModule\MainViewModule.csproj">
       <Project>{F0F6B59E-1F60-40A6-A391-CE3E1D8AC6B1}</Project>
       <Name>MainViewModule</Name>

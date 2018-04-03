@@ -32,13 +32,22 @@ namespace ClothesListModule.Filtering
         private void TypesService_TypesListUpdated(object sender, EventArgs e)
         {
             List<ClothingType> listTypes = typesService.TypesList;
+
+            Conditions = new List<FilteringConditions>();
+            Conditions.Add(new FilteringConditions()
+            {
+                Name = "Wszystkie",
+                Conditions = new Predicate<PieceOfClothing>(x => { return true; })
+            });
             foreach (var t in listTypes)
             {
-                string searchName = t.Name.ToString();
+                //string searchName = t.Name.ToString();
+                long typeID = t.Id;
                 Conditions.Add(new FilteringConditions()
                 {
                     Name = t.Name,
-                    Conditions = new Predicate<PieceOfClothing>(x => Check(x, searchName))
+                    //Conditions = new Predicate<PieceOfClothing>(x => Check(x, searchName))
+                    Conditions = new Predicate<PieceOfClothing>(x => Check(x, typeID))
                 });
              
             }
@@ -51,6 +60,15 @@ namespace ClothesListModule.Filtering
             if (x.Type != null)
             {
                 return x.Type.Name == name;
+            }
+            return false;
+        }
+
+        private bool Check(PieceOfClothing x, long typeId)
+        {
+            if(x.Type != null)
+            {
+                return x.Type.Id == typeId;
             }
             return false;
         }

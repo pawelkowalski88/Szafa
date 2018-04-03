@@ -6,45 +6,57 @@
              xmlns:local="clr-namespace:SettingsViewModule.Views"
              xmlns:icons="clr-namespace:IconsForSzafa;assembly=IconsForSzafa"
              xmlns:tmp="clr-namespace:SzafaEntities;assembly=SzafaEntities"
+             xmlns:conv="clr-namespace:PresentationUtility.Converters;assembly=PresentationUtility"
+             xmlns:comm="clr-namespace:PresentationUtility.AttachedCommands;assembly=PresentationUtility"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    
     <UserControl.Resources>
         <tmp:SampleType x:Key="TypeModel"/>
+        <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConv"/>
     </UserControl.Resources>
+    
     <Border BorderThickness="1">
-    <Grid d:DataContext="{StaticResource ResourceKey=TypeModel}" Background="White">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+        <Grid d:DataContext="{StaticResource ResourceKey=TypeModel}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition MinWidth="160"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBox Text="{Binding Name}"
-                       VerticalAlignment="Center"
-                     Margin="5"/>
 
-            <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
-                
+            <TextBox Text="{Binding Type.Name}"
+                     VerticalAlignment="Center"
+                     Margin="5"
+                     Background="#00000000"
+                     BorderBrush="#00000000"
+                     CaretBrush="Black"
+                     FontSize="24"                              
+                     comm:TextBoxTextChanged.CommandProperty="{Binding TypeNameChangedCommand}"
+                     comm:TextBoxTextChanged.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}}"/>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right" Visibility="{Binding EditMode, Converter={StaticResource BoolToVisibilityConv}}">
+
                 <Button Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" 
                         Margin="2" 
-                        Background="White" 
-                        BorderBrush="White">
+                        Background="#00000000" 
+                        BorderBrush="#00000000"
+                        Command="{Binding AcceptCommand}">
                     <icons:AcceptIcon/>
                 </Button>
-                
+
                 <Button Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}"
                         Margin="2" 
-                        Background="White" 
-                        BorderBrush="White">
+                        Background="#00000000" 
+                        BorderBrush="#00000000"
+                        Command="{Binding CancelCommand}">
                     <icons:CancelIcon/>
                 </Button>
-                
             </StackPanel>
 
-            <TextBlock Grid.Row="1" Text="Elementów: " HorizontalAlignment="Right"/>
-            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ClothesCount}"/>
+            <StackPanel Grid.Column="1" VerticalAlignment="Center" Orientation="Horizontal">
+                <TextBlock Text="Elementów: " HorizontalAlignment="Right"/>
+                <TextBlock Text="{Binding Type.ClothesCount}"/>
+            </StackPanel>
         </Grid>
     </Border>
 </UserControl>

@@ -42,6 +42,7 @@ namespace TypesService.Services
             {
                 dbConnection.UpdateTypes(t.Totypes());
             }
+            UpdateTypesList();
         }
 
         public List<ClothingType> TypesList { get; private set; }

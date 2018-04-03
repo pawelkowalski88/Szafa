@@ -13,6 +13,7 @@ namespace SzafaEntities
         {
             Id = t.id;
             Name = t.name;
+            ClothesCount = t.clothes.Count;
         }
 
         public types Totypes()
@@ -25,5 +26,6 @@ namespace SzafaEntities
         }
         public long Id { get; set; }
         public string Name { get; set; }
+        public long ClothesCount { get; set; }
     }
 }

@@ -1,5 +1,7 @@
-﻿using PresentationUtility;
+﻿using CustomEvents;
+using PresentationUtility;
 using Prism.Commands;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,17 +10,26 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using SzafaEntities;
+using SzafaInterfaces;
 
 namespace SettingsViewModule.ViewModels
 {
     public class TypesDetailsViewModel : PropertyChangedImplementation
     {
         ClothingType type;
-        ICommand acceptCommand, cancelCommand;
+        ICommand acceptCommand, cancelCommand, typeNameChangedCommand;
+        ITypesService typesService;
+        IEventAggregator eventAggregator;
+        bool editMode;
+        string oldName;
 
-        public TypesDetailsViewModel(ClothingType t)
+
+        public TypesDetailsViewModel(ClothingType t, ITypesService typesService, IEventAggregator eventAggregator)
         {
             Type = t;
+            oldName = t.Name;
+            this.typesService = typesService;
+            this.eventAggregator = eventAggregator;
         }
 
         public ClothingType Type
@@ -58,14 +69,59 @@ namespace SettingsViewModule.ViewModels
             }
         }
 
+        public ICommand TypeNameChangedCommand
+        {
+            get
+            {
+                if(typeNameChangedCommand == null)
+                {
+                    typeNameChangedCommand = new DelegateCommand(OnTypeNameChanged);
+                }
+                return typeNameChangedCommand;
+            }
+        }
+
+        private void OnTypeNameChanged()
+        {
+            if (!EditMode)
+            {
+                EditMode = true;
+            }
+        }
+
         private void OnAccept()
         {
-            MessageBox.Show("Accept");
+            try
+            {
+                typesService.UpdateType(Type);
+                oldName = Type.Name;
+                eventAggregator.GetEvent<DatabaseConnectionRefreshRequestedEvent>().Publish();
+            }
+            catch (Exception)
+            {
+                OnCancel();
+            }
         }
 
         private void OnCancel()
         {
-            MessageBox.Show("Cancel");
+            Type.Name = oldName;
+            InvokePropertyChanged("Type");
+            EditMode = false;
+        }
+
+        public bool EditMode
+        {
+            get
+            {
+                return editMode;
+            }
+
+            set
+            {
+                editMode = value;
+                InvokePropertyChanged("EditMode");
+            }
         }
     }
 }

@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:icons="clr-namespace:IconsForSzafa;assembly=IconsForSzafa"
-             xmlns:comm="clr-namespace:PresentationUtility.AttachedCommands;assembly=PresentationUtility"
+             xmlns:view="clr-namespace:SettingsViewModule.Views"
              xmlns:local="clr-namespace:SettingsViewModule.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
@@ -14,6 +14,19 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+
+        <Grid.Resources>
+            <Style TargetType="ListViewItem">
+                <Style.Triggers>
+                    <Trigger Property="ItemsControl.AlternationIndex"  Value="0">
+                        <Setter Property="Background" Value="#FFFEFEFE" />
+                    </Trigger>
+                    <Trigger Property="ItemsControl.AlternationIndex"  Value="1">
+                        <Setter Property="Background" Value="#FFFAFAFA" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
 
         <TextBlock Text="Ustawienia"
                        Grid.Row="0"
@@ -35,12 +48,15 @@
         </Button>
 
         <ListView Grid.Row="1" 
-                  ItemsSource="{Binding Types}">
+                  ItemsSource="{Binding TypesViewModels}"
+                  AlternationCount="2">
+
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBox Text="{Binding Name}"
+                    <!--<TextBox Text="{Binding Name}"
                               comm:TextBoxTextChanged.CommandProperty="{Binding RelativeSource={RelativeSource AncestorType=ListView}, Path=DataContext.TypeNameChangedCommand}"
-                              comm:TextBoxTextChanged.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}}"/>
+                              comm:TextBoxTextChanged.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}}"/>-->
+                    <view:TypeDetailsView/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
