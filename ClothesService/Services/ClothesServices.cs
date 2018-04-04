@@ -15,6 +15,7 @@ namespace ClothesService.Services
     public class ClothesServices : IClothesServices
     {
         IEventAggregator eventAggregator;
+        bool updating = false;
         public ClothesServices(ImageService imageService, IDatabaseConnectionService connectionService, IEventAggregator eventAggregator)
         {
             this.eventAggregator = eventAggregator;
@@ -25,30 +26,10 @@ namespace ClothesService.Services
 
         public async void RefreshClothesList()
         {
-            ////updating clothes list as an async operation
-            //updateClothesListTask = new Task(() =>
-            //{
-            //    try
-            //    {
-            //        List<clothes> clothesList = dbConnection.GetClothes();
-            //        ClothesList = new List<PieceOfClothing>();
-            //        foreach (var c in clothesList)
-            //        {
-            //            ClothesList.Add(new PieceOfClothing(c, imageService.RetrieveImage(c.picture_path)));
-            //        }
-            //        //when clothes list is updated, fire an event
-            //        ClothesListUpdated(this, new EventArgs());
-            //    }
-            //    catch (Exception e)
-            //    {
-            //        ClothesList = new List<PieceOfClothing>();
-            //        ClothesListUpdated(this, new EventArgs());
-            //        eventAggregator.GetEvent<DatabaseConnectionErrorOccuredEvent>().Publish(e.ToString());
-            //        MessageBox.Show(e.ToString());
-            //    }
-            //});
-            ////Start the task
-            //updateClothesListTask.RunSynchronously();
+            if (updating) { return; }
+
+            updating = true;
+
             await Task.Run(() =>
             {
                 try
@@ -71,6 +52,7 @@ namespace ClothesService.Services
 
             //when clothes list is updated, fire an event
             ClothesListUpdated(this, new EventArgs());
+            updating = false;
         }
 
         public void UpdatePieceOfClothing(PieceOfClothing c)
