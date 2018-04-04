@@ -23,10 +23,33 @@ namespace ClothesService.Services
             eventAggregator.GetEvent<DatabaseConnectionRefreshRequestedEvent>().Subscribe(RefreshClothesList);
         }
 
-        public void RefreshClothesList()
+        public async void RefreshClothesList()
         {
-            //updating clothes list as an async operation
-            updateClothesListTask = new Task(() =>
+            ////updating clothes list as an async operation
+            //updateClothesListTask = new Task(() =>
+            //{
+            //    try
+            //    {
+            //        List<clothes> clothesList = dbConnection.GetClothes();
+            //        ClothesList = new List<PieceOfClothing>();
+            //        foreach (var c in clothesList)
+            //        {
+            //            ClothesList.Add(new PieceOfClothing(c, imageService.RetrieveImage(c.picture_path)));
+            //        }
+            //        //when clothes list is updated, fire an event
+            //        ClothesListUpdated(this, new EventArgs());
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        ClothesList = new List<PieceOfClothing>();
+            //        ClothesListUpdated(this, new EventArgs());
+            //        eventAggregator.GetEvent<DatabaseConnectionErrorOccuredEvent>().Publish(e.ToString());
+            //        MessageBox.Show(e.ToString());
+            //    }
+            //});
+            ////Start the task
+            //updateClothesListTask.RunSynchronously();
+            await Task.Run(() =>
             {
                 try
                 {
@@ -36,19 +59,18 @@ namespace ClothesService.Services
                     {
                         ClothesList.Add(new PieceOfClothing(c, imageService.RetrieveImage(c.picture_path)));
                     }
-                    //when clothes list is updated, fire an event
-                    ClothesListUpdated(this, new EventArgs());
                 }
                 catch (Exception e)
                 {
                     ClothesList = new List<PieceOfClothing>();
                     ClothesListUpdated(this, new EventArgs());
                     eventAggregator.GetEvent<DatabaseConnectionErrorOccuredEvent>().Publish(e.ToString());
-                    MessageBox.Show(e.ToString());
+                    //MessageBox.Show(e.ToString());
                 }
             });
-            //Start the task
-            updateClothesListTask.Start();
+
+            //when clothes list is updated, fire an event
+            ClothesListUpdated(this, new EventArgs());
         }
 
         public void UpdatePieceOfClothing(PieceOfClothing c)

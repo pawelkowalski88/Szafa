@@ -11,17 +11,23 @@ namespace TypesService.Services
 {
     public class TypesService : ITypesService
     {
+        bool updating = false;
         public TypesService(IUnityContainer container, IDatabaseConnectionService connectionService, IEventAggregator eventAggragator)
         {
             dbConnection = connectionService;
             eventAggragator.GetEvent<DatabaseConnectionRefreshRequestedEvent>().Subscribe(UpdateTypesList);
+            updating = false;
             UpdateTypesList();
         }
 
-        public void UpdateTypesList()
+        public async void UpdateTypesList()
         {
+            if(updating) { return; }
+
+            updating = true;
+
             //updating types list as an async operation
-            updateTypesListTask = new Task(() =>
+            await Task.Run(() =>
             {
                 TypesList = new List<ClothingType>();
                 var typesList = dbConnection.GetTypes();
@@ -29,11 +35,13 @@ namespace TypesService.Services
                 {
                     TypesList.Add(new ClothingType(t));
                 }
-                //when types list is updated, fire an event
-                TypesListUpdated(this, new EventArgs());
             });
             //Start the task
-            updateTypesListTask.Start();
+            //updateTypesListTask.Start();
+
+            //when types list is updated, fire an event
+            TypesListUpdated(this, new EventArgs());
+            updating = false;
         }
 
         public void UpdateType(ClothingType t)
