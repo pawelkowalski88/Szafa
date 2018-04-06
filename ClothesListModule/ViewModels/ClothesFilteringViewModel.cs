@@ -46,6 +46,8 @@ namespace ClothesListModule.ViewModels
         private void TypeFilteringConditionsService_FilteringConditionsUpdated(object sender, EventArgs e)
         {
             TypesFilterList = typeFilteringConditionsService.Conditions;
+            SelectedTypeFilter = TypesFilterList[0];
+            InvokePropertyChanged("SelectedTypeFilter");
         }
 
         private void OnFilterChanged(FilteringConditions obj)
@@ -68,7 +70,6 @@ namespace ClothesListModule.ViewModels
 
         private void OnSortingOrderChanged(SortingOrder obj)
         {
-            //SelectedSortingOrder = obj;
             PublishFilters();
         }
 

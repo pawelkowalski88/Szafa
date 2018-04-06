@@ -19,14 +19,9 @@ namespace ClothesListModule.Filtering
         {
             typesService = ts;
             Conditions = new List<FilteringConditions>();
-            Conditions.Add(new FilteringConditions()
-            {
-                Name = "Wszystkie",
-                Conditions = new Predicate<PieceOfClothing>(x => { return true; })
-            });
+            Conditions.Add(GetAllItemsConditions());
 
             typesService.TypesListUpdated += TypesService_TypesListUpdated;
-            //typesService.UpdateTypesList();
         }
 
         private void TypesService_TypesListUpdated(object sender, EventArgs e)
@@ -34,19 +29,13 @@ namespace ClothesListModule.Filtering
             List<ClothingType> listTypes = typesService.TypesList;
 
             Conditions = new List<FilteringConditions>();
-            Conditions.Add(new FilteringConditions()
-            {
-                Name = "Wszystkie",
-                Conditions = new Predicate<PieceOfClothing>(x => { return true; })
-            });
+            Conditions.Add(GetAllItemsConditions());
             foreach (var t in listTypes)
             {
-                //string searchName = t.Name.ToString();
                 long typeID = t.Id;
                 Conditions.Add(new FilteringConditions()
                 {
                     Name = t.Name,
-                    //Conditions = new Predicate<PieceOfClothing>(x => Check(x, searchName))
                     Conditions = new Predicate<PieceOfClothing>(x => Check(x, typeID))
                 });
              
@@ -55,6 +44,21 @@ namespace ClothesListModule.Filtering
             FilteringConditionsUpdated(Conditions, new EventArgs());
         }
 
+        private FilteringConditions GetAllItemsConditions()
+        {
+            return new FilteringConditions()
+            {
+                Name = "Wszystkie",
+                Conditions = new Predicate<PieceOfClothing>(x => { return true; })
+            };
+        }
+
+        /// <summary>
+        /// Deprecated, use bool Check(PieceOfClothing x, long typeId) instead
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         private bool Check(PieceOfClothing x, string name)
         {
             if (x.Type != null)
