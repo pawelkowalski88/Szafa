@@ -65,23 +65,28 @@ namespace ClothesListModule.ViewModels
             UpdateClothesList();
         }
 
-        private void OnElementSelected(PieceOfClothing obj)
+        private void OnElementSelected(PieceOfClothing obj)//Not very straightforward...
         {
+            //if selected object is equal to null (for example when updating the list) we might try to put the previously selected item.
             if (obj == null && temporaryItem != null)
             {
+                //if the previous item is on the current list then select it.
                 if (ClothesList.Exists(x => x.Id == temporaryItem.Id))
                 {
                     CurrentItem = ClothesList.Find(x => x.Id == temporaryItem.Id);
                 }
+                //if the previously selected item is not on the list then just display nothing.
                 else
                 {
                     CurrentItem = obj;
                 }
             }
+            //if currently selected object is existing the go for it.
             else
             {
                 CurrentItem = obj;
             }
+            //notify other objects via event aggragation.
             PieceOfClothingChangedEvent evt = eventAggregator.GetEvent<PieceOfClothingChangedEvent>();
             evt.Publish(CurrentItem);
         }

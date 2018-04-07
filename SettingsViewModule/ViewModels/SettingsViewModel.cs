@@ -51,7 +51,6 @@ namespace SettingsViewModule.ViewModels
                     foreach (var t in typesService.TypesList)
                     {
                         output.Add(new TypesDetailsViewModel(t, typesService, eventAggregator));
-                        
                     }
                 }
             }

@@ -17,7 +17,6 @@ namespace ClothesListModule.ViewModels
 { 
     public class ClothesFilteringViewModel : PropertyChangedImplementation
     {
-        private List<FilteringConditions> typesFilterList;
         private ICommand selectFilterCommand, selectTypeFilterCommand, selectSortingCategoryCommand, selectSortingOrderCommand;
         private IEventAggregator eventAggregator;
         private TypeFilteringConditionsService typeFilteringConditionsService;
@@ -34,7 +33,7 @@ namespace ClothesListModule.ViewModels
             typeFilteringConditionsService.FilteringConditionsUpdated += TypeFilteringConditionsService_FilteringConditionsUpdated;
             SelectedTypeFilter = TypesFilterList[0];
 
-            SortingCategoriesList = SelectedFilter.SortingConditionsList;//SortingConditions.GenerateStandardConditions();
+            SortingCategoriesList = SelectedFilter.SortingConditionsList;
             SelectedSortingCategory = SortingCategoriesList[0];
 
             SortingOrderList = SortingOrder.GenerateStandardList();
@@ -46,6 +45,7 @@ namespace ClothesListModule.ViewModels
         private void TypeFilteringConditionsService_FilteringConditionsUpdated(object sender, EventArgs e)
         {
             TypesFilterList = typeFilteringConditionsService.Conditions;
+            InvokePropertyChanged("TypesFilterList");
             SelectedTypeFilter = TypesFilterList[0];
             InvokePropertyChanged("SelectedTypeFilter");
         }
@@ -130,26 +130,20 @@ namespace ClothesListModule.ViewModels
             }
         }
 
-        public List<FilteringConditions> TypesFilterList
-        {
-            get
-            {
-                return typesFilterList;
-            }
-
-            set
-            {
-                typesFilterList = value;
-                InvokePropertyChanged("TypesFilterList");
-            }
-        }
-
+        //All, Used, Not used
+        public List<FilteringConditions> FilterTabs { get; set; }
         public FilteringConditions SelectedFilter { get; set; }
+
+        //According to available types
+        public List<FilteringConditions> TypesFilterList { get; set; }
         public FilteringConditions SelectedTypeFilter { get; set; }
-        public SortingConditions SelectedSortingCategory { get; set; }
+
+        //According to predefined list of categories
         public List<SortingConditions> SortingCategoriesList { get; set; }
+        public SortingConditions SelectedSortingCategory { get; set; }
+
+        //asc, desc
         public List<SortingOrder> SortingOrderList { get; set; }
         public SortingOrder SelectedSortingOrder { get; set; }
-        public List<FilteringConditions> FilterTabs { get; set; }
     }
 }

@@ -13,12 +13,6 @@
 
     <UserControl.Resources>
         <datacontext:FilteringDataContext x:Key="SampleFilteringConditions"/>
-        <!--<ObjectDataProvider x:Key="SortOrder" MethodName="GetValues"
-                            ObjectType="{x:Type System:Enum}">
-            <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="f:SortingOrder"/>
-            </ObjectDataProvider.MethodParameters>
-        </ObjectDataProvider>-->
     </UserControl.Resources>
 
     <Grid Margin="0,0,0,0">

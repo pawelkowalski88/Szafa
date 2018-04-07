@@ -44,6 +44,7 @@
     <Compile Include="IClothesEditViewModel.cs" />
     <Compile Include="IClothesServices.cs" />
     <Compile Include="IDatabaseConnectionService.cs" />
+    <Compile Include="IFilteringService.cs" />
     <Compile Include="IImageService.cs" />
     <Compile Include="ITypesService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

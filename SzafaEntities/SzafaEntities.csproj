@@ -77,6 +77,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClothingType.cs" />
+    <Compile Include="Filtering\FilteringConditions.cs" />
+    <Compile Include="Filtering\SortingConditions.cs" />
+    <Compile Include="Filtering\SortingOrder.cs" />
+    <Compile Include="Filtering\TypeFilteringConditions.cs" />
     <Compile Include="PieceOfClothing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleClothesDetails.cs" />
