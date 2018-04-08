@@ -1,5 +1,6 @@
 ﻿using ClothesListModule.Events;
 using ClothesListModule.Filtering;
+using FilteringEntities;
 using PresentationUtility;
 using Prism.Commands;
 using Prism.Events;
@@ -10,7 +11,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using SzafaEntities;
 using SzafaInterfaces;
 
 namespace ClothesListModule.ViewModels
@@ -19,27 +19,27 @@ namespace ClothesListModule.ViewModels
     {
         private ICommand selectFilterCommand, selectTypeFilterCommand, selectSortingCategoryCommand, selectSortingOrderCommand;
         private IEventAggregator eventAggregator;
-        private TypeFilteringConditionsService typeFilteringConditionsService;
+        private ITypeFilteringConditionsService typeFilteringConditionsService;
+        IFilteringService filteringService;
 
-        public ClothesFilteringViewModel(IEventAggregator eventAggregator, TypeFilteringConditionsService typeFilteringConditionsService)
+        public ClothesFilteringViewModel(IEventAggregator eventAggregator, ITypeFilteringConditionsService typeFilteringConditionsService, IFilteringService filteringService)
         {
             this.eventAggregator = eventAggregator;
             this.typeFilteringConditionsService = typeFilteringConditionsService;
+            this.filteringService = filteringService;
 
-            FilterTabs = FilteringConditions.GenerateStandardConditions();
+            //FilterTabs = FilteringSortingConditions.GenerateStandardConditions();
             SelectedFilter = FilterTabs[0];
 
             TypesFilterList = typeFilteringConditionsService.Conditions;
             typeFilteringConditionsService.FilteringConditionsUpdated += TypeFilteringConditionsService_FilteringConditionsUpdated;
             SelectedTypeFilter = TypesFilterList[0];
 
-            SortingCategoriesList = SelectedFilter.SortingConditionsList;
+            SortingCategoriesList = ((FilteringSortingConditions)SelectedFilter).SortingConditionsList;
             SelectedSortingCategory = SortingCategoriesList[0];
 
             SortingOrderList = SortingOrder.GenerateStandardList();
             SelectedSortingOrder = SortingOrderList[0];
-
-            PublishFilters();
         }
 
         private void TypeFilteringConditionsService_FilteringConditionsUpdated(object sender, EventArgs e)
@@ -50,36 +50,27 @@ namespace ClothesListModule.ViewModels
             InvokePropertyChanged("SelectedTypeFilter");
         }
 
-        private void OnFilterChanged(FilteringConditions obj)
+        private void OnFilterChanged(FilteringSortingConditions obj)
         {
             SelectedFilter = obj;
             InvokePropertyChanged("SelectedFilter");
-            PublishFilters();
+            //PublishFilters();
+            filteringService.RefreshFiltering(SelectedFilter);
         }
 
-        private void OnTypeFilterChanged(FilteringConditions obj)
+        private void OnTypeFilterChanged(FilteringSortingConditions obj)
         {
             SelectedTypeFilter = obj;
-            PublishFilters();
         }
 
         private void OnSortingCategoryChanged(SortingConditions obj)
         {
-            PublishFilters();
+            filteringService.RefreshFiltering(SelectedFilter);
         }
 
         private void OnSortingOrderChanged(SortingOrder obj)
         {
-            PublishFilters();
-        }
-
-        private void PublishFilters()
-        {
-            eventAggregator.GetEvent<FilteringConditionsChangedEvent>()
-                .Publish(new List<FilteringConditions>(){ SelectedFilter, SelectedTypeFilter });
-
-            eventAggregator.GetEvent<SortingConditionsChangedEvent>()
-                .Publish(Tuple.Create(SelectedFilter.Sorting, SelectedFilter.SelectedSortingOrder.Direction));
+            filteringService.RefreshFiltering(SelectedFilter);
         }
 
         public ICommand SelectFilterCommand
@@ -88,7 +79,7 @@ namespace ClothesListModule.ViewModels
             {
                 if (selectFilterCommand == null)
                 {
-                    selectFilterCommand = new DelegateCommand<FilteringConditions>(OnFilterChanged);
+                    selectFilterCommand = new DelegateCommand<FilteringSortingConditions>(OnFilterChanged);
                 }
                 return selectFilterCommand;
             }
@@ -100,7 +91,7 @@ namespace ClothesListModule.ViewModels
             {
                 if (selectTypeFilterCommand == null)
                 {
-                    selectTypeFilterCommand = new DelegateCommand<FilteringConditions>(OnTypeFilterChanged);
+                    selectTypeFilterCommand = new DelegateCommand<FilteringSortingConditions>(OnTypeFilterChanged);
                 }
                 return selectTypeFilterCommand;
             }
@@ -131,7 +122,13 @@ namespace ClothesListModule.ViewModels
         }
 
         //All, Used, Not used
-        public List<FilteringConditions> FilterTabs { get; set; }
+        public List<FilteringConditions> FilterTabs
+        {
+            get
+            {
+                return filteringService.FilterTabs;
+            }
+        }
         public FilteringConditions SelectedFilter { get; set; }
 
         //According to available types

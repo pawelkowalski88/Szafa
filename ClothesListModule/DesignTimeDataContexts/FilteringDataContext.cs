@@ -1,5 +1,5 @@
 ﻿using ClothesListModule.Filtering;
-using System;
+using FilteringEntities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +13,7 @@ namespace ClothesListModule.DesignTimeDataContexts
         {
             get
             {
-                return FilteringConditions.GenerateStandardConditions();
+                return FilteringSortingConditions.GenerateStandardConditions();
             }
         }
     }

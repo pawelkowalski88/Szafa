@@ -69,7 +69,7 @@
                           VerticalAlignment="Bottom" 
                           Width="120"
                           ItemsSource="{Binding SelectedFilter.SortingOrderList}" 
-                          SelectedValue="{Binding SelectedFilter.SelectedSortingOrder}"
+                          SelectedValue="{Binding SelectedFilter.Order}"
                           DisplayMemberPath="Name"
                           comm:ComboBoxSelect.CommandProperty="{Binding SelectSortingOrderCommand}"
                           comm:ComboBoxSelect.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}"/>

@@ -1,16 +1,12 @@
 ﻿using FilteringEntities;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SzafaEntities;
 using SzafaInterfaces;
 
-namespace ClothesListModule.Filtering
+namespace FilteringServiceModule.Services
 {
-    public class TypeFilteringConditionsService
+    public class TypeFilteringConditionsService : ITypeFilteringConditionsService
     {
         public List<FilteringConditions> Conditions { get; set; }
         public event EventHandler FilteringConditionsUpdated;
@@ -54,12 +50,6 @@ namespace ClothesListModule.Filtering
             };
         }
 
-        /// <summary>
-        /// Deprecated, use bool Check(PieceOfClothing x, long typeId) instead
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
         private bool Check(PieceOfClothing x, string name)
         {
             if (x.Type != null)

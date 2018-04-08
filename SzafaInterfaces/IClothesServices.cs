@@ -14,8 +14,9 @@ namespace SzafaInterfaces
 
         void AddPieceOfClothing(PieceOfClothing c);
         clothes GetPieceOfClothing(long id);
-        void RefreshClothesList();
+        void RefreshClothesListAsync();
         void UpdatePieceOfClothing(PieceOfClothing c);
         void DeletePieceOfClothing(PieceOfClothing c);
+        void RefreshFiltering();
     }
 }

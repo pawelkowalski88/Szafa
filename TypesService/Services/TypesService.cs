@@ -15,7 +15,7 @@ namespace TypesService.Services
         public TypesService(IUnityContainer container, IDatabaseConnectionService connectionService, IEventAggregator eventAggragator)
         {
             dbConnection = connectionService;
-            eventAggragator.GetEvent<DatabaseConnectionRefreshRequestedEvent>().Subscribe(UpdateTypesList);
+            eventAggragator.GetEvent<ClothesListRefreshRequestedEvent>().Subscribe(UpdateTypesList);
             updating = false;
             UpdateTypesList();
         }

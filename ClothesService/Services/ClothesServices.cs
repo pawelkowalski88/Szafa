@@ -15,44 +15,67 @@ namespace ClothesService.Services
     public class ClothesServices : IClothesServices
     {
         IEventAggregator eventAggregator;
+        IFilteringService filteringService;
+        IDatabaseConnectionService dbConnection;
+        ImageService imageService;
         bool updating = false;
-        public ClothesServices(ImageService imageService, IDatabaseConnectionService connectionService, IEventAggregator eventAggregator)
+        List<PieceOfClothing> clothesListRaw;
+
+        public List<PieceOfClothing> ClothesList { get; private set; }
+        public event EventHandler ClothesListUpdated;
+
+        public ClothesServices(ImageService imageService, IDatabaseConnectionService connectionService, IEventAggregator eventAggregator, IFilteringService filteringService)
         {
             this.eventAggregator = eventAggregator;
             dbConnection = connectionService;
             this.imageService = imageService;
-            eventAggregator.GetEvent<DatabaseConnectionRefreshRequestedEvent>().Subscribe(RefreshClothesList);
+            this.filteringService = filteringService;
+            eventAggregator.GetEvent<ClothesListRefreshRequestedEvent>().Subscribe(RefreshClothesListAsync);
+            eventAggregator.GetEvent<RefreshClothesFilteringEvent>().Subscribe(RefreshFiltering);
         }
 
-        public async void RefreshClothesList()
+        public void RefreshFiltering()
+        {
+            ClothesList = filteringService.ProcessAll(clothesListRaw);
+            ClothesListUpdated(this, new EventArgs());
+        }
+
+        public async void RefreshClothesListAsync()
         {
             if (updating) { return; }
 
             updating = true;
 
+            //wait for operation to finish
             await Task.Run(() =>
             {
                 try
                 {
-                    List<clothes> clothesList = dbConnection.GetClothes();
-                    ClothesList = new List<PieceOfClothing>();
-                    foreach (var c in clothesList)
-                    {
-                        ClothesList.Add(new PieceOfClothing(c, imageService.RetrieveImage(c.picture_path)));
-                    }
+                    RefreshClothesInternal();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     ClothesList = new List<PieceOfClothing>();
-                    ClothesListUpdated(this, new EventArgs());
-                    eventAggregator.GetEvent<DatabaseConnectionErrorOccuredEvent>().Publish(e.ToString());
-                    //MessageBox.Show(e.ToString());
                 }
             });
 
             //when clothes list is updated, fire an event
             ClothesListUpdated(this, new EventArgs());
             updating = false;
+        }
+
+        private void RefreshClothesInternal()
+        {
+            //Retrieve clothes object from DB
+            List<clothes> clothesList = dbConnection.GetClothes();
+            clothesListRaw = new List<PieceOfClothing>();
+            foreach (var c in clothesList)
+            {
+                //create list of PieceOfClothing elements
+                clothesListRaw.Add(new PieceOfClothing(c, imageService.RetrieveImage(c.picture_path)));
+            }
+            //Apply filtering
+            ClothesList = filteringService.ProcessAll(clothesListRaw);
         }
 
         public void UpdatePieceOfClothing(PieceOfClothing c)
@@ -121,11 +144,6 @@ namespace ClothesService.Services
                 return;
             }
         }
-
-        public List<PieceOfClothing> ClothesList { get; private set; }
-        IDatabaseConnectionService dbConnection;
-        Task updateClothesListTask;
-        public event EventHandler ClothesListUpdated;
-        ImageService imageService;
+        
     }
 }

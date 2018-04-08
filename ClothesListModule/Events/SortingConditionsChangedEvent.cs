@@ -1,4 +1,5 @@
 ﻿using ClothesListModule.Filtering;
+using FilteringEntities;
 using Prism.Events;
 using System;
 using System.Collections.Generic;

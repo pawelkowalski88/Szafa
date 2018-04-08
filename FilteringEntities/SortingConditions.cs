@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SzafaEntities;
 
-namespace SzafaEntities.Filtering
+namespace FilteringEntities
 {
     public class SortingConditions
     {

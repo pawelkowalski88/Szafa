@@ -191,6 +191,10 @@
       <Project>{2be098ac-789a-49ac-b799-6050c59666d0}</Project>
       <Name>DatabaseConnectionModule</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FilteringServiceModule\FilteringServiceModule.csproj">
+      <Project>{9d241afb-02cd-43d8-9f2a-f5c90ef41d30}</Project>
+      <Name>FilteringServiceModule</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ImageService\ImageServiceModuleLibrary.csproj">
       <Project>{8fadca39-330d-48f7-912b-102786abaa36}</Project>
       <Name>ImageServiceModuleLibrary</Name>

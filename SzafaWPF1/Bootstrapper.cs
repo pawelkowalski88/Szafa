@@ -7,6 +7,7 @@ using StatusBarModule.ModuleDefinitions;
 using Prism.Regions;
 using Microsoft.Practices.Unity;
 using SettingsViewModule.ModuleDefinitions;
+using FilteringServiceModule.ModuleDefinitions;
 
 namespace SzafaWPF1
 {
@@ -51,7 +52,8 @@ namespace SzafaWPF1
                 //depends on database connection
                 DependsOn = new Collection<string>()
                 {
-                    "DatabaseConnectionModule"
+                    "DatabaseConnectionModule",
+                    "FilteringModule"
                 }
             });
 
@@ -118,7 +120,8 @@ namespace SzafaWPF1
                 ModuleType = moduleType.AssemblyQualifiedName,
                 DependsOn = new Collection<string>()
                 {
-                    "MainViewModule"
+                    "MainViewModule",
+                    "ClothesServiceModule"
                 }
             });
 
@@ -147,6 +150,13 @@ namespace SzafaWPF1
             moduleCatalog.AddModule(new ModuleInfo()
             {
                 ModuleName = "MainViewModule",
+                ModuleType = moduleType.AssemblyQualifiedName
+            });
+
+            moduleType = typeof(FilteringModule);
+            moduleCatalog.AddModule(new ModuleInfo()
+            {
+                ModuleName = "FilteringModule",
                 ModuleType = moduleType.AssemblyQualifiedName
             });
 

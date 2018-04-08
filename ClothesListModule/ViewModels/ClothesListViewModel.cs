@@ -11,6 +11,7 @@ using ClothesListModule.Filtering;
 using ClothesListModule.Events;
 using System.Linq;
 using SzafaInterfaces;
+using FilteringEntities;
 
 namespace ClothesListModule.ViewModels
 {
@@ -44,7 +45,6 @@ namespace ClothesListModule.ViewModels
             Updating = false;
             DatabaseConnectionError = true;
             InvokePropertyChanged("DatabaseConnectionError");
-
         }
 
         private void ClothesService_ClothesListUpdated(object sender, EventArgs e)
@@ -56,7 +56,7 @@ namespace ClothesListModule.ViewModels
 
         private void UpdateClothesList()
         {
-            clothesService.RefreshClothesList();
+            clothesService.RefreshClothesListAsync();
             Updating = true;
         }
 
@@ -108,7 +108,7 @@ namespace ClothesListModule.ViewModels
             Updating = true;
             DatabaseConnectionError = false;
             InvokePropertyChanged("DatabaseConnectionError");
-            eventAggregator.GetEvent<DatabaseConnectionRefreshRequestedEvent>().Publish();
+            eventAggregator.GetEvent<ClothesListRefreshRequestedEvent>().Publish();
         }
 
         //Zmienić na ObservableCollection
@@ -118,10 +118,7 @@ namespace ClothesListModule.ViewModels
             {
                 try
                 {
-                    var output = sortingParamters.Item2 == true ?
-                        clothesService.ClothesList.FindAll(x => ApplyFilters(x)).OrderBy(sortingParamters.Item1.Condition).ToList() :
-                        clothesService.ClothesList.FindAll(x => ApplyFilters(x)).OrderByDescending(sortingParamters.Item1.Condition).ToList();
-                    return output;
+                    return clothesService.ClothesList;
                 }
                 catch(Exception e)
                 {
@@ -129,15 +126,6 @@ namespace ClothesListModule.ViewModels
                     return new List<PieceOfClothing>();
                 }
             }
-        }
-
-        private bool ApplyFilters(PieceOfClothing p)
-        {
-            foreach (FilteringConditions filter in filters)
-            { 
-                if(filter.Conditions(p) == false) return false;
-            }
-            return true;
         }
 
         public bool Updating

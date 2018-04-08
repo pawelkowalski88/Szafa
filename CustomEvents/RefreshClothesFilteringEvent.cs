@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CustomEvents
 {
-    public class ClothesListRefreshRequestedEvent : PubSubEvent
+    public class RefreshClothesFilteringEvent : PubSubEvent
     {
     }
 }

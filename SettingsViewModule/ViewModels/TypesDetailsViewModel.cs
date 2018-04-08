@@ -95,7 +95,7 @@ namespace SettingsViewModule.ViewModels
             {
                 typesService.UpdateType(Type);
                 oldName = Type.Name;
-                eventAggregator.GetEvent<DatabaseConnectionRefreshRequestedEvent>().Publish();
+                eventAggregator.GetEvent<ClothesListRefreshRequestedEvent>().Publish();
             }
             catch (Exception)
             {
