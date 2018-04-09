@@ -7,6 +7,20 @@ namespace SzafaEntities
 {
     public class PieceOfClothing
     {
+        public long Id { get; set; }
+        public string Name { get; set; }
+        public string PicturePath { get; set; }
+        public Nullable<long> TypeId { get; set; }
+        public string Description { get; set; }
+        public Nullable<bool> InUse { get; set; }
+        public Nullable<System.DateTime> InUseFrom { get; set; }
+        public Nullable<long> TimesOn { get; set; }
+        public Nullable<System.DateTime> LastTimeOn { get; set; }
+
+        public virtual ClothingType Type { get; set; }
+
+        public BitmapImage Image { get; set; }
+
         public PieceOfClothing()
         {
             
@@ -34,6 +48,24 @@ namespace SzafaEntities
             Image = i;
         }
 
+        public void Wash()
+        {
+            InUse = false;
+            TimesOn = 0;
+        }
+
+        public void Use()
+        {
+            if (InUse == false)
+            {
+                InUse = true;
+                InUseFrom = DateTime.Now;
+                LastTimeOn = DateTime.Now;
+            }
+            TimesOn++;
+            LastTimeOn = DateTime.Now;
+        }
+
         public clothes Toclothes()
         {
             return new clothes()
@@ -49,20 +81,5 @@ namespace SzafaEntities
                 type_id = (long)this.TypeId
             };
         }
-
-        public long Id { get; set; }
-        public string Name { get; set; }
-        public string PicturePath { get; set; }
-        public Nullable<long> TypeId { get; set; }
-        public string Description { get; set; }
-        public Nullable<bool> InUse { get; set; }
-        public Nullable<System.DateTime> InUseFrom { get; set; }
-        public Nullable<long> TimesOn { get; set; }
-        public Nullable<System.DateTime> LastTimeOn { get; set; }
-
-        public virtual ClothingType Type { get; set; }
-
-        public BitmapImage Image { get; set; }
-
     }
 }

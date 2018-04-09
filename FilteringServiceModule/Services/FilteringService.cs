@@ -14,26 +14,51 @@ namespace FilteringServiceModule.Services
     public class FilteringService : IFilteringService
     {
 
-        FilteringConditions currentConditions;
+        FilteringConditions currentFilter;
+        FilteringConditions currentTypeFilter;
         IEventAggregator eventAggregator;
+        ITypeFilteringConditionsService typeFilteringConditionsService;
         public List<FilteringConditions> FilterTabs { get; private set; }
+        public List<FilteringConditions> TypesFilterList { get; private set; }
+        
+        public event EventHandler TypesFilterListUpdated;
 
-        public FilteringService(IEventAggregator eventAggregator)
+        public FilteringService(IEventAggregator eventAggregator, ITypeFilteringConditionsService typeFilteringConditionsService)
         {
             this.eventAggregator = eventAggregator;
+            this.typeFilteringConditionsService = typeFilteringConditionsService;
+
             FilterTabs = FilteringSortingConditions.GenerateStandardConditions();
-            currentConditions = FilterTabs[0];
+            currentFilter = FilterTabs[0];
+
+            TypesFilterList = typeFilteringConditionsService.Conditions;
+            typeFilteringConditionsService.FilteringConditionsUpdated += TypeFilteringConditionsService_FilteringConditionsUpdated;
+            currentTypeFilter = TypesFilterList[0];
+        }
+
+        private void TypeFilteringConditionsService_FilteringConditionsUpdated(object sender, EventArgs e)
+        {
+            TypesFilterList = typeFilteringConditionsService.Conditions;
+            currentTypeFilter = TypesFilterList[0];
+            TypesFilterListUpdated(this, new EventArgs());
         }
 
         public void RefreshFiltering(FilteringConditions filter)
         {
-            currentConditions = filter;
+            currentFilter = filter;
+            eventAggregator.GetEvent<RefreshClothesFilteringEvent>().Publish();
+        }
+
+        public void RefreshTypeFiltering(FilteringConditions filter)
+        {
+            currentTypeFilter = filter;
             eventAggregator.GetEvent<RefreshClothesFilteringEvent>().Publish();
         }
 
         public List<PieceOfClothing> ProcessAll(List<PieceOfClothing> list)
         {
-            return currentConditions.Process(list);
+            var tempList = currentTypeFilter.Process(list);
+            return currentFilter.Process(tempList);
         }
     }
 }

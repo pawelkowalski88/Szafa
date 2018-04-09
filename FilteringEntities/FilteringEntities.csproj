@@ -45,7 +45,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SortingConditions.cs" />
     <Compile Include="SortingOrder.cs" />
-    <Compile Include="TypeFilteringConditions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SzafaEntities\SzafaEntities.csproj">

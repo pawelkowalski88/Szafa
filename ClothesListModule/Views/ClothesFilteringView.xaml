@@ -59,8 +59,8 @@
                               ItemsSource="{Binding SelectedFilter.SortingConditionsList}" 
                               DisplayMemberPath="Name" 
                               SelectedValue="{Binding SelectedFilter.Sorting}"
-                              comm:ComboBoxSelect.CommandProperty="{Binding SelectSortingCategoryCommand}"
-                              comm:ComboBoxSelect.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}"/>
+                              comm:ComboBoxSelect.CommandProperty="{Binding SelectSortingCommand}"/>
+                    <!--comm:ComboBoxSelect.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}"/>-->
 
                 </StackPanel>
 
@@ -71,9 +71,8 @@
                           ItemsSource="{Binding SelectedFilter.SortingOrderList}" 
                           SelectedValue="{Binding SelectedFilter.Order}"
                           DisplayMemberPath="Name"
-                          comm:ComboBoxSelect.CommandProperty="{Binding SelectSortingOrderCommand}"
-                          comm:ComboBoxSelect.CommandParameterProperty="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}"/>
-                
+                          comm:ComboBoxSelect.CommandProperty="{Binding SelectSortingCommand}"/>
+
             </WrapPanel>
         </Border>
 

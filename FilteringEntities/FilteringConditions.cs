@@ -9,31 +9,9 @@ namespace FilteringEntities
         string name;
         Predicate<PieceOfClothing> conditions;
 
-        public Predicate<PieceOfClothing> Conditions
-        {
-            get
-            {
-                return conditions;
-            }
+        public Predicate<PieceOfClothing> Conditions { get; set; }
 
-            set
-            {
-                conditions = value;
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-
-            set
-            {
-                name = value;
-            }
-        }
+        public string Name { get; set; }
 
         public List<PieceOfClothing> ApplyFilters(List<PieceOfClothing> list)
         {

@@ -30,7 +30,7 @@ namespace FilteringServiceModule.Services
             foreach (var t in listTypes)
             {
                 long typeID = t.Id;
-                Conditions.Add(new FilteringSortingConditions()
+                Conditions.Add(new FilteringConditions()
                 {
                     Name = t.Name,
                     Conditions = new Predicate<PieceOfClothing>(x => Check(x, typeID))
@@ -41,9 +41,9 @@ namespace FilteringServiceModule.Services
             FilteringConditionsUpdated(Conditions, new EventArgs());
         }
 
-        private FilteringSortingConditions GetAllItemsConditions()
+        private FilteringConditions GetAllItemsConditions()
         {
-            return new FilteringSortingConditions()
+            return new FilteringConditions()
             {
                 Name = "Wszystkie",
                 Conditions = new Predicate<PieceOfClothing>(x => { return true; })

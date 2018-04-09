@@ -52,10 +52,7 @@ namespace ClothesDetailedViewModule.ViewModels
         /// </summary>
         private void OnEdit()
         {
-            //move this to module?
-
             //Put the edit view window on
-            //container.RegisterInstance<EditActionType>(EditActionType.Edit);
             IRegion region = regionManager.Regions["MainDetailsRegion"];
             
             ClothesEditView newView = new ClothesEditView(editViewModelFactory.GenerateViewModel(CurrentItem));
@@ -64,12 +61,11 @@ namespace ClothesDetailedViewModule.ViewModels
         }
 
         /// <summary>
-        /// Marks current piece of clothing as not used and fresh
+        /// Washes current item
         /// </summary>
         private void OnWash()
-        {
-            CurrentItem.InUse = false;
-            CurrentItem.TimesOn = 0;
+        {;
+            CurrentItem.Wash();
             clothesService.UpdatePieceOfClothing(CurrentItem);
             eventAggregator.GetEvent<ClothesListUpdateRequestedEvent>().Publish();
         }
@@ -79,14 +75,7 @@ namespace ClothesDetailedViewModule.ViewModels
         /// </summary>
         private void OnUse()
         {
-            if (CurrentItem.InUse == false)
-            {
-                CurrentItem.InUse = true;
-                CurrentItem.InUseFrom = DateTime.Now;
-                CurrentItem.LastTimeOn = DateTime.Now;
-            }
-            CurrentItem.TimesOn++;
-            CurrentItem.LastTimeOn = DateTime.Now;
+            CurrentItem.Use();
             clothesService.UpdatePieceOfClothing(CurrentItem);
             eventAggregator.GetEvent<ClothesListUpdateRequestedEvent>().Publish();
         }
