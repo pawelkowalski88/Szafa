@@ -55,7 +55,6 @@ namespace TypesService.Services
 
         public List<ClothingType> TypesList { get; private set; }
         IDatabaseConnectionService dbConnection;
-        Task updateTypesListTask;
         public event EventHandler TypesListUpdated;
     }
 }

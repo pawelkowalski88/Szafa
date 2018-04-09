@@ -21,10 +21,7 @@ namespace SzafaEntities
 
         public BitmapImage Image { get; set; }
 
-        public PieceOfClothing()
-        {
-            
-        }
+        public PieceOfClothing() { }
 
         public PieceOfClothing(clothes c)
         {
